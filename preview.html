@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vertex Industrial — Design System Preview</title>
 <link rel="stylesheet" href="dist/vertex-industrial.css">
+<link rel="stylesheet" href="preview.css">
 </head>
 <body class="grain-overlay">
 
@@ -227,7 +228,7 @@
   </section>
 
   <!-- GLASS -->
-  <section class="section" id="glass" style="background: linear-gradient(135deg, rgba(0,114,245,0.1) 0%, transparent 50%), var(--bg-000);">
+  <section class="section" id="glass" style="background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.1) 0%, transparent 50%), var(--bg-000);">
     <span class="corner-cap corner-cap--tl"></span>
     <span class="corner-cap corner-cap--tr"></span>
     <span class="section-label">05 // FROSTED GLASS</span>
@@ -281,7 +282,7 @@
   // Load wallpapers dynamically
   const wallpaperGrid = document.getElementById('wallpaperGrid');
   const categories = ['Cosmic', 'Cinematic', 'Nature', 'Books', 'Abstract', 'People'];
-  const colors = ['#0072f5', '#12a594', '#ffb224', '#e5484d', '#8e4ec6', '#45a557'];
+  const colors = ['var(--ds-blue-700)', 'var(--ds-teal-700)', 'var(--ds-amber-700)', 'var(--ds-red-700)', 'var(--ds-purple-700)', 'var(--ds-green-700)'];
   
   categories.forEach((cat, i) => {
     const item = document.createElement('div');
