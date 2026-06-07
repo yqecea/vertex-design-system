@@ -1,0 +1,14 @@
+.section { border-top: 1px solid var(--line); padding: var(--geist-space-16x) var(--geist-gap); position: relative; }
+.section-title { font-size: clamp(26px, 3.2vw, 44px); font-weight: 600; color: var(--text-hi); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: var(--geist-space-8x); }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-lo); display: block; margin-bottom: var(--geist-space-4x); }
+.corner-cap { position: absolute; width: 5px; height: 5px; background: var(--accent); z-index: 2; }
+.corner-cap--tl { top: -2px; left: -2px; }
+.corner-cap--tr { top: -2px; right: -2px; }
+.corner-cap--bl { bottom: -2px; left: -2px; }
+.corner-cap--br { bottom: -2px; right: -2px; }
+.display { font-size: clamp(48px, 8vw, 88px); font-weight: 500; color: var(--text-hi); line-height: 1.05; letter-spacing: -0.04em; }
+.glass-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--geist-radius); padding: var(--geist-gap); }
+.glass-card:hover { background: var(--glass-bg-hover); border-color: var(--glass-border-hover); }
+.hero-title { font-size: clamp(48px, 8vw, 88px); font-weight: 500; color: var(--text-hi); line-height: 1.05; letter-spacing: -0.04em; margin-bottom: var(--geist-space-4x); }
+.hero-subtitle { font-size: 18px; color: var(--text-md); max-width: 600px; margin: 0 auto var(--geist-space-8x); line-height: 1.5; }
+.cta-section { text-align: center; padding: 120px var(--geist-gap); }

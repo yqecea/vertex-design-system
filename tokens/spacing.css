@@ -9,8 +9,11 @@
   --geist-space-2: var(--geist-space-2x);
   --geist-space-2x: 8px;
   --geist-space-3x: 12px;
+  --geist-space-4: var(--geist-space-4x);
   --geist-space-4x: 16px;
+  --geist-space-6: var(--geist-space-6x);
   --geist-space-6x: 24px;
+  --geist-space-8: var(--geist-space-8x);
   --geist-space-8x: 32px;
   --geist-space-10x: 40px;
   --geist-space-16x: 64px;

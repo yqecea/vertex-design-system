@@ -1,5 +1,5 @@
 /* Vertex Industrial Design System v1.0.0 | Built CSS */
-/* Generated: 2026-06-07T03:31:00.412Z */
+/* Generated: 2026-06-07T03:46:54.469Z */
 /* Files: 92 */
 
 /* === tokens/reset.css === */
@@ -343,8 +343,11 @@ body {
   --geist-space-2: var(--geist-space-2x);
   --geist-space-2x: 8px;
   --geist-space-3x: 12px;
+  --geist-space-4: var(--geist-space-4x);
   --geist-space-4x: 16px;
+  --geist-space-6: var(--geist-space-6x);
   --geist-space-6x: 24px;
+  --geist-space-8: var(--geist-space-8x);
   --geist-space-8x: 32px;
   --geist-space-10x: 40px;
   --geist-space-16x: 64px;
@@ -2976,7 +2979,7 @@ Then use: filter: url(#liquid-refraction);
   /* ── Typography ── */
   --font-display: var(--font-sans);
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:
@@ -3032,7 +3035,7 @@ Then use: filter: url(#liquid-refraction);
   /* ── Typography ── */
   --font-display: var(--font-sans);
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:
@@ -3087,7 +3090,7 @@ Then use: filter: url(#liquid-refraction);
   /* ── Typography ── */
   --font-display: var(--font-sans);
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:
@@ -3142,7 +3145,7 @@ Then use: filter: url(#liquid-refraction);
   /* ── Typography ── */
   --font-display: var(--font-pixel-square, var(--font-sans));
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:
@@ -3200,7 +3203,7 @@ Then use: filter: url(#liquid-refraction);
   /* ── Typography ── */
   --font-display: var(--font-sans);
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:
@@ -3255,7 +3258,7 @@ Then use: filter: url(#liquid-refraction);
   /* ── Typography ── */
   --font-display: var(--font-sans);
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:
@@ -8084,9 +8087,9 @@ body::after {
 .gauge--md { --gauge-size: 64px; }
 .gauge--lg { --gauge-size: 96px; }
 
-.gauge--sm .gauge__svg { width: 48px; height: 48px; }
-.gauge--md .gauge__svg { width: 64px; height: 64px; }
-.gauge--lg .gauge__svg { width: 96px; height: 96px; }
+.gauge--sm .gauge__svg { width: var(--gauge-size, 48px); height: var(--gauge-size, 48px); }
+.gauge--md .gauge__svg { width: var(--gauge-size, 64px); height: var(--gauge-size, 64px); }
+.gauge--lg .gauge__svg { width: var(--gauge-size, 96px); height: var(--gauge-size, 96px); }
 
 /* Color variants */
 .gauge--ok    .gauge__fill { stroke: var(--ds-green-700); }

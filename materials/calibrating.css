@@ -35,7 +35,7 @@
   /* ── Typography ── */
   --font-display: var(--font-sans);
   --font-ui: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: "Geist Mono", Menlo, monospace;
 
   /* ── Surface Texture ── */
   --texture-primary:

@@ -1,0 +1,4 @@
+.two-col { display: grid; grid-template-columns: 200px 1fr; gap: var(--geist-gap); max-width: var(--geist-page-width); margin: 0 auto; padding: var(--geist-gap); }
+.figure { border: 1px solid var(--line-2); padding: var(--geist-space-4x); background: var(--bg-100); margin: var(--geist-space-4x) 0; }
+.figure-caption { font-size: 12px; color: var(--text-lo); margin-top: var(--geist-space-2x); font-style: italic; }
+.doc-nav { position: sticky; top: 80px; height: calc(100vh - 100px); overflow-y: auto; }

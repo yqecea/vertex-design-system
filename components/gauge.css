@@ -59,9 +59,9 @@
 .gauge--md { --gauge-size: 64px; }
 .gauge--lg { --gauge-size: 96px; }
 
-.gauge--sm .gauge__svg { width: 48px; height: 48px; }
-.gauge--md .gauge__svg { width: 64px; height: 64px; }
-.gauge--lg .gauge__svg { width: 96px; height: 96px; }
+.gauge--sm .gauge__svg { width: var(--gauge-size, 48px); height: var(--gauge-size, 48px); }
+.gauge--md .gauge__svg { width: var(--gauge-size, 64px); height: var(--gauge-size, 64px); }
+.gauge--lg .gauge__svg { width: var(--gauge-size, 96px); height: var(--gauge-size, 96px); }
 
 /* Color variants */
 .gauge--ok    .gauge__fill { stroke: var(--ds-green-700); }
