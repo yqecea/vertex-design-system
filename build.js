@@ -51,7 +51,6 @@ const allFiles = [...files, ...componentFiles.map(f => `components/${f}`)];
 
 // Build
 let output = '/* Vertex Industrial Design System v1.0.0 | Built CSS */\n';
-output += `/* Generated: ${new Date().toISOString()} */\n`;
 output += `/* Files: ${allFiles.length} */\n\n`;
 
 for (const file of allFiles) {

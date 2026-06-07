@@ -105,6 +105,7 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--geist-gap);
 }
+.wallpaper-item { margin-bottom: var(--geist-space-4x); }
 .wallpaper-label {
   font-family: var(--font-mono);
   font-size: 10px;
