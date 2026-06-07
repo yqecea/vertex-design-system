@@ -12,3 +12,24 @@
 .hero-title { font-size: clamp(48px, 8vw, 88px); font-weight: 500; color: var(--text-hi); line-height: 1.05; letter-spacing: -0.04em; margin-bottom: var(--geist-space-4x); }
 .hero-subtitle { font-size: 18px; color: var(--text-md); max-width: 600px; margin: 0 auto var(--geist-space-8x); line-height: 1.5; }
 .cta-section { text-align: center; padding: 120px var(--geist-gap); }
+.grain { position: relative; }
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(6) infinite;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -2%); }
+  20% { transform: translate(2%, 2%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-2%, 2%); }
+}
+.chassis { max-width: 1280px; margin: 0 auto; border-left: 1px solid var(--line-2); border-right: 1px solid var(--line-2); min-height: 100vh; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--geist-gap); }

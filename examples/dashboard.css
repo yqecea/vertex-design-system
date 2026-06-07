@@ -5,3 +5,13 @@
 .gonogo > * { background: var(--bg-100); padding: var(--geist-space-4x); }
 .metric-large { font-family: var(--font-mono); font-size: 48px; font-weight: 500; color: var(--text-hi); }
 .status-bar { display: flex; gap: var(--geist-space-4x); padding: var(--geist-space-2x) var(--geist-gap); border-top: 1px solid var(--line); font-size: 12px; color: var(--text-lo); }
+.main { padding: var(--geist-gap); }
+.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dot-live { animation: status-pulse 2s ease-in-out infinite; }
+.gonogo-cell { padding: var(--geist-space-4x); text-align: center; }
+.gonogo-cell .cell-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-lo); margin-bottom: var(--geist-space-2x); }
+.gonogo-cell .cell-state { font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--text-hi); }
+.go { background: rgba(69, 165, 87, 0.12); border-left: 2px solid var(--ds-green-700); }
+.caution { background: rgba(255, 178, 36, 0.12); border-left: 2px solid var(--ds-amber-700); }
+.nogo { background: rgba(229, 72, 77, 0.12); border-left: 2px solid var(--ds-red-700); }
+.console-sep { border-top: 1px solid var(--line); margin: var(--geist-space-2x) 0; }

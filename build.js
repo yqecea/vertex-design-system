@@ -95,6 +95,6 @@ console.log(`   Files: ${allFiles.length}`);
 console.log(`   Minified: ${isMinify ? 'yes' : 'no'}`);
 
 // Also write a dev-imports.html snippet for convenience
-const devLinks = allFiles.map(f => `<link rel="stylesheet" href="${f}">`).join('\n');
+const devLinks = allFiles.map(f => `<link rel="stylesheet" href="../${f}">`).join('\n');
 fs.writeFileSync(path.join(BASE, 'dist', 'dev-imports.html'), devLinks);
 console.log(`   Dev imports: dist/dev-imports.html`);

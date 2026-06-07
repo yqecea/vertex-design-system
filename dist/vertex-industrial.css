@@ -1,5 +1,5 @@
 /* Vertex Industrial Design System v1.0.0 | Built CSS */
-/* Generated: 2026-06-07T03:46:54.469Z */
+/* Generated: 2026-06-07T03:56:21.998Z */
 /* Files: 92 */
 
 /* === tokens/reset.css === */
@@ -350,6 +350,8 @@ body {
   --geist-space-8: var(--geist-space-8x);
   --geist-space-8x: 32px;
   --geist-space-10x: 40px;
+  --geist-space-12: var(--geist-space-12x);
+  --geist-space-12x: 48px;
   --geist-space-16x: 64px;
   --geist-space-24x: 96px;
   --geist-space-32x: 128px;
