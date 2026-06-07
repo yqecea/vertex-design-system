@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Radio Group
+   Grouped radio buttons with label association
+   ═══════════════════════════════════════════════════════ */
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space-3x);
+  font-family: var(--font-sans);
+}
+
+.radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--geist-space-6x);
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-3x);
+  cursor: pointer;
+  outline: none;
+}
+
+.radio-item:focus-visible .radio-indicator {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.radio-item[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.radio-indicator {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--ds-gray-alpha-500);
+  border-radius: 50%;
+  background: var(--ds-background-100);
+  flex-shrink: 0;
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.radio-item:hover .radio-indicator:not([aria-checked="true"]) {
+  border-color: var(--ds-gray-alpha-700);
+}
+
+.radio-item[data-state="checked"] .radio-indicator,
+.radio-indicator[aria-checked="true"] {
+  border-color: var(--ds-blue-700);
+  background: var(--ds-blue-700);
+}
+
+.radio-indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--default-transition-duration) var(--ease-in-out);
+}
+
+.radio-item[data-state="checked"] .radio-indicator::after,
+.radio-indicator[aria-checked="true"]::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radio-label {
+  font-size: var(--text-sm);
+  color: var(--ds-gray-1000);
+  line-height: var(--text-sm--line-height);
+}
+
+.radio-description {
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  margin-left: 32px;
+  margin-top: var(--geist-space);
+}
+
+/* Card variant */
+.radio-group--cards .radio-item {
+  padding: var(--geist-space-4x);
+  border: 1.5px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.radio-group--cards .radio-item:hover {
+  border-color: var(--ds-gray-alpha-500);
+  background: var(--ds-gray-100);
+}
+
+.radio-group--cards .radio-item[data-state="checked"],
+.radio-group--cards .radio-item[aria-checked="true"] {
+  border-color: var(--ds-blue-700);
+  background: var(--ds-blue-100);
+}
+
+.radio-group--cards .radio-description {
+  margin-left: 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] .radio-indicator {
+  border-color: var(--ds-gray-alpha-500);
+  background: var(--ds-background-100);
+}
+
+[data-theme="dark"] .radio-item:hover .radio-indicator:not([aria-checked="true"]) {
+  border-color: var(--ds-gray-alpha-700);
+}
+
+[data-theme="dark"] .radio-item[data-state="checked"] .radio-indicator,
+[data-theme="dark"] .radio-indicator[aria-checked="true"] {
+  border-color: var(--ds-blue-600);
+  background: var(--ds-blue-600);
+}
+
+[data-theme="dark"] .radio-label {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .radio-description {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .radio-group--cards .radio-item {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .radio-group--cards .radio-item:hover {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .radio-group--cards .radio-item[data-state="checked"],
+[data-theme="dark"] .radio-group--cards .radio-item[aria-checked="true"] {
+  border-color: var(--ds-blue-600);
+  background: rgba(0, 114, 245, 0.15);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .radio-indicator,
+  .radio-indicator::after {
+    transition: none;
+  }
+  .radio-group--cards .radio-item {
+    transition: none;
+  }
+}

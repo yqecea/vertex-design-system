@@ -1,0 +1,60 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Terminal Window
+   CLI interaction evidence slot
+   ═══════════════════════════════════════════════════════ */
+
+.terminal {
+  background: var(--bg-000);
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--line);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.terminal-title {
+  font-size: 11px;
+  color: var(--text-lo);
+  margin-left: auto;
+}
+
+.terminal-body {
+  padding: 16px;
+  line-height: 1.6;
+  color: var(--text-md);
+}
+
+.terminal-prompt {
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+.terminal-output {
+  color: var(--text-lo);
+  margin-top: 8px;
+}
+
+.terminal-line {
+  padding: 2px 0;
+}
+
+.terminal-line.info { color: var(--text-md); }
+.terminal-line.warn { color: var(--warn); }
+.terminal-line.error { color: var(--alarm); }
+.terminal-line.success { color: var(--ok); }

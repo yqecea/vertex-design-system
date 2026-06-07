@@ -1,0 +1,414 @@
+/* ═══════════════════════════════════════════════════════
+   GEIST ICON TOKENS — Size, stroke, and animation utilities
+   Industrial precision for SVG iconography
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Icon Size Scale ── */
+  --icon-size-xs: 12px;
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-xl: 32px;
+
+  /* ── Stroke Width Scale ── */
+  --icon-stroke-hairline: 1.5px;
+  --icon-stroke-default: 2px;
+  --icon-stroke-bold: 2.5px;
+
+  /* ── Icon Color Inheritance ── */
+  --icon-color: currentColor;
+  --icon-color-muted: var(--ds-gray-700);
+  --icon-color-disabled: var(--ds-gray-500);
+
+  /* ── Animation Tokens ── */
+  --icon-spin-duration: 1s;
+  --icon-pulse-duration: 2s;
+  --icon-bounce-duration: 0.6s;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE ICON RESET
+   Ensures all SVG icons inherit color and scale uniformly
+   ═══════════════════════════════════════════════════════ */
+
+.icon,
+[class^="icon-"] svg,
+[class*=" icon-"] svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  color: var(--icon-color);
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: color 150ms linear, transform 150ms linear;
+}
+
+/* ── Size Utilities ── */
+.icon-xs,
+.icon-xs svg {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+
+.icon-sm,
+.icon-sm svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.icon-md,
+.icon-md svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+.icon-lg,
+.icon-lg svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+.icon-xl,
+.icon-xl svg {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+}
+
+/* ── Stroke Width Utilities ── */
+.icon-stroke-hairline,
+.icon-stroke-hairline svg,
+.icon-stroke-hairline path {
+  stroke-width: var(--icon-stroke-hairline);
+}
+
+.icon-stroke-default,
+.icon-stroke-default svg,
+.icon-stroke-default path {
+  stroke-width: var(--icon-stroke-default);
+}
+
+.icon-stroke-bold,
+.icon-stroke-bold svg,
+.icon-stroke-bold path {
+  stroke-width: var(--icon-stroke-bold);
+}
+
+/* ── Fill Mode Utilities ── */
+.icon-fill,
+.icon-fill svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.icon-fill-stroke,
+.icon-fill-stroke svg {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* ── Animation Utilities ── */
+.icon-spin,
+.icon-spin svg {
+  animation: icon-spin var(--icon-spin-duration) linear infinite;
+}
+
+.icon-pulse,
+.icon-pulse svg {
+  animation: icon-pulse var(--icon-pulse-duration) ease-in-out infinite;
+}
+
+.icon-bounce,
+.icon-bounce svg {
+  animation: icon-bounce var(--icon-bounce-duration) ease-in-out infinite;
+}
+
+.icon-fade-in,
+.icon-fade-in svg {
+  animation: icon-fade-in 300ms ease-out forwards;
+}
+
+/* ── Contextual Utilities ── */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--geist-form-height);
+  height: var(--geist-form-height);
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  background: transparent;
+  color: var(--text-hi);
+  cursor: pointer;
+  transition: all 150ms linear;
+}
+
+.icon-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.icon-button:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
+}
+
+.icon-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+.icon-button .icon,
+.icon-button svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* Icon button sizes */
+.icon-button--sm {
+  width: var(--geist-form-small-height);
+  height: var(--geist-form-small-height);
+}
+
+.icon-button--sm .icon,
+.icon-button--sm svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.icon-button--lg {
+  width: var(--geist-form-large-height);
+  height: var(--geist-form-large-height);
+}
+
+.icon-button--lg .icon,
+.icon-button--lg svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+/* Icon inside input (extends existing .geist-input__icon) */
+.icon-input {
+  position: absolute;
+  left: var(--geist-space-3x);
+  color: var(--ds-gray-600);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-input .icon,
+.icon-input svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.icon-input--right {
+  left: auto;
+  right: var(--geist-space-3x);
+}
+
+/* Icon with text label */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--geist-space-2);
+  color: var(--text-hi);
+}
+
+.icon-text .icon,
+.icon-text svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+}
+
+.icon-text--lg .icon,
+.icon-text--lg svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+.icon-text--sm {
+  gap: var(--geist-space);
+  font-size: 13px;
+}
+
+.icon-text--sm .icon,
+.icon-text--sm svg {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+
+/* Icon group (toolbar style) */
+.icon-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  overflow: hidden;
+}
+
+.icon-group .icon-button {
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid var(--line-2);
+}
+
+.icon-group .icon-button:last-child {
+  border-right: none;
+}
+
+/* Icon badge (notification dot) */
+.icon-badge {
+  position: relative;
+  display: inline-flex;
+}
+
+.icon-badge__dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--ds-alarm);
+  border: 2px solid var(--ds-background-100);
+}
+
+.icon-badge__count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--ds-alarm);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  border: 2px solid var(--ds-background-100);
+}
+
+/* Status color variants for icons */
+.icon-status-ok {
+  color: var(--ds-ok);
+}
+
+.icon-status-warn {
+  color: var(--ds-warn);
+}
+
+.icon-status-alarm {
+  color: var(--ds-alarm);
+}
+
+.icon-status-info {
+  color: var(--ds-info);
+}
+
+.icon-status-muted {
+  color: var(--ds-gray-600);
+}
+
+/* Rotational utilities */
+.icon-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.icon-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.icon-rotate-270 {
+  transform: rotate(270deg);
+}
+
+.icon-flip-h {
+  transform: scaleX(-1);
+}
+
+.icon-flip-v {
+  transform: scaleY(-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes icon-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes icon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes icon-fade-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   DARK MODE ADJUSTMENTS
+   ═══════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .icon-button {
+  border-color: var(--line-2);
+  color: var(--text-hi);
+}
+
+[data-theme="dark"] .icon-group {
+  border-color: var(--line-2);
+}
+
+[data-theme="dark"] .icon-group .icon-button {
+  border-right-color: var(--line-2);
+}
+
+[data-theme="dark"] .icon-badge__dot,
+[data-theme="dark"] .icon-badge__count {
+  border-color: var(--ds-background-100);
+}
+
+[data-theme="dark"] .icon-input {
+  color: var(--ds-gray-600);
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-spin,
+  .icon-spin svg,
+  .icon-pulse,
+  .icon-pulse svg,
+  .icon-bounce,
+  .icon-bounce svg {
+    animation: none;
+  }
+
+  .icon-fade-in,
+  .icon-fade-in svg {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

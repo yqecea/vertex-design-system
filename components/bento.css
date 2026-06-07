@@ -1,0 +1,33 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Bento Grid
+   Feature sections with 1px seams
+   ═══════════════════════════════════════════════════════ */
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.bento > * {
+  background: var(--bg-100);
+  padding: var(--geist-gap);
+  border: none;
+}
+
+.bento-featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+  .bento-featured {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}

@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════
+   PRINTING — Documentation / Research (Light Mode)
+   Research, B2B premium, legal, finance, docs
+   Mapped to real Geist tokens
+   ═══════════════════════════════════════════════════════ */
+
+[data-material="printing"] {
+  /* ── Surface Elevation ── */
+  --bg-000: var(--ds-background-100, #ffffff);
+  --bg-100: var(--ds-background-200, #fafafa);
+  --bg-200: var(--ds-gray-100, #f2f2f2);
+  --bg-300: var(--ds-gray-200, #ebebeb);
+
+  /* ── Text Hierarchy ── */
+  --text-hi: var(--ds-gray-1000, #171717);
+  --text-md: var(--ds-gray-900, #4c4c4c);
+  --text-lo: var(--ds-gray-700, #8f8f8f);
+
+  /* ── Border System ── */
+  --line: rgba(0, 0, 0, 0.08);
+  --line-2: rgba(0, 0, 0, 0.16);
+
+  /* ── Accent ── */
+  --accent: var(--ds-blue-700, #0072f5);
+  --accent-hover: var(--ds-blue-800, #0062d1);
+
+  /* ── Semantic ── */
+  --ok: #16a34a;
+  --warn: #d97706;
+  --alarm: #dc2626;
+
+  /* ── Typography ── */
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ── Surface Texture ── */
+  --texture-primary:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 15px,
+      rgba(0, 0, 0, 0.03) 15px,
+      rgba(0, 0, 0, 0.03) 16px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 15px,
+      rgba(0, 0, 0, 0.03) 15px,
+      rgba(0, 0, 0, 0.03) 16px
+    );
+}

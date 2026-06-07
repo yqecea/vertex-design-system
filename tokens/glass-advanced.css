@@ -1,0 +1,612 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   GLASS ADVANCED — Layered glass + glow system
+   Industrial Geist extension for vertex-industrial-geist
+   Dark mode default · light mode via data-theme · reduced-motion safe
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   0. THEME TOKENS
+   All values reference real Geist tokens where possible. Local aliases keep the
+   glass math readable and avoid collisions with the base `glass.css` tokens.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Defaults assume a dark canvas (#000 / #0a0a0a) as the design system default. */
+  --glass-advanced-bg-1: rgba(255, 255, 255, 0.03);
+  --glass-advanced-bg-2: rgba(255, 255, 255, 0.05);
+  --glass-advanced-bg-3: rgba(255, 255, 255, 0.08);
+  --glass-advanced-bg-lit: rgba(255, 255, 255, 0.04);
+
+  --glass-advanced-border: rgba(255, 255, 255, 0.08);
+  --glass-advanced-border-hover: rgba(255, 255, 255, 0.16);
+  --glass-advanced-border-accent: rgba(255, 255, 255, 0.24);
+
+  --glass-advanced-glow: rgba(255, 255, 255, 0.10);
+  --glass-advanced-glow-bright: rgba(255, 255, 255, 0.20);
+  --glass-advanced-light-source: rgba(255, 255, 255, 0.12);
+
+  --glass-advanced-text: var(--ds-gray-1000, #ededed);
+  --glass-advanced-text-muted: var(--ds-gray-900, #a1a1a1);
+  --glass-advanced-accent: var(--accent, var(--ds-blue-700, #0072f5));
+
+  --glass-advanced-shadow-color: rgba(0, 0, 0, 0.45);
+
+  /* Blur presets */
+  --glass-advanced-blur-1: blur(8px) saturate(140%);
+  --glass-advanced-blur-2: blur(12px) saturate(160%);
+  --glass-advanced-blur-3: blur(16px) saturate(180%);
+  --glass-advanced-blur-nav: blur(12px) saturate(150%);
+  --glass-advanced-blur-btn: blur(8px) saturate(140%);
+}
+
+[data-theme="light"] {
+  /* Flip the glass tints for light backgrounds so overlap stays legible. */
+  --glass-advanced-bg-1: rgba(0, 0, 0, 0.03);
+  --glass-advanced-bg-2: rgba(0, 0, 0, 0.05);
+  --glass-advanced-bg-3: rgba(0, 0, 0, 0.08);
+  --glass-advanced-bg-lit: rgba(0, 0, 0, 0.04);
+
+  --glass-advanced-border: rgba(0, 0, 0, 0.08);
+  --glass-advanced-border-hover: rgba(0, 0, 0, 0.16);
+  --glass-advanced-border-accent: rgba(0, 0, 0, 0.24);
+
+  --glass-advanced-glow: rgba(0, 0, 0, 0.08);
+  --glass-advanced-glow-bright: rgba(0, 0, 0, 0.16);
+  --glass-advanced-light-source: rgba(0, 0, 0, 0.10);
+
+  --glass-advanced-shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Mirror the dark values under [data-theme="dark"] in case a page toggles late. */
+[data-theme="dark"] {
+  --glass-advanced-bg-1: rgba(255, 255, 255, 0.03);
+  --glass-advanced-bg-2: rgba(255, 255, 255, 0.05);
+  --glass-advanced-bg-3: rgba(255, 255, 255, 0.08);
+  --glass-advanced-bg-lit: rgba(255, 255, 255, 0.04);
+
+  --glass-advanced-border: rgba(255, 255, 255, 0.08);
+  --glass-advanced-border-hover: rgba(255, 255, 255, 0.16);
+  --glass-advanced-border-accent: rgba(255, 255, 255, 0.24);
+
+  --glass-advanced-glow: rgba(255, 255, 255, 0.10);
+  --glass-advanced-glow-bright: rgba(255, 255, 255, 0.20);
+  --glass-advanced-light-source: rgba(255, 255, 255, 0.12);
+
+  --glass-advanced-shadow-color: rgba(0, 0, 0, 0.45);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   1. LAYERED GLASS
+   Stack multiple glass panels without compositing blow-outs. Each layer is
+   promoted to its own GPU layer and isolated so backdrop-filters don't bleed
+   into one another unexpectedly.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-layer-1,
+.glass-layer-2,
+.glass-layer-3 {
+  position: relative;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  border: 1px solid var(--glass-advanced-border);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.glass-layer-1 {
+  background: var(--glass-advanced-bg-1);
+  backdrop-filter: var(--glass-advanced-blur-1);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-1);
+}
+
+.glass-layer-2 {
+  background: var(--glass-advanced-bg-2);
+  backdrop-filter: var(--glass-advanced-blur-2) brightness(1.05);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-2) brightness(1.05);
+  box-shadow:
+    0 8px 24px -8px var(--glass-advanced-shadow-color),
+    inset 0 1px 0 var(--glass-advanced-glow);
+}
+
+.glass-layer-3 {
+  background: var(--glass-advanced-bg-3);
+  backdrop-filter: var(--glass-advanced-blur-3) brightness(1.08);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-3) brightness(1.08);
+  box-shadow:
+    0 12px 32px -10px var(--glass-advanced-shadow-color),
+    inset 0 0 28px -8px var(--glass-advanced-glow),
+    inset 0 1px 0 var(--glass-advanced-glow-bright);
+}
+
+/* When layers touch, give them explicit paint order. */
+.glass-layer-1 { z-index: 10; }
+.glass-layer-2 { z-index: 20; }
+.glass-layer-3 { z-index: 30; }
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   2. EDGE GLOW
+   Add rim illumination without extra DOM. Glow is built from layered box-shadows
+   so it degrades gracefully and stays compositor-friendly.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-glow {
+  box-shadow:
+    inset 0 0 0 1px var(--glass-advanced-border),
+    0 0 24px -8px var(--glass-advanced-glow),
+    inset 0 0 20px -12px var(--glass-advanced-glow);
+}
+
+.glass-glow-accent {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--glass-advanced-accent) 24%, transparent),
+    0 0 28px -6px color-mix(in srgb, var(--glass-advanced-accent) 30%, transparent),
+    inset 0 0 24px -14px color-mix(in srgb, var(--glass-advanced-accent) 18%, transparent);
+}
+
+.glass-glow-animated {
+  position: relative;
+}
+
+.glass-glow-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--glass-advanced-border),
+    0 0 32px -8px var(--glass-advanced-glow),
+    inset 0 0 24px -12px var(--glass-advanced-glow);
+  opacity: 0.8;
+  pointer-events: none;
+  animation: glass-edge-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glass-edge-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   3. LIGHT TRANSMISSION
+   Simulate a light source behind the glass. The radial-gradient is painted on
+   top of the blurred backdrop so it reads as transmitted light rather than a
+   solid overlay.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-lit {
+  position: relative;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  background-color: var(--glass-advanced-bg-lit);
+  background-image:
+    radial-gradient(
+      600px circle at 20% 25%,
+      var(--glass-advanced-light-source) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      var(--glass-advanced-bg-lit) 0%,
+      transparent 100%
+    );
+  backdrop-filter: var(--glass-advanced-blur-2);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-2);
+  border: 1px solid var(--glass-advanced-border);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   4. LIQUID GLASS
+   Subtle, slow refraction-like gradients. Animations are opacity/transform only
+   so they don't stress the GPU.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-liquid {
+  position: relative;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  background:
+    linear-gradient(
+      115deg,
+      transparent 38%,
+      var(--glass-advanced-glow) 45%,
+      transparent 50%,
+      var(--glass-advanced-glow) 55%,
+      transparent 62%
+    ),
+    var(--glass-advanced-bg-2);
+  background-size: 250% 250%, 100% 100%;
+  backdrop-filter: var(--glass-advanced-blur-2);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-2);
+  border: 1px solid var(--glass-advanced-border);
+  overflow: hidden;
+  animation: glass-liquid-shift 10s linear infinite;
+}
+
+@keyframes glass-liquid-shift {
+  0% { background-position: 0% 0%, 0 0; }
+  100% { background-position: 100% 100%, 0 0; }
+}
+
+.glass-bubble {
+  position: relative;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  border-radius: var(--radius-pill, 999px);
+  background: var(--glass-advanced-bg-2);
+  backdrop-filter: var(--glass-advanced-blur-2);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-2);
+  border: 1px solid var(--glass-advanced-border);
+  box-shadow:
+    inset 0 1px 0 var(--glass-advanced-glow),
+    0 8px 24px -8px var(--glass-advanced-shadow-color);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.glass-bubble::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 40%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--glass-advanced-glow-bright) 0%,
+    transparent 70%
+  );
+  opacity: 0.55;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   5. NAV BAR GLASS
+   Fixed nav with a progressive fade from transparent to blurred. The bottom edge
+   softens via a mask so the glass dissolves into the page instead of hard-cutting.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--geist-gap, 24px);
+  background: linear-gradient(
+    to bottom,
+    var(--glass-advanced-bg-2) 0%,
+    color-mix(in srgb, var(--glass-advanced-bg-2) 40%, transparent) 70%,
+    transparent 100%
+  );
+  backdrop-filter: var(--glass-advanced-blur-nav);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-nav);
+  border-bottom: 1px solid var(--glass-advanced-border);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 75%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 75%,
+    transparent 100%
+  );
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   6. CARD GLASS
+   Elevated panels with compositor-safe shadows. Hover intensifies the glow and
+   border without lifting the card (no transform lift — stays Geist-motion-clean).
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-card {
+  position: relative;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  background: var(--glass-advanced-bg-2);
+  backdrop-filter: var(--glass-advanced-blur-2);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-2);
+  border: 1px solid var(--glass-advanced-border);
+  box-shadow:
+    var(--ds-shadow-large, 0 8px 16px -4px rgba(0, 0, 0, 0.04)),
+    0 0 0 1px var(--glass-advanced-border);
+  overflow: hidden;
+  transition:
+    background-color 150ms linear,
+    border-color 150ms linear,
+    box-shadow 150ms linear;
+  backface-visibility: hidden;
+}
+
+.glass-card-hover:hover,
+.glass-card-hover:focus-within {
+  background: var(--glass-advanced-bg-3);
+  border-color: var(--glass-advanced-border-hover);
+  box-shadow:
+    var(--ds-shadow-xl, 0 16px 24px -8px rgba(0, 0, 0, 0.06)),
+    0 0 0 1px var(--glass-advanced-border-hover),
+    0 0 48px -16px var(--glass-advanced-glow);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   7. BUTTON GLASS
+   Compact, tappable glass buttons. The primary variant uses a tinted glass fill
+   derived from the active accent color.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-btn,
+.glass-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--geist-space-2x, 8px);
+  padding: 0 var(--geist-space-4x, 16px);
+  height: var(--geist-form-height, 40px);
+  border-radius: var(--geist-radius, 6px);
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  border: 1px solid var(--glass-advanced-border);
+  transition:
+    background-color 150ms linear,
+    border-color 150ms linear,
+    box-shadow 150ms linear,
+    color 150ms linear;
+  backface-visibility: hidden;
+}
+
+.glass-btn {
+  color: var(--glass-advanced-text);
+  background: var(--glass-advanced-bg-1);
+  backdrop-filter: var(--glass-advanced-blur-btn);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-btn);
+}
+
+.glass-btn:hover {
+  background: var(--glass-advanced-bg-2);
+  border-color: var(--glass-advanced-border-hover);
+  box-shadow: 0 0 20px -6px var(--glass-advanced-glow);
+}
+
+.glass-btn:active {
+  transform: translateZ(0) scale(0.98);
+}
+
+.glass-btn-primary {
+  color: var(--glass-advanced-text);
+  background: color-mix(in srgb, var(--glass-advanced-accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--glass-advanced-accent) 35%, transparent);
+  backdrop-filter: var(--glass-advanced-blur-btn);
+  -webkit-backdrop-filter: var(--glass-advanced-blur-btn);
+  box-shadow:
+    0 0 20px -8px color-mix(in srgb, var(--glass-advanced-accent) 24%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--glass-advanced-accent) 16%, transparent);
+}
+
+.glass-btn-primary:hover {
+  background: color-mix(in srgb, var(--glass-advanced-accent) 18%, transparent);
+  border-color: color-mix(in srgb, var(--glass-advanced-accent) 50%, transparent);
+  box-shadow:
+    0 0 28px -8px color-mix(in srgb, var(--glass-advanced-accent) 32%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--glass-advanced-accent) 22%, transparent);
+}
+
+.glass-btn-primary:active {
+  transform: translateZ(0) scale(0.98);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   8. GLOW VARIANTS
+   Reusable glow utilities. Keep them opt-in and avoid stacking more than two
+   on the same element to prevent halos from blowing out.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glow-subtle {
+  box-shadow: 0 0 16px -6px var(--glass-advanced-glow);
+}
+
+.glow-medium {
+  box-shadow:
+    0 0 24px -6px var(--glass-advanced-glow),
+    0 0 48px -16px var(--glass-advanced-glow);
+}
+
+.glow-strong {
+  box-shadow:
+    0 0 40px -8px var(--glass-advanced-glow),
+    0 0 80px -24px var(--glass-advanced-glow),
+    inset 0 0 32px -18px var(--glass-advanced-glow);
+}
+
+.glow-pulse {
+  position: relative;
+}
+
+.glow-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    0 0 40px -8px var(--glass-advanced-glow),
+    0 0 80px -24px var(--glass-advanced-glow);
+  opacity: 0.7;
+  pointer-events: none;
+  animation: glass-glow-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes glass-glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.glow-rainbow {
+  /* Single-accent glow — complies with ANTI_PATTERNS §4 (one accent only) */
+  box-shadow:
+    0 0 30px -6px color-mix(in srgb, var(--glass-advanced-accent) 35%, transparent);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   9. MOTION SAFETY
+   Honor the user's system preference. Disable animated glows, liquid movement,
+   and rainbow rotation. Keep static glass usable but visually simpler.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-liquid,
+  .glass-glow-animated::before,
+  .glow-pulse::before {
+    animation: none !important;
+  }
+
+  .glass-layer-1,
+  .glass-layer-2,
+  .glass-layer-3,
+  .glass-lit,
+  .glass-liquid,
+  .glass-bubble,
+  .glass-nav,
+  .glass-card,
+  .glass-btn,
+  .glass-btn-primary {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .glass-layer-1 { background: var(--ds-gray-alpha-100, rgba(255, 255, 255, 0.03)) !important; }
+  .glass-layer-2 { background: var(--ds-gray-alpha-200, rgba(255, 255, 255, 0.06)) !important; }
+  .glass-layer-3 { background: var(--ds-gray-alpha-300, rgba(255, 255, 255, 0.09)) !important; }
+  .glass-lit { background: var(--ds-gray-alpha-100, rgba(255, 255, 255, 0.03)) !important; }
+  .glass-liquid { background: var(--ds-gray-alpha-200, rgba(255, 255, 255, 0.06)) !important; }
+  .glass-bubble { background: var(--ds-gray-alpha-200, rgba(255, 255, 255, 0.06)) !important; }
+
+  .glow-rainbow::before { opacity: 0.15 !important; filter: blur(6px) !important; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   10. MOBILE PERFORMANCE
+   Mobile GPUs crumble under multiple heavy blurs. Reduce radii, disable extra
+   pseudo-elements on small screens, and limit overlapping glass panels.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .glass-layer-1,
+  .glass-layer-2,
+  .glass-layer-3,
+  .glass-lit,
+  .glass-liquid,
+  .glass-bubble,
+  .glass-card {
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+  }
+
+  .glass-layer-2,
+  .glass-layer-3 {
+    filter: none !important;
+  }
+
+  .glass-layer-3 {
+    box-shadow:
+      0 8px 24px -8px var(--glass-advanced-shadow-color),
+      inset 0 0 20px -10px var(--glass-advanced-glow) !important;
+  }
+
+  .glass-nav {
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+  }
+
+  .glass-bubble::before,
+  .glass-liquid {
+    /* Simplify liquid refraction and bubble highlight */
+    animation: none !important;
+  }
+
+  /* Limit stacked glass panels to 3 on mobile. Extra panels fall back to solid. */
+  .glass-layer-1:nth-child(n+4),
+  .glass-layer-2:nth-child(n+4),
+  .glass-layer-3:nth-child(n+4),
+  .glass-card:nth-child(n+4) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--ds-gray-alpha-200, var(--glass-advanced-bg-2)) !important;
+    border: 1px solid var(--glass-advanced-border) !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-layer-1:nth-child(n+3),
+  .glass-layer-2:nth-child(n+3),
+  .glass-layer-3:nth-child(n+3),
+  .glass-card:nth-child(n+3) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--ds-gray-alpha-200, var(--glass-advanced-bg-2)) !important;
+    border: 1px solid var(--glass-advanced-border) !important;
+    box-shadow: none !important;
+  }
+
+  .glass-btn,
+  .glass-btn-primary {
+    /* Keep tappable without glass overhead */
+    backdrop-filter: blur(4px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(120%) !important;
+  }
+
+  .glow-rainbow {
+    /* Reduce rainbow halo intensity on small screens */
+    box-shadow:
+      0 0 16px -4px color-mix(in srgb, var(--ds-red-700, #e5484d) 25%, transparent),
+      0 0 32px -8px color-mix(in srgb, var(--ds-blue-700, #0072f5) 20%, transparent),
+      inset 0 0 12px -6px color-mix(in srgb, var(--ds-purple-700, #8e4ec6) 15%, transparent) !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   11. OVERLAP SAFETY
+   Nested glass panels can compound blur costs. Cap descendant blur so stacked
+   layers stay within the mobile budget.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.glass-layer-1 .glass-layer-2,
+.glass-layer-1 .glass-layer-3,
+.glass-layer-2 .glass-layer-3 {
+  --glass-advanced-blur-2: blur(8px) saturate(140%);
+  --glass-advanced-blur-3: blur(8px) saturate(140%);
+}

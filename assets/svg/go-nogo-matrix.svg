@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GO / NO-GO Matrix — Signature Move Dt1
+  3x2 matrix of subsystem status cells.
+  EDIT subsystem labels and statuses to match real product subsystems.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 180" width="100%" aria-labelledby="gng-title">
+  <title id="gng-title">GO / NO-GO status matrix</title>
+  <style>
+    .gng-cell    { fill: var(--bg-100, #131B22); stroke: var(--line-2, rgba(255,255,255,0.13)); stroke-width: 1; }
+    .gng-bar-ok  { fill: var(--ok, #46E37B); }
+    .gng-bar-wn  { fill: var(--warn, #FFB000); }
+    .gng-bar-no  { fill: var(--alarm, #FF453A); }
+    .gng-label   { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: 0.08em; fill: var(--text-md, #869099); text-transform: uppercase; }
+    .gng-state-ok  { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: 0.08em; fill: var(--ok, #46E37B); font-weight: 500; }
+    .gng-state-wn  { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: 0.08em; fill: var(--warn, #FFB000); font-weight: 500; }
+    .gng-state-no  { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: 0.08em; fill: var(--alarm, #FF453A); font-weight: 500; }
+  </style>
+
+  <g transform="translate(0, 0)">
+    <rect class="gng-cell" x="0"   y="0" width="160" height="80"/>
+    <rect class="gng-bar-ok" x="0" y="0" width="2"   height="80"/>
+    <text class="gng-label" x="16" y="32">PROP</text>
+    <text class="gng-state-ok" x="16" y="56">GO</text>
+  </g>
+  <g transform="translate(160, 0)">
+    <rect class="gng-cell" x="0"   y="0" width="160" height="80"/>
+    <rect class="gng-bar-ok" x="0" y="0" width="2"   height="80"/>
+    <text class="gng-label" x="16" y="32">GNC</text>
+    <text class="gng-state-ok" x="16" y="56">GO</text>
+  </g>
+  <g transform="translate(320, 0)">
+    <rect class="gng-cell" x="0"   y="0" width="160" height="80"/>
+    <rect class="gng-bar-wn" x="0" y="0" width="2"   height="80"/>
+    <text class="gng-label" x="16" y="32">COMM</text>
+    <text class="gng-state-wn" x="16" y="56">CAUTION</text>
+  </g>
+
+  <g transform="translate(0, 80)">
+    <rect class="gng-cell" x="0"   y="0" width="160" height="80"/>
+    <rect class="gng-bar-ok" x="0" y="0" width="2"   height="80"/>
+    <text class="gng-label" x="16" y="32">EPS</text>
+    <text class="gng-state-ok" x="16" y="56">GO</text>
+  </g>
+  <g transform="translate(160, 80)">
+    <rect class="gng-cell" x="0"   y="0" width="160" height="80"/>
+    <rect class="gng-bar-ok" x="0" y="0" width="2"   height="80"/>
+    <text class="gng-label" x="16" y="32">ECLSS</text>
+    <text class="gng-state-ok" x="16" y="56">GO</text>
+  </g>
+  <g transform="translate(320, 80)">
+    <rect class="gng-cell" x="0"   y="0" width="160" height="80"/>
+    <rect class="gng-bar-no" x="0" y="0" width="2"   height="80"/>
+    <text class="gng-label" x="16" y="32">TLM</text>
+    <text class="gng-state-no" x="16" y="56">NO-GO</text>
+  </g>
+</svg>

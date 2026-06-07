@@ -1,0 +1,48 @@
+{
+  "name": "vertex-industrial",
+  "version": "1.0.0",
+  "description": "Vertex Industrial Design System — Real Geist + Industrial Frontend + Frosted Glass",
+  "main": "dist/vertex-industrial.css",
+  "scripts": {
+    "build": "node build.js",
+    "build:minify": "node build.js --minify",
+    "watch": "node -e \"const fs=require('fs'),{exec}=require('child_process');console.log('Watching...');fs.watch('.',{recursive:true},(e,f)=>{if(f&&f.endsWith('.css')){console.log('Change:',f);exec('node build.js')}})\""
+  },
+  "files": [
+    "dist/",
+    "tokens/",
+    "materials/",
+    "components/",
+    "layouts/",
+    "examples/",
+    "assets/",
+    "preview.html",
+    "README.md",
+    "SKILL.md",
+    "DESIGN_SYSTEM.md",
+    "GEIST_COMPONENT_CATALOG.md",
+    "TESTING.md"
+  ],
+  "keywords": [
+    "design-system",
+    "css",
+    "geist",
+    "vercel",
+    "industrial",
+    "glass",
+    "frosted-glass",
+    "liquid-glass",
+    "dark-mode",
+    "ui",
+    "components"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yqecea/vertex-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yqecea/vertex-design-system/issues"
+  },
+  "homepage": "https://github.com/yqecea/vertex-design-system#readme"
+}

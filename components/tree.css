@@ -1,0 +1,195 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Tree
+   Hierarchical expandable list with nested items
+   ═══════════════════════════════════════════════════════ */
+
+.tree {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-item {
+  position: relative;
+}
+
+.tree-branch {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: var(--geist-space-6x);
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-2x);
+  padding: var(--geist-space-2x) var(--geist-space-3x);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  color: var(--ds-gray-900);
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.tree-row:hover {
+  background: var(--ds-gray-100);
+}
+
+.tree-row:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.tree-row[aria-selected="true"] {
+  background: var(--ds-blue-100);
+  color: var(--ds-blue-900);
+}
+
+.tree-row[aria-expanded] {
+  cursor: pointer;
+}
+
+.tree-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--ds-gray-600);
+  transition: transform var(--default-transition-duration) var(--ease-in-out);
+}
+
+.tree-row[aria-expanded="true"] .tree-toggle {
+  transform: rotate(90deg);
+}
+
+.tree-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--ds-gray-600);
+}
+
+.tree-row[aria-selected="true"] .tree-icon {
+  color: var(--ds-blue-700);
+}
+
+.tree-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space);
+  opacity: 0;
+  transition: opacity var(--default-transition-duration) var(--ease-in-out);
+}
+
+.tree-row:hover .tree-actions {
+  opacity: 1;
+}
+
+.tree-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  color: var(--ds-gray-600);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  outline: none;
+  padding: 0;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.tree-action-btn:hover {
+  background: var(--ds-gray-alpha-200);
+  color: var(--ds-gray-1000);
+}
+
+.tree-action-btn:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+/* Indentation guide lines */
+.tree--guides .tree-branch {
+  position: relative;
+}
+
+.tree--guides .tree-branch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--geist-space-3x) - 1px);
+  width: 1px;
+  background: var(--ds-gray-alpha-200);
+}
+
+/* Leaf node (no children) */
+.tree-row--leaf {
+  padding-left: calc(var(--geist-space-3x) + 16px + var(--geist-space-2x));
+}
+
+/* Dark mode */
+[data-theme="dark"] .tree-row {
+  color: var(--ds-gray-900);
+}
+
+[data-theme="dark"] .tree-row:hover {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .tree-row[aria-selected="true"] {
+  background: rgba(0, 114, 245, 0.15);
+  color: var(--ds-blue-400);
+}
+
+[data-theme="dark"] .tree-toggle {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .tree-icon {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .tree-row[aria-selected="true"] .tree-icon {
+  color: var(--ds-blue-500);
+}
+
+[data-theme="dark"] .tree-action-btn {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .tree-action-btn:hover {
+  background: var(--ds-gray-alpha-200);
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .tree--guides .tree-branch::before {
+  background: var(--ds-gray-alpha-300);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tree-row,
+  .tree-toggle,
+  .tree-actions,
+  .tree-action-btn {
+    transition: none;
+  }
+}

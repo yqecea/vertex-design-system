@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Carousel
+   Image/content slider with navigation
+   ═══════════════════════════════════════════════════════ */
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--geist-radius);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform var(--ds-motion-overlay-duration) var(--ease-in-out);
+  will-change: transform;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Navigation buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: 50%;
+  color: var(--ds-gray-1000);
+  cursor: pointer;
+  outline: none;
+  z-index: 10;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              border-color var(--default-transition-duration) var(--ease-in-out),
+              opacity var(--default-transition-duration) var(--ease-in-out);
+  box-shadow: var(--ds-shadow-small);
+}
+
+.carousel-btn:hover {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+.carousel-btn:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.carousel-btn:disabled,
+.carousel-btn[aria-disabled="true"] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.carousel-btn--prev {
+  left: var(--geist-space-4x);
+}
+
+.carousel-btn--next {
+  right: var(--geist-space-4x);
+}
+
+/* Dots indicator */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--geist-space-2x);
+  padding: var(--geist-space-4x) 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-gray-alpha-500);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              transform var(--default-transition-duration) var(--ease-in-out);
+}
+
+.carousel-dot:hover {
+  background: var(--ds-gray-alpha-700);
+}
+
+.carousel-dot:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.carousel-dot[aria-current="true"] {
+  background: var(--ds-gray-1000);
+  transform: scale(1.25);
+}
+
+/* Counter */
+.carousel-counter {
+  position: absolute;
+  bottom: var(--geist-space-4x);
+  right: var(--geist-space-4x);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--radius-pill);
+  padding: var(--geist-space) var(--geist-space-3x);
+}
+
+/* Dark mode */
+[data-theme="dark"] .carousel-btn {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .carousel-btn:hover {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .carousel-dot {
+  background: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .carousel-dot:hover {
+  background: var(--ds-gray-alpha-700);
+}
+
+[data-theme="dark"] .carousel-dot[aria-current="true"] {
+  background: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .carousel-counter {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+  color: var(--ds-gray-1000);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    transition: none;
+  }
+  .carousel-btn,
+  .carousel-dot {
+    transition: none;
+  }
+}

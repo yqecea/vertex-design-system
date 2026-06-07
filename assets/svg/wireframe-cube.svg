@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Wireframe Cube — Signature Move D2
+  Exploded view of a cube with one face floating above.
+  EDIT the label texts before shipping.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="100%" aria-labelledby="cube-title">
+  <title id="cube-title">Exploded wireframe cube</title>
+  <style>
+    .cube-edge { stroke: var(--line-2, #333); stroke-width: 1; fill: none; }
+    .cube-face { stroke: var(--line-2, #333); stroke-width: 1; fill: var(--bg-100, #181818); }
+    .cube-accent { stroke: var(--accent, #4AA8FF); stroke-width: 1.5; fill: none; }
+    .cube-float { stroke: var(--line-2, #333); stroke-width: 1; fill: var(--bg-200, #222); stroke-dasharray: 3 2; }
+    .cube-label { font-family: var(--font-mono, ui-monospace, monospace); font-size: 10px; letter-spacing: 0.08em; fill: var(--text-md, #9DA6AB); text-transform: uppercase; }
+    .cube-callout { stroke: var(--text-lo, #6B7378); stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Back face (dimmer, behind) -->
+  <polygon class="cube-edge" points="100,60 220,60 220,180 100,180"/>
+  <!-- Depth edges from back face -->
+  <line class="cube-edge" x1="100" y1="60"  x2="60"  y2="100"/>
+  <line class="cube-edge" x1="220" y1="60"  x2="180" y2="100"/>
+  <line class="cube-edge" x1="220" y1="180" x2="180" y2="220"/>
+  <line class="cube-edge" x1="100" y1="180" x2="60"  y2="220"/>
+  <!-- Front face (with accent stroke) -->
+  <polygon class="cube-face" points="60,100 180,100 180,220 60,220"/>
+  <polygon class="cube-accent" points="60,100 180,100 180,220 60,220"/>
+
+  <!-- Top face exploded floating above -->
+  <polygon class="cube-float" points="80,30 200,30 180,55 60,55"/>
+  <text class="cube-label" x="130" y="46" text-anchor="middle">FACE 01</text>
+
+  <!-- Callout line from float to right -->
+  <line class="cube-callout" x1="200" y1="40" x2="280" y2="20"/>
+  <circle cx="200" cy="40" r="2" fill="var(--accent, #4AA8FF)"/>
+  <text class="cube-label" x="284" y="18">ACCESS LAYER</text>
+  <text class="cube-label" x="284" y="32" style="opacity: 0.7;">cap: 1024 keys</text>
+
+  <!-- Center label on front face -->
+  <text class="cube-label" x="120" y="165" text-anchor="middle" style="fill: var(--accent, #4AA8FF);">CORE</text>
+</svg>

@@ -1,0 +1,16 @@
+/* ═══════════════════════════════════════════════════════
+   Z-INDEX SCALE — Unified layering system
+   Prevents z-index chaos across components
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Base Layers ── */
+  --z-base: 1;
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  
+  /* ── Overlay Layers ── */
+  --z-drawer: 1000;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}

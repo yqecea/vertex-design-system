@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Leader Line Annotation — Signature Move D4
+  Four leader-line callouts (anchor dot → line → label box) overlaid on a product visualization.
+  Replace the anchor positions, lines, and label text to match the real product image underneath.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" aria-labelledby="leader-title">
+  <title id="leader-title">Annotated leader-line callouts</title>
+  <style>
+    .ld-anchor { fill: var(--accent, #4AA8FF); }
+    .ld-line   { stroke: var(--line-2, rgba(255,255,255,0.18)); stroke-width: 1; fill: none; }
+    .ld-box    { fill: var(--bg-100, #121619); stroke: var(--line-2, rgba(255,255,255,0.18)); stroke-width: 1; }
+    .ld-num    { font-family: var(--font-mono, ui-monospace, monospace); font-size: 10px; letter-spacing: 0.08em; fill: var(--accent, #4AA8FF); }
+    .ld-title  { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: 0.08em; fill: var(--text-hi, #E4E7E9); text-transform: uppercase; }
+    .ld-body   { font-family: var(--font-ui, system-ui, sans-serif); font-size: 11px; fill: var(--text-md, #9DA6AB); }
+  </style>
+
+  <circle class="ld-anchor" cx="240" cy="180" r="3"/>
+  <path class="ld-line" d="M 240 180 L 540 100 L 560 100"/>
+  <rect class="ld-box" x="560" y="76" width="220" height="48"/>
+  <text class="ld-num"   x="572" y="92">01</text>
+  <text class="ld-title" x="596" y="92">LIVE REQUEST PANEL</text>
+  <text class="ld-body"  x="572" y="112">Inbound calls, 100ms refresh</text>
+
+  <circle class="ld-anchor" cx="380" cy="240" r="3"/>
+  <path class="ld-line" d="M 380 240 L 560 220"/>
+  <rect class="ld-box" x="560" y="196" width="220" height="48"/>
+  <text class="ld-num"   x="572" y="212">02</text>
+  <text class="ld-title" x="596" y="212">RATE LIMITER</text>
+  <text class="ld-body"  x="572" y="232">Per-key, sliding window</text>
+
+  <circle class="ld-anchor" cx="260" cy="380" r="3"/>
+  <path class="ld-line" d="M 260 380 L 540 380 L 560 380"/>
+  <rect class="ld-box" x="560" y="356" width="220" height="48"/>
+  <text class="ld-num"   x="572" y="372">03</text>
+  <text class="ld-title" x="596" y="372">AUDIT LOG</text>
+  <text class="ld-body"  x="572" y="392">7-day retention default</text>
+
+  <circle class="ld-anchor" cx="500" cy="420" r="3"/>
+  <path class="ld-line" d="M 500 420 L 240 460 L 220 460"/>
+  <rect class="ld-box" x="20" y="436" width="200" height="48"/>
+  <text class="ld-num"   x="32" y="452">04</text>
+  <text class="ld-title" x="56" y="452">EDGE WORKER</text>
+  <text class="ld-body"  x="32" y="472">Sub-ms latency at PoP</text>
+</svg>

@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════
+   WELDING — Steel Frame Assembly
+   Open-source tools, platforms, frameworks
+   Mapped to real Geist tokens
+   ═══════════════════════════════════════════════════════ */
+
+[data-material="welding"] {
+  /* ── Surface Elevation ── */
+  --bg-000: var(--ds-background-100, #0a0a0a);
+  --bg-100: var(--ds-gray-100, #1a1a1a);
+  --bg-200: #242629;
+  --bg-300: #2e3033;
+
+  /* ── Text Hierarchy ── */
+  --text-hi: #e8e4dc;
+  --text-md: #9a968e;
+  --text-lo: #6a665e;
+
+  /* ── Border System ── */
+  --line: rgba(255, 255, 255, 0.10);
+  --line-2: rgba(255, 255, 255, 0.18);
+
+  /* ── Accent ── */
+  --accent: var(--ds-amber-700, #ffb224);
+  --accent-hover: #f2a20d;
+
+  /* ── Semantic ── */
+  --ok: var(--ds-green-700, #45a557);
+  --warn: var(--ds-amber-700, #ffb224);
+  --alarm: var(--ds-red-700, #e5484d);
+
+  /* ── Typography ── */
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ── Surface Texture ── */
+  --texture-primary:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 15px,
+      rgba(255, 176, 36, 0.04) 15px,
+      rgba(255, 176, 36, 0.04) 16px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 15px,
+      rgba(255, 176, 36, 0.04) 15px,
+      rgba(255, 176, 36, 0.04) 16px
+    );
+}

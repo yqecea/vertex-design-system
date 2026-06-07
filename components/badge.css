@@ -1,0 +1,278 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Badge
+   Status indicator with variants
+   ═══════════════════════════════════════════════════════ */
+
+.geist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--geist-space);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  padding: var(--geist-space) var(--geist-space-2x);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: background var(--default-transition-duration) var(--ease-in-out),
+              color var(--default-transition-duration) var(--ease-in-out);
+}
+
+/* Badge variants */
+.geist-badge--default {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-900);
+  border: 1px solid var(--ds-gray-alpha-200);
+}
+
+.geist-badge--success {
+  background: var(--ds-green-100);
+  color: var(--ds-green-900);
+  border: 1px solid var(--ds-green-400);
+}
+
+.geist-badge--warning {
+  background: var(--ds-amber-100);
+  color: var(--ds-amber-900);
+  border: 1px solid var(--ds-amber-400);
+}
+
+.geist-badge--error {
+  background: var(--ds-red-100);
+  color: var(--ds-red-900);
+  border: 1px solid var(--ds-red-400);
+}
+
+.geist-badge--info {
+  background: var(--ds-blue-100);
+  color: var(--ds-blue-900);
+  border: 1px solid var(--ds-blue-400);
+}
+
+.geist-badge--gray {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-900);
+  border: 1px solid var(--ds-gray-alpha-200);
+}
+
+.geist-badge--blue {
+  background: var(--ds-blue-100);
+  color: var(--ds-blue-900);
+  border: 1px solid var(--ds-blue-400);
+}
+
+.geist-badge--purple {
+  background: var(--ds-purple-100);
+  color: var(--ds-purple-900);
+  border: 1px solid var(--ds-purple-400);
+}
+
+.geist-badge--pink {
+  background: var(--ds-pink-100);
+  color: var(--ds-pink-900);
+  border: 1px solid var(--ds-pink-400);
+}
+
+.geist-badge--teal {
+  background: var(--ds-teal-100);
+  color: var(--ds-teal-900);
+  border: 1px solid var(--ds-teal-400);
+}
+
+/* Badge sizes */
+.geist-badge--sm {
+  font-size: 11px;
+  padding: 2px var(--geist-space-2x);
+  height: 20px;
+}
+
+.geist-badge--md {
+  font-size: var(--text-xs);
+  padding: var(--geist-space) var(--geist-space-2x);
+  height: 24px;
+}
+
+.geist-badge--lg {
+  font-size: var(--text-sm);
+  padding: var(--geist-space-2x) var(--geist-space-3x);
+  height: 32px;
+}
+
+/* Dot variant */
+.geist-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.geist-badge--default .geist-badge__dot {
+  background: var(--ds-gray-600);
+}
+
+.geist-badge--success .geist-badge__dot {
+  background: var(--ds-green-700);
+}
+
+.geist-badge--warning .geist-badge__dot {
+  background: var(--ds-amber-700);
+}
+
+.geist-badge--error .geist-badge__dot {
+  background: var(--ds-red-700);
+}
+
+.geist-badge--info .geist-badge__dot {
+  background: var(--ds-blue-700);
+}
+
+/* Pulse animation on dot */
+.geist-badge--pulse .geist-badge__dot {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Outline variant */
+.geist-badge--outline {
+  background: transparent;
+}
+
+.geist-badge--outline.geist-badge--default {
+  color: var(--ds-gray-700);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+.geist-badge--outline.geist-badge--success {
+  color: var(--ds-green-800);
+  border-color: var(--ds-green-500);
+}
+
+.geist-badge--outline.geist-badge--warning {
+  color: var(--ds-amber-800);
+  border-color: var(--ds-amber-500);
+}
+
+.geist-badge--outline.geist-badge--error {
+  color: var(--ds-red-800);
+  border-color: var(--ds-red-500);
+}
+
+.geist-badge--outline.geist-badge--info {
+  color: var(--ds-blue-800);
+  border-color: var(--ds-blue-500);
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-badge--default {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-900);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-badge--success {
+  background: var(--ds-green-1000);
+  color: var(--ds-green-600);
+  border-color: var(--ds-green-900);
+}
+
+[data-theme="dark"] .geist-badge--warning {
+  background: var(--ds-amber-1000);
+  color: var(--ds-amber-600);
+  border-color: var(--ds-amber-900);
+}
+
+[data-theme="dark"] .geist-badge--error {
+  background: var(--ds-red-1000);
+  color: var(--ds-red-600);
+  border-color: var(--ds-red-900);
+}
+
+[data-theme="dark"] .geist-badge--info {
+  background: var(--ds-blue-1000);
+  color: var(--ds-blue-600);
+  border-color: var(--ds-blue-900);
+}
+
+[data-theme="dark"] .geist-badge--gray {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-900);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-badge--blue {
+  background: var(--ds-blue-1000);
+  color: var(--ds-blue-600);
+  border-color: var(--ds-blue-900);
+}
+
+[data-theme="dark"] .geist-badge--purple {
+  background: var(--ds-purple-1000);
+  color: var(--ds-purple-600);
+  border-color: var(--ds-purple-900);
+}
+
+[data-theme="dark"] .geist-badge--pink {
+  background: var(--ds-pink-1000);
+  color: var(--ds-pink-600);
+  border-color: var(--ds-pink-900);
+}
+
+[data-theme="dark"] .geist-badge--teal {
+  background: var(--ds-teal-1000);
+  color: var(--ds-teal-600);
+  border-color: var(--ds-teal-900);
+}
+
+[data-theme="dark"] .geist-badge--default .geist-badge__dot {
+  background: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .geist-badge--success .geist-badge__dot {
+  background: var(--ds-green-600);
+}
+
+[data-theme="dark"] .geist-badge--warning .geist-badge__dot {
+  background: var(--ds-amber-600);
+}
+
+[data-theme="dark"] .geist-badge--error .geist-badge__dot {
+  background: var(--ds-red-600);
+}
+
+[data-theme="dark"] .geist-badge--info .geist-badge__dot {
+  background: var(--ds-blue-600);
+}
+
+[data-theme="dark"] .geist-badge--outline.geist-badge--default {
+  color: var(--ds-gray-600);
+  border-color: var(--ds-gray-alpha-400);
+}
+
+[data-theme="dark"] .geist-badge--outline.geist-badge--success {
+  color: var(--ds-green-600);
+  border-color: var(--ds-green-800);
+}
+
+[data-theme="dark"] .geist-badge--outline.geist-badge--warning {
+  color: var(--ds-amber-600);
+  border-color: var(--ds-amber-800);
+}
+
+[data-theme="dark"] .geist-badge--outline.geist-badge--error {
+  color: var(--ds-red-600);
+  border-color: var(--ds-red-800);
+}
+
+[data-theme="dark"] .geist-badge--outline.geist-badge--info {
+  color: var(--ds-blue-600);
+  border-color: var(--ds-blue-800);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-badge,
+  .geist-badge--pulse .geist-badge__dot {
+    transition: none;
+    animation: none;
+  }
+}

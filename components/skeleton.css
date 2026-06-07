@@ -1,0 +1,187 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Skeleton
+   Loading placeholder
+   ═══════════════════════════════════════════════════════ */
+
+.geist-skeleton {
+  display: block;
+  background: var(--ds-gray-100);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.geist-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--ds-gray-alpha-100) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: loading 8s ease-in-out infinite;
+}
+
+/* Skeleton variants */
+.geist-skeleton--text {
+  height: 1em;
+  margin-bottom: 0.5em;
+  border-radius: var(--radius-sm);
+}
+
+.geist-skeleton--text:last-child {
+  width: 80%;
+}
+
+.geist-skeleton--circular {
+  border-radius: 50%;
+}
+
+.geist-skeleton--rectangular {
+  border-radius: var(--radius-sm);
+}
+
+.geist-skeleton--rounded {
+  border-radius: var(--geist-radius);
+}
+
+/* Skeleton sizes */
+.geist-skeleton--sm {
+  height: var(--geist-form-small-height);
+}
+
+.geist-skeleton--md {
+  height: var(--geist-form-height);
+}
+
+.geist-skeleton--lg {
+  height: var(--geist-form-large-height);
+}
+
+.geist-skeleton--xl {
+  height: 80px;
+}
+
+/* Typography skeletons */
+.geist-skeleton--h1 {
+  height: var(--text-xl);
+  margin-bottom: var(--geist-space-2x);
+}
+
+.geist-skeleton--h2 {
+  height: var(--text-lg);
+  margin-bottom: var(--geist-space-2x);
+}
+
+.geist-skeleton--h3 {
+  height: var(--text-base);
+  margin-bottom: var(--geist-space);
+}
+
+.geist-skeleton--body {
+  height: var(--text-sm);
+  margin-bottom: var(--geist-space);
+}
+
+.geist-skeleton--caption {
+  height: var(--text-xs);
+  margin-bottom: var(--geist-space);
+}
+
+/* Avatar skeleton */
+.geist-skeleton--avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.geist-skeleton--avatar-sm {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.geist-skeleton--avatar-lg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+/* Button skeleton */
+.geist-skeleton--button {
+  width: 100px;
+  height: var(--geist-form-height);
+  border-radius: var(--geist-radius);
+}
+
+.geist-skeleton--button-sm {
+  width: 80px;
+  height: var(--geist-form-small-height);
+  border-radius: var(--geist-radius);
+}
+
+.geist-skeleton--button-lg {
+  width: 120px;
+  height: var(--geist-form-large-height);
+  border-radius: var(--geist-radius);
+}
+
+/* Card skeleton */
+.geist-skeleton--card {
+  border-radius: var(--geist-radius);
+}
+
+.geist-skeleton--card .geist-skeleton__media {
+  height: 160px;
+  width: 100%;
+  border-radius: var(--geist-radius) var(--geist-radius) 0 0;
+}
+
+.geist-skeleton--card .geist-skeleton__content {
+  padding: var(--geist-space-4x);
+}
+
+/* Multiple lines skeleton */
+.geist-skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space);
+  width: 100%;
+}
+
+.geist-skeleton-group .geist-skeleton:nth-child(1) { width: 100%; }
+.geist-skeleton-group .geist-skeleton:nth-child(2) { width: 92%; }
+.geist-skeleton-group .geist-skeleton:nth-child(3) { width: 88%; }
+.geist-skeleton-group .geist-skeleton:nth-child(4) { width: 60%; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-skeleton::after {
+    animation: none;
+    background: var(--ds-gray-alpha-100);
+  }
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-skeleton {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .geist-skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--ds-gray-alpha-200) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] .geist-skeleton::after {
+    background: var(--ds-gray-alpha-200);
+  }
+}

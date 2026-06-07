@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Design System — Vertex Geist Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       VERTEX INDUSTRIAL GEIST — DESIGN SYSTEM SHOWCASE
+       Material: MACHINING (primary) with multi-material demonstrations
+       Layout: BOXED with FULL-BLEED and SPLIT sections
+       ═══════════════════════════════════════════════════════════════ */
+
+    :root {
+      /* ── MACHINING Material Tokens ── */
+      --bg-000: #0B0D0F;
+      --bg-100: #121619;
+      --bg-200: #1A2024;
+      --bg-300: #222A30;
+      --text-hi: #E4E7E9;
+      --text-md: #9DA6AB;
+      --text-lo: #6B7378;
+      --line:    rgba(255,255,255,0.07);
+      --line-2:  rgba(255,255,255,0.13);
+      --accent:  #4AA8FF;
+      --accent-rgb: 74, 168, 255;
+      --ok:      #3DF07A;
+      --warn:    #FFB000;
+      --alarm:   #FF3B30;
+
+      /* ── Typography ── */
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-ui:      'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+      /* ── Spacing Scale ── */
+      --s-1: 4px;
+      --s-2: 8px;
+      --s-3: 12px;
+      --s-4: 16px;
+      --s-5: 24px;
+      --s-6: 32px;
+      --s-7: 48px;
+      --s-8: 64px;
+      --s-9: 96px;
+
+      /* ── Radius ── */
+      --r: 2px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-000);
+      color: var(--text-hi);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Reduced Motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TEXTURES
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* Raw Carbon Texture */
+    .texture-carbon {
+      position: relative;
+    }
+    .texture-carbon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 8px Plotting Grid */
+    .texture-grid-fine {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 7px, rgba(255,255,255,0.03) 7px, rgba(255,255,255,0.03) 8px),
+        repeating-linear-gradient(90deg, transparent, transparent 7px, rgba(255,255,255,0.03) 7px, rgba(255,255,255,0.03) 8px);
+    }
+
+    /* Blueprint Grid (8px + 80px) */
+    .blueprint-grid {
+      background-image:
+        linear-gradient(to right, var(--line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line) 1px, transparent 1px),
+        linear-gradient(to right, var(--line-2) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line-2) 1px, transparent 1px);
+      background-size: 8px 8px, 8px 8px, 80px 80px, 80px 80px;
+    }
+
+    /* Dot Grid Section Markers */
+    .dot-grid {
+      background-image:
+        radial-gradient(circle 1px, var(--line-2) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    /* Plotting Grid */
+    .plotting-grid {
+      background-image:
+        linear-gradient(to right, var(--line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
+
+    /* Diagonal Hatching (ONE element only) */
+    .hazard-hatch {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        var(--bg-000) 0 12px,
+        var(--accent) 12px 24px
+      );
+    }
+
+    /* Edge Light (top-edge highlight) */
+    .edge-light {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    /* Inner Glow */
+    .inner-glow {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        inset 0 0 20px rgba(var(--accent-rgb), 0.03);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYOUT — BOXED CHASSIS
+       ═══════════════════════════════════════════════════════════════ */
+
+    .chassis {
+      max-width: 1280px;
+      margin: 0 auto;
+      border-left: 1px solid var(--line-2);
+      border-right: 1px solid var(--line-2);
+      background: var(--bg-000);
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Chassis corner ticks */
+    .chassis::before,
+    .chassis::after {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      border: 1px solid var(--line-2);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .chassis::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+    .chassis::after  { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+    /* Edge-strip vertical brand label */
+    .edge-strip {
+      position: absolute;
+      top: 48px;
+      left: -40px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-lo);
+      z-index: 10;
+    }
+
+    @media (max-width: 800px) {
+      .chassis { border-left: none; border-right: none; max-width: 100%; }
+      .edge-strip { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ═══════════════════════════════════════════════════════════════ */
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-lo);
+      display: inline-block;
+    }
+    .label-bracket::before { content: "[ "; }
+    .label-bracket::after  { content: " ]"; }
+    .label-slash::before   { content: "// "; }
+    .label-numeric::before { content: attr(data-num) " / "; }
+    .label-section::before { content: "§ "; }
+
+    .display {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 7vw, 84px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--text-hi);
+    }
+
+    .headline {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.2vw, 44px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--text-hi);
+    }
+
+    .body {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--text-md);
+    }
+
+    .mono-data {
+      font-family: var(--font-mono);
+      font-size: clamp(22px, 2.4vw, 38px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: var(--text-hi);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════════════ */
+
+    .nav-bar {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-000);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--s-5);
+      height: 56px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-hi);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: var(--s-5);
+    }
+    .nav-links a {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--text-md);
+      text-decoration: none;
+      transition: color 150ms linear;
+    }
+    .nav-links a:hover {
+      color: var(--text-hi);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--s-3);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       COMPONENTS
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* ── Panel (machined edges) ── */
+    .panel {
+      background: var(--bg-100);
+      border: 1px solid var(--line-2);
+      padding: var(--s-5);
+      position: relative;
+      transition: border-color 150ms linear, background-color 150ms linear;
+    }
+    .panel:hover {
+      border-color: var(--accent);
+      background: var(--bg-200);
+    }
+    .panel-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-lo);
+      margin-bottom: var(--s-3);
+      display: block;
+    }
+    .panel-headline {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 600;
+      color: var(--text-hi);
+      line-height: 1.2;
+      margin-bottom: var(--s-2);
+    }
+    .panel-body {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      color: var(--text-md);
+      line-height: 1.55;
+    }
+    .panel-footer {
+      margin-top: var(--s-4);
+      display: flex;
+      align-items: center;
+      gap: var(--s-2);
+    }
+
+    /* Machined edge variant (accent left border) */
+    .panel-machined {
+      border-left: 2px solid var(--accent);
+    }
+
+    /* ── Metric Card ── */
+    .metric-card {
+      background: var(--bg-100);
+      border: 1px solid var(--line-2);
+      padding: var(--s-4);
+    }
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-lo);
+      display: block;
+      margin-bottom: var(--s-3);
+    }
+    .metric-number {
+      font-family: var(--font-mono);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 500;
+      color: var(--text-hi);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+    .metric-unit {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-lo);
+      margin-left: var(--s-1);
+    }
+    .metric-trend {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin-top: var(--s-2);
+    }
+    .trend-positive { color: var(--ok); }
+    .trend-negative { color: var(--alarm); }
+
+    /* ── Status Dot ── */
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-ok    { background: var(--ok); }
+    .status-warn  { background: var(--warn); }
+    .status-alarm { background: var(--alarm); }
+    .status-live  {
+      background: var(--ok);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ── Button ── */
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: all 150ms linear;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-2);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-000);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.15);
+    }
+    .btn-primary:active {
+      transform: scale(0.98);
+      filter: brightness(0.9);
+      transition-duration: 80ms;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-hi);
+      border-color: var(--line-2);
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-ghost:active {
+      transform: scale(0.98);
+      background: rgba(var(--accent-rgb), 0.08);
+      transition-duration: 80ms;
+    }
+
+    /* ── Terminal ── */
+    .terminal {
+      background: #0A0A0A;
+      border: 1px solid var(--line-2);
+      border-radius: var(--r);
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--line);
+    }
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+    }
+    .terminal-title {
+      font-size: 11px;
+      color: var(--text-lo);
+      margin-left: auto;
+    }
+    .terminal-body {
+      padding: 16px;
+      line-height: 1.6;
+      color: var(--text-md);
+    }
+    .terminal-prompt {
+      color: var(--accent);
+      margin-right: 8px;
+    }
+    .terminal-output {
+      color: var(--text-lo);
+      margin-top: 8px;
+    }
+    .terminal-ok {
+      color: var(--ok);
+    }
+
+    /* ── Console Strip ── */
+    .console-strip {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text-md);
+      padding: var(--s-3) var(--s-5);
+      border-top: 1px solid var(--line-2);
+      border-bottom: 1px solid var(--line-2);
+      display: flex;
+      gap: var(--s-3);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .console-sep {
+      color: var(--line-2);
+    }
+
+    /* ── Log Stream ── */
+    .log-stream {
+      border: 1px solid var(--line-2);
+      background: var(--bg-100);
+    }
+    .log-stream-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--s-3) var(--s-4);
+      border-bottom: 1px solid var(--line-2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-md);
+    }
+    .log-stream-body {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.6;
+      padding: var(--s-3) var(--s-4);
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .log-line {
+      padding: 2px 0;
+      border-left: 2px solid transparent;
+      padding-left: var(--s-2);
+    }
+    .log-line.info { color: var(--text-md); }
+    .log-line.warn { color: var(--warn); border-left-color: var(--warn); }
+    .log-line.error { color: var(--alarm); border-left-color: var(--alarm); }
+
+    /* ── GO/NO-GO Matrix ── */
+    .go-nogo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line-2);
+      border: 1px solid var(--line-2);
+    }
+    .cell {
+      background: var(--bg-100);
+      padding: var(--s-3) var(--s-4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--s-2);
+    }
+    .cell-label, .cell-state {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+    .cell-label { color: var(--text-md); }
+    .cell.go .cell-state { color: var(--ok); }
+    .cell.caution .cell-state { color: var(--warn); }
+    .cell.no-go .cell-state { color: var(--alarm); }
+    .cell.go { border-left: 2px solid var(--ok); }
+    .cell.caution { border-left: 2px solid var(--warn); }
+    .cell.no-go { border-left: 2px solid var(--alarm); }
+
+    /* ── Section Header with Hairline Rule ── */
+    .section-header {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      gap: var(--s-3);
+      align-items: center;
+      margin-bottom: var(--s-5);
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-md);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-hi);
+    }
+    .section-rule {
+      height: 1px;
+      background: var(--line-2);
+    }
+
+    /* ── Hairline Divider ── */
+    .hairline-divider {
+      height: 1px;
+      background: var(--line);
+      margin: var(--s-7) 0;
+    }
+
+    /* ── Designator ── */
+    .designator {
+      position: absolute;
+      top: var(--s-2);
+      right: var(--s-3);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-lo);
+    }
+
+    /* ── Bento Grid ── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .bento-grid > .panel {
+      background: var(--bg-100);
+      border: none;
+    }
+    .bento-featured {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    @media (max-width: 768px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-featured { grid-column: span 1; }
+    }
+
+    /* ── Readout (Segment Display) ── */
+    .readout {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-2);
+    }
+    .readout-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-md);
+      text-transform: uppercase;
+    }
+    .readout-value {
+      font-family: var(--font-mono);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Terminal Header (Copy Pattern) ── */
+    .terminal-header-pattern {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      padding: var(--s-3) var(--s-4);
+      background: var(--bg-100);
+      border-bottom: 1px solid var(--line-2);
+    }
+    .terminal-header-pattern .prompt {
+      color: var(--text-md);
+    }
+    .terminal-header-pattern .command {
+      color: var(--accent);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PAGE SECTIONS
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* ── Hero (SPLIT layout) ── */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-7);
+      min-height: 80vh;
+      align-items: center;
+      padding: var(--s-8) var(--s-7);
+    }
+    .hero-message {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-4);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-weight: 500;
+      color: var(--text-hi);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .hero-sub {
+      font-family: var(--font-ui);
+      font-size: 17px;
+      color: var(--text-md);
+      line-height: 1.5;
+      max-width: 480px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--s-3);
+      margin-top: var(--s-2);
+    }
+    .hero-evidence {
+      background: var(--bg-100);
+      border: 1px solid var(--line-2);
+      padding: var(--s-5);
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-4);
+    }
+
+    @media (max-width: 900px) {
+      .hero-split {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: var(--s-7) var(--s-4);
+      }
+      .hero-evidence {
+        min-height: 300px;
+      }
+    }
+
+    /* ── Proof Section (FULL-BLEED) ── */
+    .proof-section {
+      padding: var(--s-8) var(--s-7);
+      border-top: 1px solid var(--line-2);
+      border-bottom: 1px solid var(--line-2);
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      margin-top: var(--s-6);
+    }
+    .metric-grid > .metric-card {
+      border: none;
+    }
+    @media (max-width: 768px) {
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── System Section ── */
+    .system-section {
+      padding: var(--s-8) var(--s-7);
+    }
+
+    /* ── Capabilities Section (Bento) ── */
+    .capabilities-section {
+      padding: var(--s-8) var(--s-7);
+      border-top: 1px solid var(--line-2);
+    }
+
+    /* ── Signature Moves Gallery ── */
+    .gallery-section {
+      padding: var(--s-8) var(--s-7);
+      border-top: 1px solid var(--line-2);
+      border-bottom: 1px solid var(--line-2);
+    }
+    .moves-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-5);
+      margin-top: var(--s-6);
+    }
+    .move-card {
+      background: var(--bg-100);
+      border: 1px solid var(--line-2);
+      padding: var(--s-5);
+    }
+    .move-card .move-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--s-3);
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .moves-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Footer (System Terminal) ── */
+    .footer-terminal {
+      padding: var(--s-7) var(--s-5);
+      background: var(--bg-000);
+      border-top: 1px solid var(--line-2);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-5);
+      margin-bottom: var(--s-6);
+    }
+    .footer-col h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-lo);
+      margin-bottom: var(--s-3);
+    }
+    .footer-col a {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--text-md);
+      text-decoration: none;
+      padding: var(--s-1) 0;
+      transition: color 150ms linear;
+    }
+    .footer-col a:hover {
+      color: var(--text-hi);
+    }
+    .footer-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-lo);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-top: var(--s-5);
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: var(--s-3);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── ASCII Logo ── */
+    .ascii-logo {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.2;
+      color: var(--text-md);
+      white-space: pre;
+      overflow-x: auto;
+      margin-bottom: var(--s-5);
+    }
+
+    /* ── Cursor Blink Animation ── */
+    .cursor-blink::after {
+      content: '▌';
+      color: var(--accent);
+      animation: cursor-blink 530ms steps(2) infinite;
+    }
+    @keyframes cursor-blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PAGE CONTAINER
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="chassis">
+    <span class="edge-strip">VERTEX GEIST · INDUSTRIAL SYSTEMS · SERIES 04 · 2026</span>
+
+    <!-- ── Navigation ── -->
+    <nav class="nav-bar">
+      <div class="nav-inner">
+        <a href="#" class="nav-brand">VERTEX</a>
+        <div class="nav-links">
+          <a href="#system">System</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#moves">Moves</a>
+          <a href="#docs">Docs</a>
+        </div>
+        <div class="nav-actions">
+          <span class="status-dot status-live"></span>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">Operational</span>
+          <a href="#" class="btn btn-ghost btn-sm" style="padding: 6px 14px; font-size: 12px;">Open Console</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         HERO — SPLIT LAYOUT
+         Signature Moves: D1 (Isometric Module Map) + Dt3 (Log Stream) + C3 (Console Strip)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero-split texture-grid-fine" id="hero">
+      <div class="hero-message">
+        <span class="label label-bracket">INFRASTRUCTURE OS</span>
+        <h1 class="hero-title">Deploy at<br>machine speed.</h1>
+        <p class="hero-sub">Zero-downtime orchestration for distributed systems. Sub-100ms propagation. 99.99% uptime.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">Initialize</a>
+          <a href="#" class="btn btn-ghost">View Architecture</a>
+        </div>
+      </div>
+      <div class="hero-evidence inner-glow">
+        <!-- Terminal Window -->
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <span class="terminal-title">forge@console:~/ops</span>
+          </div>
+          <div class="terminal-body">
+            <div><span class="terminal-prompt">$</span><span style="color: var(--accent);"> forge deploy --region us-east-1 --replicas 3</span></div>
+            <div class="terminal-output">→ build  v4.1.2-rc1   ok   2.1s</div>
+            <div class="terminal-output">→ test   324 pass    ok   8.4s</div>
+            <div class="terminal-output">→ push   3 images    ok   12.7s</div>
+            <div class="terminal-output">→ rollout  us-east-1 ✓ us-west-2 ✓ eu-west-1 ✓</div>
+            <div class="terminal-ok">✓ deployed in 47.3s   (latency p99: 12ms)</div>
+            <div style="margin-top: 16px;"><span class="terminal-prompt">$</span><span style="color: var(--accent);"> forge status</span></div>
+            <div style="color: var(--text-hi);">all systems nominal</div>
+            <div class="terminal-output">build   v4.1.2-rc1</div>
+            <div class="terminal-output">uptime  847d 14h 22m</div>
+            <div class="terminal-output">region  us-east-1</div>
+            <div style="margin-top: 8px;" class="cursor-blink"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Console Strip -->
+    <div class="console-strip">
+      <span class="status-dot status-live"></span>
+      <span>ALL SYSTEMS OPERATIONAL</span>
+      <span class="console-sep">·</span>
+      <span>BUILD v4.1.2-rc1</span>
+      <span class="console-sep">·</span>
+      <span>NODE: US-EAST-1</span>
+      <span class="console-sep">·</span>
+      <span>LATENCY 4ms</span>
+      <span class="console-sep">·</span>
+      <span>UTC 02:47:33</span>
+    </div>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PROOF — FULL-BLEED SECTION
+         Evidence: Metric Cards with real data
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="proof-section" id="proof">
+      <header class="section-header">
+        <span class="section-num">§ 01</span>
+        <span class="section-title">PERFORMANCE METRICS</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <span class="metric-label">PROPAGATION</span>
+          <div>
+            <span class="metric-number">1.8</span>
+            <span class="metric-unit">ms</span>
+          </div>
+          <div class="metric-trend trend-positive">▼ 12%</div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">UPTIME</span>
+          <div>
+            <span class="metric-number">99.99</span>
+            <span class="metric-unit">%</span>
+          </div>
+          <div class="metric-trend trend-positive">▲ 0.01%</div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">THROUGHPUT</span>
+          <div>
+            <span class="metric-number">4.2</span>
+            <span class="metric-unit">k req/s</span>
+          </div>
+          <div class="metric-trend trend-positive">▲ 8%</div>
+        </div>
+        <div class="metric-card panel-machined">
+          <span class="metric-label">P99 LATENCY</span>
+          <div>
+            <span class="metric-number">12</span>
+            <span class="metric-unit">ms</span>
+          </div>
+          <div class="metric-trend trend-positive">▼ 3ms</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SYSTEM — BOXED SECTION
+         Signature Move: D1 (Isometric Module Map)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="system-section" id="system">
+      <header class="section-header">
+        <span class="section-num">§ 02</span>
+        <span class="section-title">SYSTEM ARCHITECTURE</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <p class="body" style="max-width: 640px; margin-bottom: var(--s-6);">
+        The Vertex platform routes requests through five core modules. Each module is independently scalable and communicates via gRPC with guaranteed delivery semantics.
+      </p>
+
+      <!-- Isometric Module Map (SVG inline) -->
+      <div style="max-width: 720px; margin: 0 auto;">
+        <svg viewBox="0 0 720 480" width="100%" aria-labelledby="iso-title">
+          <title id="iso-title">Isometric module map</title>
+          <style>
+            .iso-stroke { stroke: var(--line-2); stroke-width: 1; fill: var(--bg-100); }
+            .iso-top    { stroke: var(--line-2); stroke-width: 1; fill: var(--bg-200); }
+            .iso-side   { stroke: var(--line-2); stroke-width: 1; fill: var(--bg-100); opacity: 0.85; }
+            .iso-accent .iso-stroke,
+            .iso-accent .iso-top,
+            .iso-accent .iso-side { stroke: var(--accent); }
+            .iso-accent .iso-top  { fill: color-mix(in srgb, var(--accent) 18%, var(--bg-200)); }
+            .iso-line   { stroke: var(--line-2); stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+            .iso-label  { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; fill: var(--text-md); text-transform: uppercase; }
+            .iso-label-conn { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.06em; fill: var(--text-md); text-transform: uppercase; }
+          </style>
+
+          <!-- Module A — INGEST -->
+          <g transform="translate(80, 100)">
+            <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+            <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+            <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+            <text class="iso-label" x="120" y="65" text-anchor="start">INGEST</text>
+          </g>
+
+          <!-- Module B — NORMALIZE -->
+          <g transform="translate(440, 100)">
+            <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+            <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+            <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+            <text class="iso-label" x="120" y="65" text-anchor="start">NORMALIZE</text>
+          </g>
+
+          <!-- Module C — INFERENCE (ACCENT) -->
+          <g transform="translate(280, 200)" class="iso-accent">
+            <polygon class="iso-top" points="50,0 120,35 70,70 0,35"/>
+            <polygon class="iso-side" points="0,35 70,70 70,130 0,95"/>
+            <polygon class="iso-stroke" points="120,35 120,95 70,130 70,70"/>
+            <text class="iso-label" x="60" y="160" text-anchor="middle" style="fill: var(--accent);">INFERENCE</text>
+          </g>
+
+          <!-- Module D — STORAGE -->
+          <g transform="translate(100, 320)">
+            <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+            <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+            <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+            <text class="iso-label" x="120" y="65" text-anchor="start">STORAGE</text>
+          </g>
+
+          <!-- Module E — EDGE -->
+          <g transform="translate(460, 320)">
+            <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+            <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+            <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+            <text class="iso-label" x="120" y="65" text-anchor="start">EDGE</text>
+          </g>
+
+          <!-- Connection lines -->
+          <path class="iso-line" d="M 180 160 Q 240 200 320 240"/>
+          <text class="iso-label-conn" x="240" y="195">grpc :9092</text>
+          <path class="iso-line" d="M 500 160 Q 460 200 400 240"/>
+          <text class="iso-label-conn" x="455" y="195">tcp :7000</text>
+          <path class="iso-line" d="M 320 320 Q 240 340 180 360"/>
+          <text class="iso-label-conn" x="220" y="355">wal stream</text>
+          <path class="iso-line" d="M 400 320 Q 460 340 520 360"/>
+          <text class="iso-label-conn" x="455" y="355">wss</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CAPABILITIES — BENTO GRID
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="capabilities-section" id="capabilities">
+      <header class="section-header">
+        <span class="section-num">§ 03</span>
+        <span class="section-title">CAPABILITIES</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <div class="bento-grid">
+        <div class="panel bento-featured panel-machined" style="position: relative;">
+          <span class="designator">MOD-01</span>
+          <span class="panel-label">PRIMARY</span>
+          <h3 class="panel-headline">Edge Compute</h3>
+          <p class="panel-body">Sub-100ms inference at the network edge. Deploy models to 47 regions with a single command. Automatic failover and zero-downtime updates.</p>
+          <div class="panel-footer">
+            <span class="status-dot status-ok"></span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">OPERATIONAL</span>
+          </div>
+        </div>
+        <div class="panel" style="position: relative;">
+          <span class="designator">MOD-02</span>
+          <span class="panel-label">ROUTING</span>
+          <h3 class="panel-headline">Smart Load Balancing</h3>
+          <p class="panel-body">Latency-aware routing with automatic circuit breaking.</p>
+          <div class="panel-footer">
+            <span class="status-dot status-ok"></span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">OPERATIONAL</span>
+          </div>
+        </div>
+        <div class="panel" style="position: relative;">
+          <span class="designator">MOD-03</span>
+          <span class="panel-label">SECURITY</span>
+          <h3 class="panel-headline">Zero-Trust Mesh</h3>
+          <p class="panel-body">mTLS everywhere. No exceptions. No compromises.</p>
+          <div class="panel-footer">
+            <span class="status-dot status-ok"></span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">OPERATIONAL</span>
+          </div>
+        </div>
+        <div class="panel" style="position: relative;">
+          <span class="designator">MOD-04</span>
+          <span class="panel-label">OBSERVABILITY</span>
+          <h3 class="panel-headline">Real-Time Telemetry</h3>
+          <p class="panel-body">100ms resolution metrics. Distributed tracing built-in.</p>
+          <div class="panel-footer">
+            <span class="status-dot status-live"></span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">LIVE</span>
+          </div>
+        </div>
+        <div class="panel" style="position: relative;">
+          <span class="designator">MOD-05</span>
+          <span class="panel-label">STORAGE</span>
+          <h3 class="panel-headline">Distributed WAL</h3>
+          <p class="panel-body">Write-ahead log with cross-region replication.</p>
+          <div class="panel-footer">
+            <span class="status-dot status-ok"></span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">OPERATIONAL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SIGNATURE MOVES GALLERY
+         Demonstrates all 5 categories with live examples
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="gallery-section" id="moves">
+      <header class="section-header">
+        <span class="section-num">§ 04</span>
+        <span class="section-title">SIGNATURE MOVES GALLERY</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <div class="moves-grid">
+        <!-- DIAGRAMS -->
+        <div class="move-card">
+          <span class="move-tag">DIAGRAMS · D3</span>
+          <h3 class="panel-headline" style="margin-bottom: var(--s-3);">PCB Schematic</h3>
+          <div style="max-width: 400px;">
+            <svg viewBox="0 0 400 240" width="100%">
+              <rect x="10" y="10" width="380" height="220" rx="4" fill="var(--bg-100)" stroke="var(--line-2)" stroke-width="1"/>
+              <text x="20" y="30" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)" text-transform="uppercase">BOARD REV C · 12-LAYER</text>
+              <line x1="40" y1="60" x2="360" y2="60" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+              <line x1="40" y1="90" x2="360" y2="90" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+              <line x1="40" y1="120" x2="360" y2="120" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <text x="10" y="63" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)">BUS-A</text>
+              <text x="10" y="93" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)">BUS-B</text>
+              <text x="10" y="123" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)">PWR</text>
+              <circle cx="100" cy="60" r="3" fill="var(--bg-000)" stroke="var(--accent)" stroke-width="0.8"/>
+              <circle cx="200" cy="60" r="3" fill="var(--bg-000)" stroke="var(--accent)" stroke-width="0.8"/>
+              <circle cx="300" cy="60" r="3" fill="var(--bg-000)" stroke="var(--accent)" stroke-width="0.8"/>
+              <rect x="80" y="160" width="60" height="28" fill="var(--bg-200)" stroke="var(--line-2)" stroke-width="1"/>
+              <text x="110" y="178" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)" text-anchor="middle">R1</text>
+              <rect x="170" y="160" width="80" height="40" fill="var(--bg-200)" stroke="var(--line-2)" stroke-width="1"/>
+              <text x="210" y="178" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)" text-anchor="middle">U7</text>
+              <rect x="280" y="160" width="60" height="28" fill="var(--bg-200)" stroke="var(--line-2)" stroke-width="1"/>
+              <text x="310" y="178" font-family="var(--font-mono)" font-size="9" fill="var(--text-md)" text-anchor="middle">C4</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- DATA DISPLAY -->
+        <div class="move-card">
+          <span class="move-tag">DATA DISPLAY · Dt1</span>
+          <h3 class="panel-headline" style="margin-bottom: var(--s-3);">GO/NO-GO Matrix</h3>
+          <div class="go-nogo">
+            <div class="cell go"><span class="cell-label">PROP</span><span class="cell-state">GO</span></div>
+            <div class="cell go"><span class="cell-label">GNC</span><span class="cell-state">GO</span></div>
+            <div class="cell caution"><span class="cell-label">COMM</span><span class="cell-state">CAUTION</span></div>
+            <div class="cell go"><span class="cell-label">EPS</span><span class="cell-state">GO</span></div>
+            <div class="cell go"><span class="cell-label">ECLSS</span><span class="cell-state">GO</span></div>
+            <div class="cell no-go"><span class="cell-label">TLM</span><span class="cell-state">NO-GO</span></div>
+          </div>
+        </div>
+
+        <!-- STRUCTURAL ELEMENTS -->
+        <div class="move-card">
+          <span class="move-tag">STRUCTURAL · S3</span>
+          <h3 class="panel-headline" style="margin-bottom: var(--s-3);">Blueprint Grid</h3>
+          <div class="blueprint-grid" style="height: 160px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">8px MINOR · 80px MAJOR</span>
+          </div>
+        </div>
+
+        <!-- SURFACE TREATMENTS -->
+        <div class="move-card">
+          <span class="move-tag">SURFACE · Su2</span>
+          <h3 class="panel-headline" style="margin-bottom: var(--s-3);">ASCII Art Block</h3>
+          <pre class="ascii-logo">  ███████╗  ██████╗  ██████╗   ██████╗ ███████╗
+  ██╔════╝ ██╔═══██╗ ██╔══██╗ ██╔════╝ ██╔════╝
+  █████╗   ██║   ██║ ██████╔╝ ██║  ███╗█████╗  
+  ██╔══╝   ██║   ██║ ██╔══██╗ ██║   ██║██╔══╝  
+  ██║      ╚██████╔╝ ██║  ██║ ╚██████╔╝███████╗
+  ╚═╝       ╚═════╝  ╚═╝  ╚═╝  ╚═════╝ ╚══════╝</pre>
+        </div>
+
+        <!-- COPY PATTERNS -->
+        <div class="move-card">
+          <span class="move-tag">COPY · C1</span>
+          <h3 class="panel-headline" style="margin-bottom: var(--s-3);">Terminal Session Header</h3>
+          <div class="terminal-header-pattern">
+            <span class="prompt">forge@console:~$</span>
+            <span class="command"> ./inspect --module=routing --since=24h</span>
+            <span class="cursor-blink"></span>
+          </div>
+          <div style="margin-top: var(--s-3); font-family: var(--font-mono); font-size: 11px; color: var(--text-lo);">
+            // SYSTEM STATUS · ALL MODULES NOMINAL
+          </div>
+        </div>
+
+        <!-- LOG STREAM -->
+        <div class="move-card">
+          <span class="move-tag">DATA DISPLAY · Dt3</span>
+          <h3 class="panel-headline" style="margin-bottom: var(--s-3);">Log Stream Tile</h3>
+          <div class="log-stream">
+            <div class="log-stream-header">
+              <span>// REQUEST.LOG · LIVE</span>
+              <span><span class="status-dot status-live"></span> STREAMING</span>
+            </div>
+            <div class="log-stream-body">
+              <div class="log-line info">02:47:33  GET /v1/keys/verify  ok  4ms</div>
+              <div class="log-line info">02:47:33  GET /v1/ratelimits/check  ok  2ms</div>
+              <div class="log-line warn">02:47:34  POST /v1/keys/create  4xx  retrying…</div>
+              <div class="log-line info">02:47:34  POST /v1/keys/create  ok  18ms</div>
+              <div class="log-line info">02:47:35  GET /v1/analytics  ok  31ms</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         MATERIAL DEMONSTRATIONS
+         Shows all 6 materials with their native tokens
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="system-section" id="materials">
+      <header class="section-header">
+        <span class="section-num">§ 05</span>
+        <span class="section-title">MATERIAL PALETTES</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); margin-top: var(--s-6);">
+        <!-- CASTING -->
+        <div class="panel" style="border-color: #FF5800;">
+          <span class="panel-label" style="color: #FF5800;">CASTING</span>
+          <div style="display: flex; gap: var(--s-2); margin-top: var(--s-3);">
+            <div style="width: 32px; height: 32px; background: #17181A; border: 1px solid rgba(255,255,255,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #202225; border: 1px solid rgba(255,255,255,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #FF5800; border: 1px solid rgba(255,255,255,0.15);"></div>
+          </div>
+          <p class="panel-body" style="margin-top: var(--s-3); font-size: 13px;">Foundry, mold, forge. Heavy, permanent, final.</p>
+        </div>
+
+        <!-- MACHINING -->
+        <div class="panel" style="border-color: var(--accent);">
+          <span class="panel-label" style="color: var(--accent);">MACHINING</span>
+          <div style="display: flex; gap: var(--s-2); margin-top: var(--s-3);">
+            <div style="width: 32px; height: 32px; background: #0B0D0F; border: 1px solid rgba(255,255,255,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #121619; border: 1px solid rgba(255,255,255,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #4AA8FF; border: 1px solid rgba(255,255,255,0.15);"></div>
+          </div>
+          <p class="panel-body" style="margin-top: var(--s-3); font-size: 13px;">CNC mill. Precision aluminum. Measured tolerances.</p>
+        </div>
+
+        <!-- PLATING -->
+        <div class="panel" style="border-color: #33FF99;">
+          <span class="panel-label" style="color: #33FF99;">PLATING</span>
+          <div style="display: flex; gap: var(--s-2); margin-top: var(--s-3);">
+            <div style="width: 32px; height: 32px; background: #0A1208; border: 1px solid rgba(180,220,160,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #0F1A10; border: 1px solid rgba(180,220,160,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #33FF99; border: 1px solid rgba(180,220,160,0.15);"></div>
+          </div>
+          <p class="panel-body" style="margin-top: var(--s-3); font-size: 13px;">PCB fabrication. Copper traces. Dense routing.</p>
+        </div>
+
+        <!-- PRINTING -->
+        <div class="panel" style="border-color: #0047FF; background: #F7F5F0;">
+          <span class="panel-label" style="color: #0047FF;">PRINTING</span>
+          <div style="display: flex; gap: var(--s-2); margin-top: var(--s-3);">
+            <div style="width: 32px; height: 32px; background: #F7F5F0; border: 1px solid rgba(22,20,18,0.30);"></div>
+            <div style="width: 32px; height: 32px; background: #FFFFFF; border: 1px solid rgba(22,20,18,0.30);"></div>
+            <div style="width: 32px; height: 32px; background: #0047FF; border: 1px solid rgba(22,20,18,0.30);"></div>
+          </div>
+          <p class="panel-body" style="margin-top: var(--s-3); font-size: 13px; color: #4A463F;">Letterpress, offset. Ink on warm paper.</p>
+        </div>
+
+        <!-- WELDING -->
+        <div class="panel" style="border-color: #FFB000;">
+          <span class="panel-label" style="color: #FFB000;">WELDING</span>
+          <div style="display: flex; gap: var(--s-2); margin-top: var(--s-3);">
+            <div style="width: 32px; height: 32px; background: #111214; border: 1px solid rgba(255,255,255,0.18);"></div>
+            <div style="width: 32px; height: 32px; background: #1A1C1F; border: 1px solid rgba(255,255,255,0.18);"></div>
+            <div style="width: 32px; height: 32px; background: #FFB000; border: 1px solid rgba(255,255,255,0.18);"></div>
+          </div>
+          <p class="panel-body" style="margin-top: var(--s-3); font-size: 13px;">Steel frame. Visible welds. Exposed beams.</p>
+        </div>
+
+        <!-- CALIBRATING -->
+        <div class="panel" style="border-color: #FFB000;">
+          <span class="panel-label" style="color: #FFB000;">CALIBRATING</span>
+          <div style="display: flex; gap: var(--s-2); margin-top: var(--s-3);">
+            <div style="width: 32px; height: 32px; background: #0C1116; border: 1px solid rgba(255,176,0,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #131B22; border: 1px solid rgba(255,176,0,0.15);"></div>
+            <div style="width: 32px; height: 32px; background: #FFB000; border: 1px solid rgba(255,176,0,0.15);"></div>
+          </div>
+          <p class="panel-body" style="margin-top: var(--s-3); font-size: 13px;">Instruments, gauges, meters. Dense readouts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         RAW CARBON TEXTURE DEMONSTRATION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="system-section texture-carbon" style="position: relative; padding: var(--s-8) var(--s-7);">
+      <div style="position: relative; z-index: 2;">
+        <header class="section-header">
+          <span class="section-num">§ 06</span>
+          <span class="section-title">RAW CARBON TEXTURE</span>
+          <span class="section-rule"></span>
+        </header>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin-top: var(--s-6);">
+          <div>
+            <p class="body" style="margin-bottom: var(--s-4);">
+              The raw carbon texture simulates powder-coated aluminum or cast iron surfaces. Applied via SVG <code>feTurbulence</code> noise filter at 0.9 baseFrequency with 3% opacity overlay.
+            </p>
+            <p class="body" style="margin-bottom: var(--s-4);">
+              Use on CASTING material surfaces. The noise adds tactile depth without competing with content. Never stack with other textures.
+            </p>
+            <div class="terminal" style="margin-top: var(--s-5);">
+              <div class="terminal-body">
+                <div style="color: var(--text-lo);">/* CSS implementation */</div>
+                <div style="margin-top: 8px;">.texture-carbon::before {</div>
+                <div style="color: var(--text-lo);">  content: '';</div>
+                <div style="color: var(--text-lo);">  position: absolute;</div>
+                <div style="color: var(--text-lo);">  inset: 0;</div>
+                <div style="color: var(--text-lo);">  background: url("noise.svg");</div>
+                <div style="color: var(--text-lo);">  opacity: 0.03;</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 240px;">
+            <span class="panel-label">TEXTURE SAMPLE</span>
+            <div style="width: 120px; height: 120px; background: var(--bg-100); border: 1px solid var(--line-2); position: relative;">
+              <div style="position: absolute; inset: 0; background: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.08%22/%3E%3C/svg%3E');"></div>
+            </div>
+            <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); margin-top: var(--s-3); text-transform: uppercase; letter-spacing: 0.08em;">feTurbulence · 0.9 · 3% opacity</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         DOT-GRID SECTION MARKERS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="system-section" id="markers">
+      <header class="section-header">
+        <span class="section-num">§ 07</span>
+        <span class="section-title">DOT-GRID SECTION MARKERS</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); margin-top: var(--s-6);">
+        <div class="panel dot-grid" style="min-height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <span class="panel-label">16px DOT GRID</span>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">Section marker pattern</p>
+        </div>
+        <div class="panel plotting-grid" style="min-height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <span class="panel-label">8px PLOTTING GRID</span>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">Machining / Calibrating</p>
+        </div>
+        <div class="panel blueprint-grid" style="min-height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <span class="panel-label">BLUEPRINT GRID</span>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">8px + 80px dual scale</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CALIBRATED TYPOGRAPHY
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="system-section" id="typography">
+      <header class="section-header">
+        <span class="section-num">§ 08</span>
+        <span class="section-title">CALIBRATED TYPOGRAPHY</span>
+        <span class="section-rule"></span>
+      </header>
+
+      <div style="margin-top: var(--s-6); display: flex; flex-direction: column; gap: var(--s-5);">
+        <div class="panel">
+          <span class="panel-label">HERO DISPLAY · STRUCTURE VOICE</span>
+          <p class="display">Machine precision at scale.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); margin-top: var(--s-2);">Space Grotesk · clamp(40px, 7vw, 84px) · weight 500 · letter-spacing -0.02em · line-height 1.05</p>
+        </div>
+
+        <div class="panel">
+          <span class="panel-label">SECTION HEADLINE · STRUCTURE VOICE</span>
+          <p class="headline">Deploy with zero-downtime orchestration.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); margin-top: var(--s-2);">Space Grotesk · clamp(26px, 3.2vw, 44px) · weight 600 · letter-spacing -0.01em · line-height 1.15</p>
+        </div>
+
+        <div class="panel">
+          <span class="panel-label">BODY COPY · STRUCTURE VOICE</span>
+          <p class="body">The Vertex platform routes requests through five core modules. Each module is independently scalable and communicates via gRPC with guaranteed delivery semantics. Sub-100ms propagation. 99.99% uptime.</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); margin-top: var(--s-2);">Inter · 16px · weight 400 · line-height 1.55</p>
+        </div>
+
+        <div class="panel">
+          <span class="panel-label">MONOSPACE LABEL · INSTRUMENT VOICE</span>
+          <p style="font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-lo);">
+            [ SYSTEM STATUS ] · ALL MODULES NOMINAL · BUILD v4.1.2-rc1
+          </p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); margin-top: var(--s-2);">JetBrains Mono · 11px · weight 500 · letter-spacing 0.08em · uppercase</p>
+        </div>
+
+        <div class="panel">
+          <span class="panel-label">DATA METRIC · INSTRUMENT VOICE</span>
+          <p class="mono-data">4,217.83 req/s</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); margin-top: var(--s-2);">JetBrains Mono · clamp(22px, 2.4vw, 38px) · tabular-nums · letter-spacing -0.01em</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hairline Divider -->
+    <div class="hairline-divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER — SYSTEM TERMINAL
+         ═══════════════════════════════════════════════════════════════ -->
+    <footer class="footer-terminal" id="docs">
+      <pre class="ascii-logo">  ██╗   ██╗███████╗██████╗  ██████╗███████╗██╗  ██╗
+  ██║   ██║██╔════╝██╔══██╗██╔════╝██╔════╝╚██╗██╔╝
+  ██║   ██║█████╗  ██████╔╝██║     █████╗   ╚███╔╝ 
+  ╚██╗ ██╔╝██╔══╝  ██╔══██╗██║     ██╔══╝   ██╔██╗ 
+   ╚████╔╝ ███████╗██║  ██║╚██████╗███████╗██╔╝ ██╗
+    ╚═══╝  ╚══════╝╚═╝  ╚═╝ ╚═════╝╚══════╝╚═╝  ╚═╝</pre>
+
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>System</h4>
+          <a href="#">Product</a>
+          <a href="#">Pricing</a>
+          <a href="#">Changelog</a>
+          <a href="#">Status</a>
+        </div>
+        <div class="footer-col">
+          <h4>Documentation</h4>
+          <a href="#">Getting Started</a>
+          <a href="#">API Reference</a>
+          <a href="#">SDKs</a>
+          <a href="#">CLI</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
+          <a href="#">SOC 2</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#">GitHub</a>
+          <a href="#">Discord</a>
+          <a href="#">Twitter</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-status">
+        <span class="status-dot status-live"></span>
+        <span>ALL SYSTEMS OPERATIONAL</span>
+        <span class="console-sep">·</span>
+        <span>BUILD v4.1.2-rc1</span>
+        <span class="console-sep">·</span>
+        <span>NODE: US-EAST-1</span>
+        <span class="console-sep">·</span>
+        <span>LATENCY 4ms</span>
+        <span class="console-sep">·</span>
+        <span>UTC 02:47:33</span>
+        <span class="console-sep">·</span>
+        <span>© 2026 VERTEX SYSTEMS</span>
+      </div>
+    </footer>
+
+  </div><!-- /chassis -->
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Halftone Dither Filter + Sample — Signature Move Su1
+  Defines an SVG filter that applies a halftone/dither effect to any image.
+  Use by referencing the filter in your HTML:
+    <svg width="0" height="0" style="position:absolute">
+      <use href="halftone-dither.svg#halftone"/>
+    </svg>
+    <img src="hero.jpg" style="filter: url(#halftone)" />
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" aria-labelledby="halftone-title">
+  <title id="halftone-title">Halftone dither pattern</title>
+  <defs>
+    <filter id="halftone" x="0" y="0" width="100%" height="100%">
+      <feGaussianBlur stdDeviation="0.3" in="SourceGraphic"/>
+      <feColorMatrix type="matrix"
+        values="0.33 0.33 0.33 0 0
+                0.33 0.33 0.33 0 0
+                0.33 0.33 0.33 0 0
+                0    0    0    1 0"/>
+      <feComponentTransfer>
+        <feFuncA type="discrete" tableValues="0 0 0 0.2 0.4 0.6 0.8 1"/>
+      </feComponentTransfer>
+    </filter>
+
+    <pattern id="dot-screen" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.2" fill="var(--text-hi, #161412)"/>
+    </pattern>
+    <pattern id="dot-screen-dense" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="var(--text-hi, #161412)"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="320" height="200" fill="var(--bg-000, #F7F5F0)"/>
+  <rect x="0"   y="0" width="106" height="200" fill="url(#dot-screen)" opacity="0.25"/>
+  <rect x="106" y="0" width="106" height="200" fill="url(#dot-screen)" opacity="0.55"/>
+  <rect x="212" y="0" width="108" height="200" fill="url(#dot-screen-dense)" opacity="0.85"/>
+</svg>

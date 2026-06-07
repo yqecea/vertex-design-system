@@ -1,0 +1,186 @@
+/* ═══════════════════════════════════════════════════════
+   GEIST COLOR TOKENS — Real values from vercel.com/geist
+   Light + Dark themes, 10 color scales each
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Backgrounds ── */
+  --ds-background-100: #ffffff;
+  --ds-background-200: #fafafa;
+
+  /* ── Gray Scale (Light) ── */
+  --ds-gray-100: #f2f2f2;
+  --ds-gray-200: #ebebeb;
+  --ds-gray-300: #e6e6e6;
+  --ds-gray-400: #ebebeb;
+  --ds-gray-500: #c9c9c9;
+  --ds-gray-600: #a8a8a8;
+  --ds-gray-700: #8f8f8f;
+  --ds-gray-800: #7d7d7d;
+  --ds-gray-900: #4c4c4c;
+  --ds-gray-1000: #171717;
+
+  /* ── Gray Alpha (Light) ── */
+  --ds-gray-alpha-100: rgba(0,0,0,0.05);
+  --ds-gray-alpha-200: rgba(0,0,0,0.08);
+  --ds-gray-alpha-300: rgba(0,0,0,0.10);
+  --ds-gray-alpha-400: rgba(0,0,0,0.08);
+  --ds-gray-alpha-500: rgba(0,0,0,0.21);
+  --ds-gray-alpha-600: rgba(0,0,0,0.34);
+  --ds-gray-alpha-700: rgba(0,0,0,0.44);
+  --ds-gray-alpha-800: rgba(0,0,0,0.51);
+  --ds-gray-alpha-900: rgba(0,0,0,0.70);
+  --ds-gray-alpha-1000: rgba(0,0,0,0.91);
+
+  /* ── Blue Scale ── */
+  --ds-blue-100: #f0f7ff;
+  --ds-blue-200: #ebf5ff;
+  --ds-blue-300: #e0f0ff;
+  --ds-blue-400: #cce6ff;
+  --ds-blue-500: #99ceff;
+  --ds-blue-600: #52aeff;
+  --ds-blue-700: #0072f5;
+  --ds-blue-800: #0062d1;
+  --ds-blue-900: #0068d6;
+  --ds-blue-1000: #00254c;
+
+  /* ── Red Scale ── */
+  --ds-red-100: #fff0f0;
+  --ds-red-200: #ffebeb;
+  --ds-red-300: #ffe5e5;
+  --ds-red-400: #fdd8d8;
+  --ds-red-500: #f8b9b9;
+  --ds-red-600: #f87275;
+  --ds-red-700: #e5484d;
+  --ds-red-800: #da2f35;
+  --ds-red-900: #cb2a2f;
+  --ds-red-1000: #391417;
+
+  /* ── Amber Scale ── */
+  --ds-amber-100: #fff6e5;
+  --ds-amber-200: #fff4d6;
+  --ds-amber-300: #fef0cd;
+  --ds-amber-400: #ffdd8f;
+  --ds-amber-500: #ffc96b;
+  --ds-amber-600: #f5b047;
+  --ds-amber-700: #ffb224;
+  --ds-amber-800: #ff990a;
+  --ds-amber-900: #a35200;
+  --ds-amber-1000: #4e2009;
+
+  /* ── Green Scale ── */
+  --ds-green-100: #effbef;
+  --ds-green-200: #ebfaeb;
+  --ds-green-300: #daf6da;
+  --ds-green-400: #c6f1c7;
+  --ds-green-500: #99e69e;
+  --ds-green-600: #6cda75;
+  --ds-green-700: #45a557;
+  --ds-green-800: #398e4a;
+  --ds-green-900: #297a3a;
+  --ds-green-1000: #1b311e;
+
+  /* ── Teal Scale ── */
+  --ds-teal-100: #eefcf9;
+  --ds-teal-200: #e5faf6;
+  --ds-teal-300: #d4f7f0;
+  --ds-teal-400: #bef4eb;
+  --ds-teal-500: #86ead9;
+  --ds-teal-600: #45dec5;
+  --ds-teal-700: #12a594;
+  --ds-teal-800: #0d8c7d;
+  --ds-teal-900: #067a6e;
+  --ds-teal-1000: #073c34;
+
+  /* ── Purple Scale ── */
+  --ds-purple-100: #f9f0ff;
+  --ds-purple-200: #f9f1fe;
+  --ds-purple-300: #f4e8fc;
+  --ds-purple-400: #eddcf9;
+  --ds-purple-500: #d5b1f1;
+  --ds-purple-600: #bf89ec;
+  --ds-purple-700: #8e4ec6;
+  --ds-purple-800: #763da9;
+  --ds-purple-900: #7820bc;
+  --ds-purple-1000: #2e004c;
+
+  /* ── Pink Scale ── */
+  --ds-pink-100: #ffebf5;
+  --ds-pink-200: #feecf2;
+  --ds-pink-300: #fce3ec;
+  --ds-pink-400: #f9d7e2;
+  --ds-pink-500: #f5b8cc;
+  --ds-pink-600: #ee87a7;
+  --ds-pink-700: #ea3e83;
+  --ds-pink-800: #df2670;
+  --ds-pink-900: #bd2864;
+  --ds-pink-1000: #430a23;
+
+  /* ── Semantic Tokens ── */
+  --ds-ok: var(--ds-green-700);
+  --ds-warn: var(--ds-amber-700);
+  --ds-alarm: var(--ds-red-700);
+  --ds-info: var(--ds-blue-700);
+
+  /* ── Accent RGB (for rgba() tints) ── */
+  --accent-rgb: 0, 114, 245;
+
+  /* ── Focus ── */
+  --ds-focus-color: #0072f5;
+  --ds-focus-ring: 0 0 0 2px #fff, 0 0 0 4px #0072f5;
+  --ds-focus-ring-outline: 2px solid #0072f5;
+
+  /* ── Shadows ── */
+  --ds-shadow-2xs: 0px 1px 1px rgba(0,0,0,0.04);
+  --ds-shadow-xs: 0px 1px 2px rgba(0,0,0,0.04);
+  --ds-shadow-small: 0px 2px 2px rgba(0,0,0,0.04);
+  --ds-shadow-medium: 0px 2px 2px rgba(0,0,0,0.04), 0px 8px 8px -8px rgba(0,0,0,0.04);
+  --ds-shadow-large: 0px 2px 2px rgba(0,0,0,0.04), 0px 8px 16px -4px rgba(0,0,0,0.04);
+  --ds-shadow-xl: 0px 1px 1px rgba(0,0,0,0.02), 0px 4px 8px -4px rgba(0,0,0,0.04), 0px 16px 24px -8px rgba(0,0,0,0.06);
+  --ds-shadow-2xl: 0px 1px 1px rgba(0,0,0,0.02), 0px 8px 16px -4px rgba(0,0,0,0.04), 0px 24px 32px -8px rgba(0,0,0,0.06);
+
+  /* ── Border ── */
+  --ds-shadow-border: 0 0 0 1px rgba(0,0,0,0.08);
+  --ds-shadow-border-large: 0 0 0 1px rgba(0,0,0,0.08), 0px 2px 2px rgba(0,0,0,0.04), 0px 8px 16px -4px rgba(0,0,0,0.04);
+
+  /* ── Overlay ── */
+  --ds-overlay-backdrop-color: rgba(255,255,255,0.8);
+}
+
+[data-theme="dark"] {
+  /* ── Backgrounds (Dark) ── */
+  --ds-background-100: #0a0a0a;
+  --ds-background-200: #000000;
+
+  /* ── Gray Scale (Dark) ── */
+  --ds-gray-100: #1a1a1a;
+  --ds-gray-200: #1f1f1f;
+  --ds-gray-300: #292929;
+  --ds-gray-400: #2e2e2e;
+  --ds-gray-500: #454545;
+  --ds-gray-600: #878787;
+  --ds-gray-700: #8f8f8f;
+  --ds-gray-800: #7d7d7d;
+  --ds-gray-900: #a1a1a1;
+  --ds-gray-1000: #ededed;
+
+  /* ── Gray Alpha (Dark) ── */
+  --ds-gray-alpha-100: rgba(255,255,255,0.06);
+  --ds-gray-alpha-200: rgba(255,255,255,0.09);
+  --ds-gray-alpha-300: rgba(255,255,255,0.13);
+  --ds-gray-alpha-400: rgba(255,255,255,0.14);
+  --ds-gray-alpha-500: rgba(255,255,255,0.24);
+  --ds-gray-alpha-600: rgba(255,255,255,0.51);
+  --ds-gray-alpha-700: rgba(255,255,255,0.54);
+  --ds-gray-alpha-800: rgba(255,255,255,0.47);
+  --ds-gray-alpha-900: rgba(255,255,255,0.61);
+  --ds-gray-alpha-1000: rgba(255,255,255,0.92);
+
+  /* ── Focus (Dark) ── */
+  --ds-focus-color: #52a8ff;
+  --ds-focus-ring: 0 0 0 2px #0a0a0a, 0 0 0 4px #52a8ff;
+  --ds-focus-ring-outline: 2px solid #52a8ff;
+
+  /* ── Overlay (Dark) ── */
+  --ds-overlay-backdrop-color: rgba(0,0,0,0.8);
+}

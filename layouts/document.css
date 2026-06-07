@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════
+   LAYOUT: DOCUMENT — Print-grid composition
+   Light mode, wide margins, registration marks
+   ═══════════════════════════════════════════════════════ */
+
+body {
+  background: var(--bg-000);
+  color: var(--text-hi);
+  margin: 0;
+  padding: var(--geist-gap-double) clamp(48px, 8vw, 144px);
+  position: relative;
+  font-family: var(--font-ui, system-ui, sans-serif);
+  line-height: 1.55;
+}
+
+/* ── Registration marks at corners ── */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+body::before {
+  top: 24px; left: 24px;
+  background:
+    linear-gradient(to right, var(--text-hi) 1px, transparent 1px) top left / 16px 1px no-repeat,
+    linear-gradient(to bottom, var(--text-hi) 1px, transparent 1px) top left / 1px 16px no-repeat;
+}
+body::after {
+  top: 24px; right: 24px;
+  background:
+    linear-gradient(to left, var(--text-hi) 1px, transparent 1px) top right / 16px 1px no-repeat,
+    linear-gradient(to bottom, var(--text-hi) 1px, transparent 1px) top right / 1px 16px no-repeat;
+}
+
+.doc-section {
+  max-width: 880px;
+  margin: 0 auto var(--geist-gap-double);
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: var(--geist-gap-double);
+}
+
+.doc-section h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--geist-space-4);
+}
+
+.doc-section h2::before {
+  content: '\00A7 ' counter(section, decimal-leading-zero) ' \2014 ';
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-md);
+  letter-spacing: 0.04em;
+}
+
+.doc-body {
+  column-count: 2;
+  column-gap: var(--geist-space-8);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.doc-figure {
+  margin: var(--geist-space-8) 0;
+  border: 1px solid var(--line-2);
+  padding: var(--geist-space-6);
+}
+
+.doc-figure-caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-md);
+  margin-top: var(--geist-space-4);
+}

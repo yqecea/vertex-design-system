@@ -1,0 +1,148 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Scroll Area
+   Custom scrollable container with styled scrollbar
+   ═══════════════════════════════════════════════════════ */
+
+.scroll-area {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-area__viewport {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-gray-alpha-300) transparent;
+}
+
+.scroll-area__viewport::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-area__viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-area__viewport::-webkit-scrollbar-thumb {
+  background: var(--ds-gray-alpha-300);
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scroll-area__viewport::-webkit-scrollbar-thumb:hover {
+  background: var(--ds-gray-alpha-500);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scroll-area__viewport::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Scrollbar track (custom implementation fallback) */
+.scroll-area__scrollbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  padding: 2px;
+  background: transparent;
+  user-select: none;
+  touch-action: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.scroll-area__scrollbar:hover {
+  background: var(--ds-gray-alpha-100);
+}
+
+.scroll-area__scrollbar--horizontal {
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 10px;
+}
+
+.scroll-area__thumb {
+  position: relative;
+  background: var(--ds-gray-alpha-400);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.scroll-area__thumb:hover {
+  background: var(--ds-gray-alpha-600);
+}
+
+.scroll-area__thumb::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+/* Corner */
+.scroll-area__corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+/* Sizes */
+.scroll-area--none .scroll-area__viewport {
+  scrollbar-width: none;
+}
+
+.scroll-area--none .scroll-area__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* Dark mode */
+[data-theme="dark"] .scroll-area__viewport {
+  scrollbar-color: var(--ds-gray-alpha-300) transparent;
+}
+
+[data-theme="dark"] .scroll-area__viewport::-webkit-scrollbar-thumb {
+  background: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .scroll-area__viewport::-webkit-scrollbar-thumb:hover {
+  background: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .scroll-area__scrollbar:hover {
+  background: var(--ds-gray-alpha-100);
+}
+
+[data-theme="dark"] .scroll-area__thumb {
+  background: var(--ds-gray-alpha-400);
+}
+
+[data-theme="dark"] .scroll-area__thumb:hover {
+  background: var(--ds-gray-alpha-600);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-area__scrollbar,
+  .scroll-area__thumb {
+    transition: none;
+  }
+}

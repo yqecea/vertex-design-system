@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Spinner
+   Loading spinner
+   ═══════════════════════════════════════════════════════ */
+
+.geist-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.geist-spinner__svg {
+  animation: spinner-rotate 0.8s linear infinite;
+  transform-origin: center;
+}
+
+.geist-spinner__track {
+  fill: none;
+  stroke: var(--ds-gray-alpha-200);
+  stroke-width: 2;
+}
+
+.geist-spinner__indicator {
+  fill: none;
+  stroke: var(--ds-gray-1000);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 60 100;
+}
+
+/* Spinner sizes */
+.geist-spinner--sm {
+  width: 16px;
+  height: 16px;
+}
+
+.geist-spinner--sm .geist-spinner__svg {
+  width: 16px;
+  height: 16px;
+}
+
+.geist-spinner--md {
+  width: 24px;
+  height: 24px;
+}
+
+.geist-spinner--md .geist-spinner__svg {
+  width: 24px;
+  height: 24px;
+}
+
+.geist-spinner--lg {
+  width: 32px;
+  height: 32px;
+}
+
+.geist-spinner--lg .geist-spinner__svg {
+  width: 32px;
+  height: 32px;
+}
+
+.geist-spinner--xl {
+  width: 48px;
+  height: 48px;
+}
+
+.geist-spinner--xl .geist-spinner__svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* Spinner variants */
+.geist-spinner--default .geist-spinner__indicator {
+  stroke: var(--ds-gray-1000);
+}
+
+.geist-spinner--primary .geist-spinner__indicator {
+  stroke: var(--ds-blue-700);
+}
+
+.geist-spinner--secondary .geist-spinner__indicator {
+  stroke: var(--ds-gray-700);
+}
+
+.geist-spinner--success .geist-spinner__indicator {
+  stroke: var(--ds-green-700);
+}
+
+.geist-spinner--warning .geist-spinner__indicator {
+  stroke: var(--ds-amber-700);
+}
+
+.geist-spinner--error .geist-spinner__indicator {
+  stroke: var(--ds-red-700);
+}
+
+/* Centered spinner wrapper */
+.geist-spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--geist-space-8x) 0;
+}
+
+.geist-spinner-wrapper--inline {
+  display: inline-flex;
+  padding: 0;
+  width: auto;
+}
+
+/* Spinner with label */
+.geist-spinner__label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ds-gray-700);
+  margin-top: var(--geist-space-2x);
+  text-align: center;
+}
+
+.geist-spinner--with-label {
+  flex-direction: column;
+}
+
+/* Button spinner */
+.geist-spinner--in-button {
+  width: 1em;
+  height: 1em;
+}
+
+.geist-spinner--in-button .geist-spinner__svg {
+  width: 1em;
+  height: 1em;
+}
+
+.geist-spinner--in-button .geist-spinner__track {
+  stroke: currentColor;
+  opacity: 0.3;
+}
+
+.geist-spinner--in-button .geist-spinner__indicator {
+  stroke: currentColor;
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-spinner__track {
+  stroke: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-spinner__indicator {
+  stroke: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-spinner--default .geist-spinner__indicator {
+  stroke: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-spinner--primary .geist-spinner__indicator {
+  stroke: var(--ds-blue-600);
+}
+
+[data-theme="dark"] .geist-spinner--secondary .geist-spinner__indicator {
+  stroke: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .geist-spinner--success .geist-spinner__indicator {
+  stroke: var(--ds-green-600);
+}
+
+[data-theme="dark"] .geist-spinner--warning .geist-spinner__indicator {
+  stroke: var(--ds-amber-600);
+}
+
+[data-theme="dark"] .geist-spinner--error .geist-spinner__indicator {
+  stroke: var(--ds-red-600);
+}
+
+[data-theme="dark"] .geist-spinner__label {
+  color: var(--ds-gray-600);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-spinner__svg {
+    animation: none;
+  }
+  
+  .geist-spinner__indicator {
+    stroke-dasharray: none;
+    opacity: 0.5;
+  }
+}
+
+/* Keyframes */
+@keyframes spinner-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

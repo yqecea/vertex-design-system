@@ -1,0 +1,670 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   GLASS PERFORMANCE — Mobile Optimization & Performance Budget Enforcement
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Oysana lag on mobile is caused by:
+ * 1. backdrop-filter blur on EVERY card (GPU overwork)
+ * 2. Multiple overlapping glass layers (compositing nightmare)
+ * 3. No will-change hints (browser can't optimize)
+ * 4. Large blur radius on small screens (unnecessary)
+ * 5. No GPU layer promotion
+ * 6. Animating filter: blur() — the most expensive CSS property to transition
+ * 7. No containment rules — repaint propagates to entire viewport
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 1: CSS CUSTOM PROPERTIES (Design Tokens)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Glass blur scale */
+  --glass-blur-xs: blur(2px) saturate(110%);
+  --glass-blur-sm: blur(4px) saturate(120%);
+  --glass-blur-md: blur(8px) saturate(140%);
+  --glass-blur-lg: blur(12px) saturate(160%);
+  --glass-blur-xl: blur(16px) saturate(180%);
+  
+  /* Glass background opacity scale */
+  --glass-bg-far:    rgba(0, 0, 0, 0.80);
+  --glass-bg-mid:    rgba(0, 0, 0, 0.60);
+  --glass-bg-near:   rgba(0, 0, 0, 0.40);
+  --glass-bg-solid:  rgba(0, 0, 0, 0.72);
+  
+  /* Glass border opacity */
+  --glass-border-faint:  rgba(255, 255, 255, 0.04);
+  --glass-border-light:  rgba(255, 255, 255, 0.08);
+  --glass-border-medium: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.20);
+  
+  /* Z-index scale for glass layers */
+  --z-glass-base:     10;
+  --z-glass-mid:      20;
+  --z-glass-content:  30;
+  --z-glass-floating: 40;
+  --z-glass-overlay:  50;
+  --z-glass-nav:      60;
+  --z-glass-top:      70;
+  
+  /* Performance budget defaults */
+  --glass-max-blur-mobile: 8px;
+  --glass-max-panels-mobile: 3;
+  --glass-max-panels-small: 2;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 2: BASE GLASS CLASSES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.glass {
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  background: var(--glass-bg-mid);
+  border: 1px solid var(--glass-border-light);
+  /* GPU hint — will be refined by .glass-promote */
+  transform: translateZ(0);
+}
+
+.glass-xs {
+  backdrop-filter: var(--glass-blur-xs);
+  -webkit-backdrop-filter: var(--glass-blur-xs);
+  background: var(--glass-bg-solid);
+  border: 1px solid var(--glass-border-faint);
+}
+
+.glass-sm {
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  background: var(--glass-bg-near);
+  border: 1px solid var(--glass-border-light);
+}
+
+.glass-md {
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  background: var(--glass-bg-mid);
+  border: 1px solid var(--glass-border-medium);
+}
+
+.glass-lg {
+  backdrop-filter: var(--glass-blur-lg);
+  -webkit-backdrop-filter: var(--glass-blur-lg);
+  background: var(--glass-bg-far);
+  border: 1px solid var(--glass-border-strong);
+}
+
+.glass-xl {
+  backdrop-filter: var(--glass-blur-xl);
+  -webkit-backdrop-filter: var(--glass-blur-xl);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid var(--glass-border-strong);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 3: GPU LAYER PROMOTION CLASSES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * GPU promotion forces the browser to create a dedicated compositor layer.
+ * Use sparingly — each layer consumes ~2-4MB VRAM on mobile.
+ * Apply BEFORE animation starts, remove AFTER animation completes.
+ */
+
+.glass-promote {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Force GPU compositing, skip CPU rasterization */
+}
+
+/* Remove GPU promotion after animation (apply via JS) */
+.glass-promote-done {
+  will-change: auto;
+  transform: none;
+  backface-visibility: visible;
+}
+
+/* Persistent GPU promotion for fixed elements (navbars, modals) */
+.glass-promote-persistent {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* GPU promotion with content-visibility for off-screen elements */
+.glass-promote-lazy {
+  will-change: transform;
+  transform: translateZ(0);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 4: CONTAINMENT RULES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * CSS containment isolates glass elements so repaints don't propagate
+ * to parent containers. Critical for pages with multiple glass panels.
+ */
+
+/* Standard glass container — isolates layout, style, and paint */
+.glass-container {
+  contain: layout style paint;
+  position: relative;
+}
+
+/* Strict containment for individual glass cards */
+.glass-card {
+  contain: strict;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
+/* Layout-only containment for grid wrappers */
+.glass-grid {
+  contain: layout;
+  display: grid;
+}
+
+/* Paint containment for glass elements themselves */
+.glass-paint {
+  contain: paint;
+}
+
+/* Style containment to prevent CSS custom property bleed */
+.glass-style {
+  contain: style;
+}
+
+/* Full isolation for complex glass stacks */
+.glass-isolate {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 5: @MEDIA QUERIES FOR MOBILE OPTIMIZATION
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Tablet and below (≤1024px) ─── */
+@media (max-width: 1024px) {
+  .glass {
+    --glass-blur-md: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+  }
+  
+  .glass-lg {
+    --glass-blur-lg: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+  }
+  
+  .glass-xl {
+    --glass-blur-xl: blur(12px) saturate(160%);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  }
+}
+
+/* ─── Mobile (≤768px) ─── */
+@media (max-width: 768px) {
+  /* Cap all blur radii at 8px */
+  .glass,
+  .glass-md {
+    --glass-blur-md: blur(8px) saturate(140%);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    background: var(--glass-bg-solid);
+  }
+  
+  .glass-sm {
+    --glass-blur-sm: blur(4px) saturate(120%);
+    backdrop-filter: blur(4px) saturate(120%);
+    -webkit-backdrop-filter: blur(4px) saturate(120%);
+  }
+  
+  .glass-lg,
+  .glass-xl {
+    --glass-blur-lg: blur(8px) saturate(140%);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+  }
+  
+  /* Reduce border opacity for subtler look on small screens */
+  .glass,
+  .glass-sm,
+  .glass-md,
+  .glass-lg,
+  .glass-xl {
+    border-color: var(--glass-border-faint);
+  }
+  
+  /* Disable pseudo-element effects (specular shine, edge glow) */
+  .glass::before,
+  .glass::after,
+  .glass-sm::before,
+  .glass-sm::after,
+  .glass-md::before,
+  .glass-md::after,
+  .glass-lg::before,
+  .glass-lg::after,
+  .glass-xl::before,
+  .glass-xl::after {
+    display: none;
+  }
+  
+  /* Limit concurrent glass panels to 3 */
+  .glass-grid > .glass:nth-child(n+4),
+  .glass-grid > .glass-md:nth-child(n+4),
+  .glass-grid > .glass-sm:nth-child(n+4) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+    border: 1px solid var(--glass-border-faint) !important;
+  }
+  
+  /* Reduce GPU layer promotion on mobile to save VRAM */
+  .glass-promote {
+    will-change: auto;
+    transform: none;
+  }
+  
+  /* But keep promotion for elements currently animating */
+  .glass-promote.animating {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+}
+
+/* ─── Small mobile (≤480px) ─── */
+@media (max-width: 480px) {
+  /* Further reduce blur to 6px max */
+  .glass,
+  .glass-md,
+  .glass-lg,
+  .glass-xl {
+    --glass-blur-md: blur(6px) saturate(130%);
+    backdrop-filter: blur(6px) saturate(130%);
+    -webkit-backdrop-filter: blur(6px) saturate(130%);
+  }
+  
+  /* Limit concurrent glass panels to 2 */
+  .glass-grid > .glass:nth-child(n+3),
+  .glass-grid > .glass-md:nth-child(n+3),
+  .glass-grid > .glass-sm:nth-child(n+3) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+    border: 1px solid var(--glass-border-faint) !important;
+  }
+  
+  /* Very small elements: no blur at all, just opacity */
+  .glass-xs {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+  }
+}
+
+/* ─── Touch devices (any size) ─── */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover-specific glass effects that don't apply */
+  .glass:hover,
+  .glass-sm:hover,
+  .glass-md:hover,
+  .glass-lg:hover,
+  .glass-xl:hover {
+    backdrop-filter: inherit;
+    background: inherit;
+    border-color: inherit;
+  }
+  
+  /* Ensure touch targets inside glass are accessible */
+  .glass a,
+  .glass button,
+  .glass [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 6: FALLBACK CLASSES FOR UNSUPPORTED BROWSERS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Browsers that don't support backdrop-filter (old Safari, IE, Firefox < 103)
+ * get solid translucent backgrounds instead.
+ */
+
+@supports not (backdrop-filter: blur(10px)) {
+  .glass,
+  .glass-sm,
+  .glass-md,
+  .glass-lg,
+  .glass-xl {
+    backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+    border: 1px solid var(--glass-border-light) !important;
+  }
+  
+  /* Add subtle texture to simulate depth */
+  .glass-fallback-texture {
+    background-image: 
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03) 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.05) 100%
+      );
+  }
+}
+
+/* Firefox-specific: older versions need -webkit prefix check */
+@-moz-document url-prefix() {
+  @supports not (backdrop-filter: blur(10px)) {
+    .glass,
+    .glass-sm,
+    .glass-md,
+    .glass-lg,
+    .glass-xl {
+      background: var(--glass-bg-solid) !important;
+      border: 1px solid var(--glass-border-light) !important;
+    }
+  }
+}
+
+/* Low-end device fallback (applied via JS device detection) */
+[data-tier="low"] .glass,
+[data-tier="low"] .glass-sm,
+[data-tier="low"] .glass-md,
+[data-tier="low"] .glass-lg,
+[data-tier="low"] .glass-xl,
+.glass-low-power .glass,
+.glass-low-power .glass-sm,
+.glass-low-power .glass-md,
+.glass-low-power .glass-lg,
+.glass-low-power .glass-xl {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--glass-bg-solid) !important;
+  border: 1px solid var(--glass-border-faint) !important;
+  
+  /* Remove all GPU promotions to save VRAM */
+  will-change: auto !important;
+  transform: none !important;
+}
+
+/* Mid-tier device fallback */
+[data-tier="mid"] .glass,
+[data-tier="mid"] .glass-md {
+  backdrop-filter: blur(6px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(120%) !important;
+}
+
+[data-tier="mid"] .glass-lg,
+[data-tier="mid"] .glass-xl {
+  backdrop-filter: blur(8px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 7: DEVICE-SPECIFIC FIXES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── iOS Safari ─── */
+@supports (-webkit-touch-callout: none) {
+  .glass,
+  .glass-sm,
+  .glass-md,
+  .glass-lg,
+  .glass-xl {
+    /* Safari requires explicit -webkit prefix */
+    -webkit-backdrop-filter: var(--glass-blur-md);
+    
+    /* Fix for overflow:hidden clipping backdrop-filter */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    
+    /* Force hardware acceleration */
+    -webkit-transform: translateZ(0);
+  }
+  
+  /* Disable mix-blend-mode on Safari (causes flicker + 50% perf hit) */
+  .glass::after,
+  .glass-sm::after,
+  .glass-md::after,
+  .glass-lg::after,
+  .glass-xl::after {
+    mix-blend-mode: normal !important;
+    opacity: 0.4;
+  }
+  
+  /* iOS Safari: additional blur reduction */
+  @media (max-width: 768px) and (hover: none) {
+    .glass,
+    .glass-md,
+    .glass-lg,
+    .glass-xl {
+      -webkit-backdrop-filter: blur(6px) saturate(120%);
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+  }
+  
+  /* Fix border-radius + blur corruption on iOS 15-16 */
+  .glass-rounded {
+    border-radius: 12px;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ─── Android Chrome ─── */
+@media (hover: none) and (pointer: coarse) {
+  /* Prefer composited layers on Android */
+  .glass {
+    will-change: transform;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Avoid blur on low-end Android (2GB RAM) */
+  @media (max-device-memory: 2gb) {
+    .glass,
+    .glass-sm,
+    .glass-md,
+    .glass-lg,
+    .glass-xl {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background: var(--glass-bg-solid) !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 8: PERFORMANCE BUDGET ENFORCEMENT
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * These classes enforce hard limits on glass usage.
+ * Apply to body or container when FPS drops below target.
+ */
+
+/* Emergency mode: disable ALL blur, keep visuals with solid bg */
+.glass-emergency .glass,
+.glass-emergency .glass-sm,
+.glass-emergency .glass-md,
+.glass-emergency .glass-lg,
+.glass-emergency .glass-xl {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--glass-bg-solid) !important;
+  border: 1px solid var(--glass-border-faint) !important;
+  box-shadow: none !important;
+}
+
+.glass-emergency .glass::before,
+.glass-emergency .glass::after,
+.glass-emergency .glass-sm::before,
+.glass-emergency .glass-sm::after,
+.glass-emergency .glass-md::before,
+.glass-emergency .glass-md::after,
+.glass-emergency .glass-lg::before,
+.glass-emergency .glass-lg::after,
+.glass-emergency .glass-xl::before,
+.glass-emergency .glass-xl::after {
+  display: none !important;
+}
+
+/* Reduced motion: respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  .glass,
+  .glass-sm,
+  .glass-md,
+  .glass-lg,
+  .glass-xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 9: ANIMATION SAFETY RULES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * NEVER animate backdrop-filter values. Animate these instead.
+ */
+
+.glass,
+.glass-sm,
+.glass-md,
+.glass-lg,
+.glass-xl {
+  /* Safe properties to transition */
+  transition: 
+    opacity 150ms linear,
+    border-color 150ms linear,
+    background-color 150ms linear,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  
+  /* Explicitly remove backdrop-filter from transition */
+  transition-property: opacity, border-color, background-color, transform;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 10: GLASS LAYER Z-INDEX UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.glass-layer-base     { z-index: var(--z-glass-base); }
+.glass-layer-mid      { z-index: var(--z-glass-mid); }
+.glass-layer-content  { z-index: var(--z-glass-content); }
+.glass-layer-floating { z-index: var(--z-glass-floating); }
+.glass-layer-overlay  { z-index: var(--z-glass-overlay); }
+.glass-layer-nav      { z-index: var(--z-glass-nav); }
+.glass-layer-top      { z-index: var(--z-glass-top); }
+
+/* Force stacking context on all glass layers */
+[class*="glass-layer-"] {
+  position: relative;
+  transform: translateZ(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 11: DISTANT LAYER OPTIMIZATION
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Background layers that are visually behind focal glass
+ * can use opacity reduction instead of blur.
+ */
+
+.glass-distant {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--glass-bg-far) !important;
+  border: 1px solid var(--glass-border-faint) !important;
+}
+
+.glass-distant-mid {
+  backdrop-filter: blur(4px) saturate(110%);
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  background: var(--glass-bg-far);
+  border: 1px solid var(--glass-border-faint);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 12: LAZY LOADING GLASS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * Don't render glass effects until element is near viewport.
+ */
+
+.glass-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+  /* Glass effect applied when visible via IntersectionObserver */
+}
+
+.glass-lazy:not(.glass-visible) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--glass-bg-solid) !important;
+}
+
+.glass-lazy.glass-visible {
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 13: OYSANA-SPECIFIC FIXES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Fix for Oysana InsaneCard grid */
+@media (max-width: 768px) {
+  .grid-cols-1 .glass-promote:nth-child(n+4) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+  }
+  
+  /* Oysana label badge: remove unnecessary blur */
+  .oy-label-badge {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--glass-bg-solid) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SECTION 14: SUMMARY — PERFORMANCE RULES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * 1. Use .glass-xs for badges, chips, small buttons
+ * 2. Use .glass-sm for medium buttons, tags
+ * 3. Use .glass-md for cards, navbars (default)
+ * 4. Use .glass-lg for modals, dialogs, large panels
+ * 5. Use .glass-xl for hero overlays ONLY on desktop
+ * 6. On mobile (≤768px): max blur 8px, max 3 glass panels
+ * 7. On small mobile (≤480px): max blur 6px, max 2 glass panels
+ * 8. Never animate backdrop-filter — animate opacity/transform instead
+ * 9. Use contain: layout style paint on all glass containers
+ * 10. Use isolation: isolate on glass stack wrappers
+ * 11. Apply .glass-promote before animation, .glass-promote-done after
+ * 12. Respect prefers-reduced-motion
+ * 13. Use .glass-distant for background layers instead of full blur
+ * 14. Enable .glass-low-power class when FPS < 30
+ * 15. Test with Chrome DevTools: 4× CPU slowdown, mobile viewport
+ */

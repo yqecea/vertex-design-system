@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════════════
+   PLATING — PCB Routing Material
+   Data platforms, API infrastructure, integration tools
+   Mapped to real Geist tokens
+   ═══════════════════════════════════════════════════════ */
+
+[data-material="plating"] {
+  /* ── Surface Elevation ── */
+  --bg-000: var(--ds-background-100, #0a0a0a);
+  --bg-100: #0f1a10;
+  --bg-200: #162214;
+  --bg-300: #1e2c1a;
+
+  /* ── Text Hierarchy ── */
+  --text-hi: #d4e8cc;
+  --text-md: #8aaa7c;
+  --text-lo: #5a7a4e;
+
+  /* ── Border System ── */
+  --line: rgba(180, 220, 160, 0.08);
+  --line-2: rgba(180, 220, 160, 0.15);
+
+  /* ── Accent ── */
+  --accent: var(--ds-teal-700, #12a594);
+  --accent-2: var(--ds-gray-900, #a1a1a1);
+  --accent-hover: #0ac7b4;
+
+  /* ── Semantic ── */
+  --ok: var(--ds-teal-700, #12a594);
+  --warn: var(--ds-amber-700, #ffb224);
+  --alarm: var(--ds-red-700, #e5484d);
+
+  /* ── Typography ── */
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ── Surface Texture ── */
+  --texture-primary:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(18, 165, 148, 0.04) 3px,
+      rgba(18, 165, 148, 0.04) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(18, 165, 148, 0.04) 3px,
+      rgba(18, 165, 148, 0.04) 4px
+    );
+}

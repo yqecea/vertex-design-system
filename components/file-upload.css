@@ -1,0 +1,273 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: File Upload
+   Drag & drop file input with preview
+   ═══════════════════════════════════════════════════════ */
+
+.file-upload {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.file-upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--geist-space-3x);
+  padding: var(--geist-space-16x) var(--geist-space-8x);
+  border: 2px dashed var(--ds-gray-alpha-300);
+  border-radius: var(--geist-radius);
+  background: var(--ds-background-100);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.file-upload-zone:hover {
+  border-color: var(--ds-gray-alpha-500);
+  background: var(--ds-gray-100);
+}
+
+.file-upload-zone:focus-visible {
+  border-color: var(--ds-focus-color);
+  box-shadow: var(--ds-focus-ring);
+}
+
+.file-upload-zone[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.file-upload-zone--dragover {
+  border-color: var(--ds-blue-700);
+  background: var(--ds-blue-100);
+}
+
+.file-upload-zone__icon {
+  width: 48px;
+  height: 48px;
+  color: var(--ds-gray-600);
+}
+
+.file-upload-zone__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-1000);
+  margin: 0;
+}
+
+.file-upload-zone__hint {
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  margin: 0;
+}
+
+.file-upload-zone__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* File list */
+.file-upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space-2x);
+  margin-top: var(--geist-space-4x);
+}
+
+.file-upload-item {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-3x);
+  padding: var(--geist-space-3x) var(--geist-space-4x);
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  transition: background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.file-upload-item:hover {
+  background: var(--ds-gray-100);
+}
+
+.file-upload-item__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ds-gray-100);
+  border-radius: var(--radius-sm);
+  color: var(--ds-gray-700);
+}
+
+.file-upload-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space);
+}
+
+.file-upload-item__name {
+  font-size: var(--text-sm);
+  color: var(--ds-gray-1000);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-upload-item__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.file-upload-item__progress {
+  width: 100%;
+  height: 4px;
+  background: var(--ds-gray-200);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.file-upload-item__progress-bar {
+  height: 100%;
+  background: var(--ds-blue-700);
+  border-radius: var(--radius-pill);
+  transition: width var(--ds-motion-overlay-duration) var(--ease-in-out);
+}
+
+.file-upload-item__remove {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  color: var(--ds-gray-600);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.file-upload-item__remove:hover {
+  background: var(--ds-red-100);
+  color: var(--ds-red-700);
+}
+
+.file-upload-item__remove:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.file-upload-item--error {
+  border-color: var(--ds-red-400);
+  background: var(--ds-red-100);
+}
+
+.file-upload-item--error .file-upload-item__name {
+  color: var(--ds-red-700);
+}
+
+/* Compact variant */
+.file-upload--compact .file-upload-zone {
+  padding: var(--geist-space-8x) var(--geist-space-6x);
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* Dark mode */
+[data-theme="dark"] .file-upload-zone {
+  border-color: var(--ds-gray-alpha-300);
+  background: var(--ds-background-100);
+}
+
+[data-theme="dark"] .file-upload-zone:hover {
+  border-color: var(--ds-gray-alpha-500);
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .file-upload-zone--dragover {
+  border-color: var(--ds-blue-600);
+  background: rgba(0, 114, 245, 0.15);
+}
+
+[data-theme="dark"] .file-upload-zone__icon {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .file-upload-zone__title {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .file-upload-item {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .file-upload-item:hover {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .file-upload-item__icon {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .file-upload-item__name {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .file-upload-item__meta {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .file-upload-item__progress {
+  background: var(--ds-gray-200);
+}
+
+[data-theme="dark"] .file-upload-item__progress-bar {
+  background: var(--ds-blue-600);
+}
+
+[data-theme="dark"] .file-upload-item__remove {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .file-upload-item__remove:hover {
+  background: var(--ds-red-100);
+  color: var(--ds-red-500);
+}
+
+[data-theme="dark"] .file-upload-item--error {
+  border-color: var(--ds-red-400);
+  background: rgba(229, 72, 77, 0.1);
+}
+
+[data-theme="dark"] .file-upload-item--error .file-upload-item__name {
+  color: var(--ds-red-500);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .file-upload-zone,
+  .file-upload-item,
+  .file-upload-item__progress-bar,
+  .file-upload-item__remove {
+    transition: none;
+  }
+}

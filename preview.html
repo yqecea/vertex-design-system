@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" data-material="machining" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex Industrial — Design System Preview</title>
+<link rel="stylesheet" href="dist/vertex-industrial.css">
+</head>
+<body class="grain-overlay">
+
+<nav class="nav">
+  <div class="nav-brand">VERTEX</div>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#materials">Materials</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#glass">Glass</a></li>
+    <li><a href="#wallpapers">Assets</a></li>
+  </ul>
+</nav>
+
+<div class="chassis">
+
+  <!-- HERO -->
+  <section class="section" style="text-align:center; padding: 120px var(--geist-gap);">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="corner-cap corner-cap--bl"></span>
+    <span class="corner-cap corner-cap--br"></span>
+    
+    <div class="section-label">// DESIGN SYSTEM PREVIEW</div>
+    <h1 style="font-size: clamp(48px, 8vw, 88px); font-weight: 500; color: var(--text-hi); line-height: 1.05; letter-spacing: -0.04em; margin-bottom: var(--geist-space-4x);">
+      Vertex Industrial
+    </h1>
+    <p style="font-size: 18px; color: var(--text-md); max-width: 600px; margin: 0 auto var(--geist-space-8x);">
+      Real Geist tokens + Industrial architecture + Frosted glass<br>
+      72 assets · 6 materials · 4 layouts · 15 SVGs
+    </p>
+    <div style="display: flex; gap: var(--geist-space-4x); justify-content: center;">
+      <button class="btn btn-primary">Initialize</button>
+      <button class="btn btn-ghost">View Docs</button>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="section" id="colors">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="section-label">01 // COLOR SYSTEM</span>
+    <h2 class="section-title">Geist Color Tokens</h2>
+    
+    <div style="margin-bottom: var(--geist-space-8x);">
+      <div class="panel-label">Gray Scale (Dark)</div>
+      <div class="swatch-grid">
+        <div class="swatch" style="background: var(--ds-gray-100);"><span class="swatch-label">100</span></div>
+        <div class="swatch" style="background: var(--ds-gray-200);"><span class="swatch-label">200</span></div>
+        <div class="swatch" style="background: var(--ds-gray-300);"><span class="swatch-label">300</span></div>
+        <div class="swatch" style="background: var(--ds-gray-400);"><span class="swatch-label">400</span></div>
+        <div class="swatch" style="background: var(--ds-gray-500);"><span class="swatch-label">500</span></div>
+        <div class="swatch" style="background: var(--ds-gray-600);"><span class="swatch-label">600</span></div>
+        <div class="swatch" style="background: var(--ds-gray-700);"><span class="swatch-label">700</span></div>
+        <div class="swatch" style="background: var(--ds-gray-800);"><span class="swatch-label">800</span></div>
+        <div class="swatch" style="background: var(--ds-gray-900);"><span class="swatch-label">900</span></div>
+        <div class="swatch" style="background: var(--ds-gray-1000);"><span class="swatch-label">1000</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: var(--geist-space-8x);">
+      <div class="panel-label">Semantic Colors</div>
+      <div class="swatch-grid" style="max-width: 400px;">
+        <div class="swatch" style="background: var(--ds-blue-700);"><span class="swatch-label">Accent</span></div>
+        <div class="swatch" style="background: var(--ds-green-700);"><span class="swatch-label">OK</span></div>
+        <div class="swatch" style="background: var(--ds-amber-700);"><span class="swatch-label">Warn</span></div>
+        <div class="swatch" style="background: var(--ds-red-700);"><span class="swatch-label">Alarm</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="section" id="typography">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="section-label">02 // TYPOGRAPHY</span>
+    <h2 class="section-title">Geist Sans + Mono + Pixel</h2>
+    
+    <div class="bento">
+      <div>
+        <div class="panel-label">Structure Voice (Geist Sans)</div>
+        <p style="font-size: 48px; font-weight: 500; color: var(--text-hi); line-height: 1.05; letter-spacing: -0.04em;">Display</p>
+        <p style="font-size: 32px; font-weight: 600; color: var(--text-hi); margin-top: 16px;">Headline</p>
+        <p style="font-size: 16px; color: var(--text-md); margin-top: 16px;">Body text in Geist Sans — clean, precise, engineered.</p>
+      </div>
+      <div>
+        <div class="panel-label">Instrument Voice (Geist Mono)</div>
+        <p style="font-family: var(--font-mono); font-size: 40px; font-weight: 500; color: var(--text-hi); font-variant-numeric: tabular-nums;">99.99%</p>
+        <p style="font-family: var(--font-mono); font-size: 14px; color: var(--text-md); margin-top: 16px;">// METRIC_LABEL</p>
+        <p style="font-family: var(--font-mono); font-size: 13px; color: var(--text-lo); margin-top: 8px;">BUILD v3.2.1 · NODE: US-EAST-1</p>
+      </div>
+      <div>
+        <div class="panel-label">Display Moments (Geist Pixel)</div>
+        <p style="font-family: var(--font-mono); font-size: 36px; font-weight: 500; color: var(--text-hi); letter-spacing: -0.02em;">PIXEL</p>
+        <p style="font-size: 14px; color: var(--text-md); margin-top: 16px;">For banners, dashboards, decorative headlines. 5 variants available.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section class="section" id="materials">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="section-label">03 // MATERIALS</span>
+    <h2 class="section-title">6 Industrial Materials</h2>
+    
+    <div class="bento">
+      <div style="border-top: 2px solid var(--ds-blue-700);">
+        <div class="panel-label">[ MACHINING ]</div>
+        <p style="color: var(--text-hi); font-weight: 600; margin-bottom: 8px;">CNC Precision</p>
+        <p style="color: var(--text-md); font-size: 14px;">Dev tools, AI/ML, infrastructure. Default material.</p>
+        <div style="margin-top: 16px; display: flex; gap: 8px; align-items: center;">
+          <span class="dot dot-ok"></span><span style="font-size: 12px; color: var(--text-lo);">Accent: #0072f5</span>
+        </div>
+      </div>
+      <div style="border-top: 2px solid var(--ds-teal-700);">
+        <div class="panel-label">[ PLATING ]</div>
+        <p style="color: var(--text-hi); font-weight: 600; margin-bottom: 8px;">PCB Routing</p>
+        <p style="color: var(--text-md); font-size: 14px;">Data platforms, API infrastructure, integration.</p>
+        <div style="margin-top: 16px; display: flex; gap: 8px; align-items: center;">
+          <span class="dot dot-ok"></span><span style="font-size: 12px; color: var(--text-lo);">Accent: #12a594</span>
+        </div>
+      </div>
+      <div style="border-top: 2px solid var(--ds-amber-700);">
+        <div class="panel-label">[ WELDING ]</div>
+        <p style="color: var(--text-hi); font-weight: 600; margin-bottom: 8px;">Steel Frame</p>
+        <p style="color: var(--text-md); font-size: 14px;">Open-source, platforms, frameworks.</p>
+        <div style="margin-top: 16px; display: flex; gap: 8px; align-items: center;">
+          <span class="dot dot-warn"></span><span style="font-size: 12px; color: var(--text-lo);">Accent: #ffb224</span>
+        </div>
+      </div>
+      <div style="border-top: 2px solid var(--ds-red-700);">
+        <div class="panel-label">[ CASTING ]</div>
+        <p style="color: var(--text-hi); font-weight: 600; margin-bottom: 8px;">Foundry</p>
+        <p style="color: var(--text-md); font-size: 14px;">Hardware, manufacturing, robotics.</p>
+        <div style="margin-top: 16px; display: flex; gap: 8px; align-items: center;">
+          <span class="dot dot-alarm"></span><span style="font-size: 12px; color: var(--text-lo);">Accent: #e5484d</span>
+        </div>
+      </div>
+      <div style="border-top: 2px solid var(--ds-amber-700);">
+        <div class="panel-label">[ CALIBRATING ]</div>
+        <p style="color: var(--text-hi); font-weight: 600; margin-bottom: 8px;">Mission Control</p>
+        <p style="color: var(--text-md); font-size: 14px;">Monitoring, trading, real-time ops.</p>
+        <div style="margin-top: 16px; display: flex; gap: 8px; align-items: center;">
+          <span class="dot dot-warn"></span><span style="font-size: 12px; color: var(--text-lo);">Accent: #ffb224</span>
+        </div>
+      </div>
+      <div style="border-top: 2px solid var(--ds-blue-700); background: var(--ds-gray-1000); color: var(--ds-gray-100);">
+        <div class="panel-label" style="color: var(--ds-gray-700);">[ PRINTING ]</div>
+        <p style="font-weight: 600; margin-bottom: 8px;">Documentation</p>
+        <p style="font-size: 14px; color: var(--ds-gray-600);">Research, B2B premium, legal. Light mode.</p>
+        <div style="margin-top: 16px; display: flex; gap: 8px; align-items: center;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ds-blue-700);"></span><span style="font-size: 12px; color: var(--ds-gray-700);">Accent: #0072f5</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="section" id="components">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="section-label">04 // COMPONENTS</span>
+    <h2 class="section-title">Industrial Primitives</h2>
+    
+    <div class="bento">
+      <div>
+        <div class="panel-label">Panel</div>
+        <div class="panel">
+          <span class="panel-label">MODULE 3A</span>
+          <h3 style="color: var(--text-hi); font-size: 18px; font-weight: 600; margin-bottom: 8px;">Edge Compute</h3>
+          <p style="color: var(--text-md); font-size: 15px;">Sub-100ms inference at the network edge.</p>
+          <div style="margin-top: 16px; display: flex; align-items: center; gap: 8px;">
+            <span class="dot dot-live"></span><span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.06em;">Operational</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Metric Card</div>
+        <div class="panel">
+          <span class="metric-label">PROPAGATION</span>
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="metric-number">1.8</span>
+            <span style="font-family: var(--font-mono); font-size: 14px; color: var(--text-lo);">ms</span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--ok); margin-top: 8px;">▼ 12%</div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-label">Buttons</div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: var(--geist-gap);">
+          <button class="btn btn-primary">Deploy</button>
+          <button class="btn btn-ghost">View Docs</button>
+          <button class="btn btn-ghost btn-sm">Small</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--geist-space-8x);">
+      <div class="panel-label">Terminal Window</div>
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-title">terminal</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="terminal-prompt">$</span>forge deploy --region us-east-1 --replicas 3</div>
+          <div class="terminal-line" style="color: var(--text-lo); margin-top: 8px;">
+            ✓ Build verified (2.1s)<br>
+            ✓ Image pushed to registry<br>
+            ✓ Rolling update: 3/3 replicas healthy<br>
+            → Endpoint: https://api.example.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLASS -->
+  <section class="section" id="glass" style="background: linear-gradient(135deg, rgba(0,114,245,0.1) 0%, transparent 50%), var(--bg-000);">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="section-label">05 // FROSTED GLASS</span>
+    <h2 class="section-title">Glass Overlay System</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--geist-space-4x); margin-bottom: var(--geist-space-8x);">
+      <div class="glass" style="padding: var(--geist-gap);">
+        <div class="panel-label">Glass Panel</div>
+        <p style="color: var(--text-md);">Standard glass with blur(16px) saturate(180%). Grid visible behind.</p>
+      </div>
+      <div class="glass" style="padding: var(--geist-gap); --glass-blur: blur(24px) saturate(200%);">
+        <div class="panel-label">Heavy Glass</div>
+        <p style="color: var(--text-md);">Stronger blur(24px) for modals and overlays.</p>
+      </div>
+      <div class="glass" style="padding: var(--geist-gap); --glass-blur: blur(8px) saturate(140%);">
+        <div class="panel-label">Light Glass</div>
+        <p style="color: var(--text-md);">Subtle blur(8px) for navbars and subtle panels.</p>
+      </div>
+    </div>
+
+    <div class="glass" style="padding: var(--geist-gap); text-align: center;">
+      <div class="panel-label">Glass over Grid</div>
+      <p style="color: var(--text-hi); font-size: 20px; margin: 16px 0;">The grid IS the design. Glass is the lens.</p>
+      <p style="color: var(--text-md);">backdrop-filter: blur(16px) saturate(180%)</p>
+    </div>
+  </section>
+
+  <!-- WALLPAPERS -->
+  <section class="section" id="wallpapers">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <span class="section-label">06 // ASSETS</span>
+    <h2 class="section-title">72 PPLX Wallpapers</h2>
+    <p style="color: var(--text-md); margin-bottom: var(--geist-space-8x);">Desktop (16:9) and Mobile (9:16) — categorized by theme</p>
+    
+    <div class="wallpaper-grid" id="wallpaperGrid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="section" style="text-align: center; border-top: 1px solid var(--line);">
+    <span class="corner-cap corner-cap--tl"></span>
+    <span class="corner-cap corner-cap--tr"></span>
+    <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-lo); letter-spacing: 0.04em; text-transform: uppercase;">
+      © 2026 Vertex Systems · BUILD v1.0.0 · DESIGN SYSTEM PREVIEW
+    </p>
+  </section>
+
+</div>
+
+<script>
+  // Load wallpapers dynamically
+  const wallpaperGrid = document.getElementById('wallpaperGrid');
+  const categories = ['Cosmic', 'Cinematic', 'Nature', 'Books', 'Abstract', 'People'];
+  const colors = ['#0072f5', '#12a594', '#ffb224', '#e5484d', '#8e4ec6', '#45a557'];
+  
+  categories.forEach((cat, i) => {
+    const item = document.createElement('div');
+    item.className = 'wallpaper-item';
+    item.innerHTML = `
+      <div style="width:100%;height:100%;background: linear-gradient(135deg, ${colors[i]}20, ${colors[i]}10); display:flex;align-items:center;justify-content:center;">
+        <span style="font-family: var(--font-mono); font-size: 12px; color: ${colors[i]}; text-transform: uppercase; letter-spacing: 0.08em;">${cat}</span>
+      </div>
+      <div class="wallpaper-label">${cat} · Desktop</div>
+    `;
+    wallpaperGrid.appendChild(item);
+  });
+
+  // Reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.dot-live').forEach(el => {
+      el.style.animation = 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

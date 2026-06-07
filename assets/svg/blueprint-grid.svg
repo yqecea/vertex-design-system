@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Blueprint Grid — Signature Move S3
+  8px (minor) + 80px (major) plotting grid pattern.
+  Use as a background-image or as a layered SVG behind content.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0; pointer-events:none;">
+  <defs>
+    <pattern id="blueprint-minor" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M 8 0 L 0 0 0 8" fill="none" stroke="var(--line, rgba(255,255,255,0.04))" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="blueprint-major" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="url(#blueprint-minor)"/>
+      <path d="M 80 0 L 0 0 0 80" fill="none" stroke="var(--line-2, rgba(255,255,255,0.10))" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#blueprint-major)"/>
+</svg>

@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Card
+   Content container
+   ═══════════════════════════════════════════════════════ */
+
+.geist-card {
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  overflow: hidden;
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              box-shadow var(--default-transition-duration) var(--ease-in-out);
+  font-family: var(--font-sans);
+}
+
+.geist-card:hover {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+/* Card variants */
+.geist-card--default {
+  border: 1px solid var(--ds-gray-alpha-200);
+}
+
+.geist-card--shadow {
+  border: none;
+  box-shadow: var(--ds-shadow-small);
+}
+
+.geist-card--shadow:hover {
+  box-shadow: var(--ds-shadow-medium);
+  border-color: transparent;
+}
+
+.geist-card--border {
+  border: 1px solid var(--ds-gray-alpha-200);
+  box-shadow: none;
+}
+
+.geist-card--interactive {
+  cursor: pointer;
+  border: 1px solid var(--ds-gray-alpha-200);
+}
+
+.geist-card--interactive:hover {
+  border-color: var(--ds-gray-alpha-400);
+  box-shadow: var(--ds-shadow-medium);
+}
+
+.geist-card--interactive:active {
+  transform: scale(0.995);
+  transition-duration: 80ms;
+}
+
+.geist-card--ghost {
+  background: transparent;
+  border: none;
+}
+
+/* Card padding variants */
+.geist-card--padding-none .geist-card__content {
+  padding: 0;
+}
+
+.geist-card--padding-sm .geist-card__content {
+  padding: var(--geist-space-2x);
+}
+
+.geist-card--padding-md .geist-card__content {
+  padding: var(--geist-space-4x);
+}
+
+.geist-card--padding-lg .geist-card__content {
+  padding: var(--geist-space-6x);
+}
+
+/* Card sections */
+.geist-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--geist-space-4x) var(--geist-space-4x) var(--geist-space-2x);
+  gap: var(--geist-space-3x);
+}
+
+.geist-card__title {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--ds-gray-1000);
+  line-height: var(--text-base--line-height);
+  margin: 0;
+}
+
+.geist-card__subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-700);
+  margin-top: var(--geist-space);
+  line-height: var(--leading-normal);
+}
+
+.geist-card__content {
+  padding: var(--geist-space-4x);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--ds-gray-900);
+}
+
+.geist-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--geist-space-2x);
+  padding: var(--geist-space-2x) var(--geist-space-4x) var(--geist-space-4x);
+  border-top: 1px solid var(--ds-gray-alpha-100);
+}
+
+.geist-card__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--ds-gray-100);
+}
+
+.geist-card__media + .geist-card__content,
+.geist-card__media + .geist-card__header {
+  padding-top: var(--geist-space-4x);
+}
+
+/* Card hoverable with overlay action */
+.geist-card--hoverable {
+  position: relative;
+}
+
+.geist-card--hoverable::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ds-gray-alpha-100);
+  opacity: 0;
+  transition: opacity var(--default-transition-duration) var(--ease-in-out);
+  pointer-events: none;
+}
+
+.geist-card--hoverable:hover::after {
+  opacity: 1;
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-card {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-card:hover {
+  border-color: var(--ds-gray-alpha-400);
+}
+
+[data-theme="dark"] .geist-card--shadow {
+  box-shadow: var(--ds-shadow-small);
+}
+
+[data-theme="dark"] .geist-card--shadow:hover {
+  box-shadow: var(--ds-shadow-medium);
+}
+
+[data-theme="dark"] .geist-card--interactive {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-card--interactive:hover {
+  border-color: var(--ds-gray-alpha-500);
+  box-shadow: var(--ds-shadow-medium);
+}
+
+[data-theme="dark"] .geist-card__title {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-card__subtitle {
+  color: var(--ds-gray-700);
+}
+
+[data-theme="dark"] .geist-card__content {
+  color: var(--ds-gray-900);
+}
+
+[data-theme="dark"] .geist-card__footer {
+  border-top-color: var(--ds-gray-alpha-200);
+}
+
+[data-theme="dark"] .geist-card__media {
+  background: var(--ds-gray-100);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-card,
+  .geist-card--interactive,
+  .geist-card--hoverable::after {
+    transition: none;
+  }
+  
+  .geist-card--interactive:active {
+    transform: none;
+  }
+}

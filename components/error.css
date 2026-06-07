@@ -1,0 +1,92 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Error State
+   Error boundary / fault display
+   ═══════════════════════════════════════════════════════ */
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--geist-space-16x) var(--geist-gap);
+  gap: var(--geist-space-4x);
+  min-height: 60vh;
+}
+
+.error__code {
+  font-family: var(--font-mono);
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 700;
+  color: var(--text-lo);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.error__title {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-hi);
+}
+
+.error__message {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-md);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.error__action {
+  margin-top: var(--geist-space-4x);
+  display: flex;
+  gap: var(--geist-space-4x);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error__illustration {
+  width: 120px;
+  height: 120px;
+  color: var(--line-2);
+  margin-bottom: var(--geist-space-4x);
+}
+
+/* Compact variant */
+.error--compact {
+  min-height: auto;
+  padding: var(--geist-space-8x) var(--geist-gap);
+}
+
+.error--compact .error__code {
+  font-size: clamp(32px, 5vw, 64px);
+}
+
+.error--compact .error__illustration {
+  width: 64px;
+  height: 64px;
+}
+
+/* Inline variant */
+.error--inline {
+  flex-direction: row;
+  text-align: left;
+  min-height: auto;
+  padding: var(--geist-space-4x) 0;
+  gap: var(--geist-space-4x);
+}
+
+.error--inline .error__illustration {
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.error--inline .error__code {
+  font-size: 14px;
+  opacity: 1;
+  letter-spacing: 0;
+}

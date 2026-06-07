@@ -1,0 +1,143 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Toggle Group
+   Grouped two-state buttons (single or multi select)
+   ═══════════════════════════════════════════════════════ */
+
+.toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--geist-space);
+  font-family: var(--font-sans);
+}
+
+.toggle-group--outline {
+  gap: 0;
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  overflow: hidden;
+}
+
+.toggle-group--outline .toggle-group-item {
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid var(--ds-gray-alpha-200);
+}
+
+.toggle-group--outline .toggle-group-item:last-child {
+  border-right: none;
+}
+
+.toggle-group-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--geist-space-2x);
+  padding: var(--geist-space-2x) var(--geist-space-4x);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-800);
+  background: transparent;
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              border-color var(--default-transition-duration) var(--ease-in-out),
+              color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.toggle-group-item:hover {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+.toggle-group-item:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+  z-index: 1;
+}
+
+.toggle-group-item[aria-pressed="true"],
+.toggle-group-item[data-state="on"] {
+  background: var(--ds-gray-1000);
+  border-color: var(--ds-gray-1000);
+  color: var(--ds-background-100);
+  z-index: 1;
+}
+
+.toggle-group-item[aria-pressed="true"]:hover,
+.toggle-group-item[data-state="on"]:hover {
+  background: var(--ds-gray-900);
+  border-color: var(--ds-gray-900);
+}
+
+.toggle-group-item:disabled,
+.toggle-group-item[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-group-item__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Sizes */
+.toggle-group--sm .toggle-group-item {
+  padding: var(--geist-space) var(--geist-space-3x);
+  font-size: var(--text-xs);
+}
+
+.toggle-group--lg .toggle-group-item {
+  padding: var(--geist-space-3x) var(--geist-space-6x);
+  font-size: var(--text-base);
+}
+
+/* Pill shape */
+.toggle-group--pill .toggle-group-item {
+  border-radius: var(--radius-pill);
+}
+
+.toggle-group--pill.toggle-group--outline {
+  border-radius: var(--radius-pill);
+}
+
+/* Dark mode */
+[data-theme="dark"] .toggle-group--outline {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .toggle-group--outline .toggle-group-item {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .toggle-group-item {
+  color: var(--ds-gray-600);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .toggle-group-item:hover {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .toggle-group-item[aria-pressed="true"],
+[data-theme="dark"] .toggle-group-item[data-state="on"] {
+  background: var(--ds-gray-1000);
+  border-color: var(--ds-gray-1000);
+  color: var(--ds-background-200);
+}
+
+[data-theme="dark"] .toggle-group-item[aria-pressed="true"]:hover,
+[data-theme="dark"] .toggle-group-item[data-state="on"]:hover {
+  background: var(--ds-gray-900);
+  border-color: var(--ds-gray-900);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .toggle-group-item {
+    transition: none;
+  }
+}

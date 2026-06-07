@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-material="printing" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex — Documentation</title>
+<link rel="stylesheet" href="../tokens/reset.css">
+<link rel="stylesheet" href="../tokens/colors.css">
+<link rel="stylesheet" href="../tokens/typography.css">
+<link rel="stylesheet" href="../tokens/spacing.css">
+<link rel="stylesheet" href="../tokens/motion.css">
+<link rel="stylesheet" href="../tokens/shape.css">
+<link rel="stylesheet" href="../tokens/glass.css">
+<link rel="stylesheet" href="../materials/printing.css">
+<link rel="stylesheet" href="../layouts/document.css">
+<link rel="stylesheet" href="../components/nav.css">
+</head>
+<body>
+
+<div class="doc-section">
+  <h1>System Overview</h1>
+  <div class="two-col">
+    <p>Vertex is a precision-engineered design system that merges Vercel's Geist design language with industrial frontend architecture. It treats every interface as a machine: engineered, not decorated.</p>
+    <p>The system is built on three pillars: real Geist tokens extracted from vercel.com/geist, industrial design patterns from the manufacturing world, and frosted glass overlays for depth and premium feel.</p>
+  </div>
+  
+  <div class="figure">
+    <pre><code>&lt;!-- Quick Start --&gt;
+&lt;html data-material="machining" data-theme="dark"&gt;
+  &lt;link rel="stylesheet" href="tokens/colors.css"&gt;
+  &lt;link rel="stylesheet" href="tokens/typography.css"&gt;
+  &lt;body class="chassis"&gt;
+    &lt;div class="panel"&gt;...&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <div class="figure-caption">FIG. 1.1 — Minimal integration example</div>
+  </div>
+</div>
+
+<div class="doc-section">
+  <h1>Color Tokens</h1>
+  <p>The color system uses real Geist tokens with a three-tier structure: Neutral (80%), Accent (10%), and Semantic (5%).</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Usage</th>
+        <th>Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Neutral</td>
+        <td>Backgrounds, text, borders</td>
+        <td><code>--ds-gray-100</code> to <code>--ds-gray-1000</code></td>
+      </tr>
+      <tr>
+        <td>Accent</td>
+        <td>Primary actions, key data</td>
+        <td><code>--ds-blue-700</code> (#0072f5)</td>
+      </tr>
+      <tr>
+        <td>Semantic</td>
+        <td>Status indicators</td>
+        <td><code>--ds-green-700</code>, <code>--ds-red-700</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="doc-section">
+  <h1>Materials</h1>
+  <p>Each material defines a complete aesthetic world: surface, color, texture, typography, copy voice, and signature detail.</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Material</th>
+        <th>Best For</th>
+        <th>Accent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>MACHINING</td><td>Dev tools, AI/ML</td><td>#0072f5</td></tr>
+      <tr><td>PLATING</td><td>Data platforms, APIs</td><td>#12a594</td></tr>
+      <tr><td>WELDING</td><td>Open-source, platforms</td><td>#ffb224</td></tr>
+      <tr><td>CASTING</td><td>Hardware, robotics</td><td>#e5484d</td></tr>
+      <tr><td>CALIBRATING</td><td>Monitoring, trading</td><td>#ffb224</td></tr>
+      <tr><td>PRINTING</td><td>Docs, research (light)</td><td>#0072f5</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="doc-section">
+  <h1>Glass System</h1>
+  <p>Frosted glass is an optional overlay layer, not a base material. It adds depth without obscuring the grid beneath.</p>
+  
+  <div class="figure">
+    <pre><code>/* Glass tokens */
+--glass-bg: rgba(255, 255, 255, 0.03);
+--glass-border: rgba(255, 255, 255, 0.06);
+--glass-blur: blur(16px) saturate(180%);
+
+/* Apply to navbar, modals, floating cards */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}</code></pre>
+    <div class="figure-caption">FIG. 2.1 — Glass overlay implementation</div>
+  </div>
+</div>
+
+<div class="doc-section">
+  <h1>Layout Modes</h1>
+  <p>Four layout modes define the chassis shape: BOXED (default), FULL-BLEED, SPLIT, and DOCUMENT.</p>
+  
+  <div class="two-col">
+    <p><strong>BOXED</strong> — Centered max-width chassis with visible gutters. Best for dashboards, docs, B2B premium.</p>
+    <p><strong>FULL-BLEED</strong> — Edge-to-edge content. Best for infrastructure platforms, full dashboards.</p>
+    <p><strong>SPLIT</strong> — Message column + live-evidence column. Best for API products, AI demos.</p>
+    <p><strong>DOCUMENT</strong> — Print-grid with wide margins. Best for research, documentation.</p>
+  </div>
+</div>
+
+<div style="text-align: center; padding-top: 48px; border-top: 1px solid var(--ds-gray-alpha-200);">
+  <p style="font-family: var(--font-mono); font-size: 12px; color: var(--ds-gray-700); letter-spacing: 0.04em; text-transform: uppercase;">
+    SET IN GEIST & GEIST MONO · PRINTED 2026 · EDITION 01
+  </p>
+</div>
+
+</body>
+</html>

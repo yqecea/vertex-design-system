@@ -1,0 +1,520 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   LIQUID GLASS — Apple-inspired depth system
+   Based on research: base diffusion + tint/fill + edge definition + 
+   specular rim + motion response + depth hierarchy
+   
+   Rule: ONE blurred surface + visual sublayers via ::before/::after
+   Never nest multiple backdrop-filter panels.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   0. THEME TOKENS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Liquid Glass layers */
+  --liquid-base: rgba(255, 255, 255, 0.02);
+  --liquid-tint: rgba(255, 255, 255, 0.04);
+  --liquid-edge: rgba(255, 255, 255, 0.08);
+  --liquid-rim: rgba(255, 255, 255, 0.12);
+  --liquid-specular: rgba(255, 255, 255, 0.18);
+  --liquid-glow: rgba(255, 255, 255, 0.06);
+  
+  /* Depth blur stack */
+  --liquid-blur-base: blur(20px) saturate(180%);
+  --liquid-blur-shallow: blur(12px) saturate(160%);
+  --liquid-blur-deep: blur(28px) saturate(200%);
+  
+  /* Accent glow */
+  --liquid-accent-glow: var(--accent, var(--ds-blue-700, #0072f5));
+}
+
+[data-theme="light"] {
+  --liquid-base: rgba(0, 0, 0, 0.02);
+  --liquid-tint: rgba(0, 0, 0, 0.04);
+  --liquid-edge: rgba(0, 0, 0, 0.08);
+  --liquid-rim: rgba(0, 0, 0, 0.10);
+  --liquid-specular: rgba(0, 0, 0, 0.14);
+  --liquid-glow: rgba(0, 0, 0, 0.04);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   1. LIQUID GLASS BASE
+   Single backdrop-filter with visual sublayers for depth.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background: var(--liquid-base);
+  backdrop-filter: var(--liquid-blur-base);
+  -webkit-backdrop-filter: var(--liquid-blur-base);
+  border: 1px solid var(--liquid-edge);
+  box-shadow:
+    inset 0 1px 0 var(--liquid-rim),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Specular highlight layer */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 20% 10%, var(--liquid-specular), transparent 40%),
+    conic-gradient(from 220deg at 50% 50%,
+      var(--liquid-rim), transparent 15%,
+      var(--liquid-glow), transparent 60%,
+      var(--liquid-rim));
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Edge refraction simulation */
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent 0 42%, var(--liquid-specular) 50%, transparent 58%);
+  filter: blur(10px);
+  opacity: .7;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   2. LAYERED DEPTH VARIANTS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Shallow layer — less blur, for close elements */
+.liquid-glass-layer-1 {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background: var(--liquid-base);
+  backdrop-filter: var(--liquid-blur-shallow);
+  -webkit-backdrop-filter: var(--liquid-blur-shallow);
+  border: 1px solid var(--liquid-edge);
+  box-shadow: inset 0 1px 0 var(--liquid-rim);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Middle layer — medium depth */
+.liquid-glass-layer-2 {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background: var(--liquid-tint);
+  backdrop-filter: var(--liquid-blur-base);
+  -webkit-backdrop-filter: var(--liquid-blur-base);
+  border: 1px solid var(--liquid-edge);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 var(--liquid-rim);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Deep layer — maximum blur for background elements */
+.liquid-glass-layer-3 {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background: var(--liquid-tint);
+  backdrop-filter: var(--liquid-blur-deep);
+  -webkit-backdrop-filter: var(--liquid-blur-deep);
+  border: 1px solid var(--liquid-edge);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 var(--liquid-rim);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   3. NAV BAR LIQUID GLASS
+   Progressive blur from transparent to solid.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--geist-gap, 24px);
+  background: linear-gradient(
+    to bottom,
+    var(--liquid-tint) 0%,
+    color-mix(in srgb, var(--liquid-tint) 50%, transparent) 60%,
+    transparent 100%
+  );
+  backdrop-filter: var(--liquid-blur-shallow);
+  -webkit-backdrop-filter: var(--liquid-blur-shallow);
+  border-bottom: 1px solid var(--liquid-edge);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 70%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 70%,
+    transparent 100%
+  );
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   4. CARD LIQUID GLASS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-card {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background: var(--liquid-base);
+  backdrop-filter: var(--liquid-blur-base);
+  -webkit-backdrop-filter: var(--liquid-blur-base);
+  border: 1px solid var(--liquid-edge);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 var(--liquid-rim);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: background-color 150ms linear, border-color 150ms linear;
+}
+
+.liquid-glass-card:hover {
+  background: var(--liquid-tint);
+  border-color: var(--liquid-rim);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 var(--liquid-specular);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   5. BUTTON LIQUID GLASS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--geist-space-2x, 8px);
+  padding: 0 var(--geist-space-4x, 16px);
+  height: var(--geist-form-height, 40px);
+  border-radius: var(--geist-radius, 6px);
+  font-family: var(--font-mono, 'Geist Mono', monospace);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-gray-1000, #ededed);
+  background: var(--liquid-base);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  border: 1px solid var(--liquid-edge);
+  box-shadow: inset 0 1px 0 var(--liquid-rim);
+  cursor: pointer;
+  isolation: isolate;
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: all 150ms linear;
+}
+
+.liquid-glass-btn:hover {
+  background: var(--liquid-tint);
+  border-color: var(--liquid-rim);
+  box-shadow: inset 0 1px 0 var(--liquid-specular);
+}
+
+.liquid-glass-btn:active {
+  transform: translateZ(0) scale(0.98);
+}
+
+.liquid-glass-btn-primary {
+  background: color-mix(in srgb, var(--liquid-accent-glow) 12%, transparent);
+  border-color: color-mix(in srgb, var(--liquid-accent-glow) 35%, transparent);
+  box-shadow:
+    0 0 20px -8px color-mix(in srgb, var(--liquid-accent-glow) 24%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--liquid-accent-glow) 16%, transparent);
+}
+
+.liquid-glass-btn-primary:hover {
+  background: color-mix(in srgb, var(--liquid-accent-glow) 18%, transparent);
+  border-color: color-mix(in srgb, var(--liquid-accent-glow) 50%, transparent);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   6. GLOW EFFECTS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-glow {
+  box-shadow:
+    0 0 24px -8px var(--liquid-glow),
+    inset 0 0 20px -12px var(--liquid-glow);
+}
+
+.liquid-glass-glow-accent {
+  box-shadow:
+    0 0 28px -6px color-mix(in srgb, var(--liquid-accent-glow) 30%, transparent),
+    inset 0 0 24px -14px color-mix(in srgb, var(--liquid-accent-glow) 18%, transparent);
+}
+
+.liquid-glass-glow-pulse {
+  position: relative;
+}
+
+.liquid-glass-glow-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 32px -8px var(--liquid-glow);
+  opacity: 0.8;
+  pointer-events: none;
+  animation: liquid-glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes liquid-glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   7. LIGHT TRANSMISSION
+   Simulate light source behind glass.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-lit {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background:
+    radial-gradient(
+      600px circle at 20% 25%,
+      var(--liquid-specular) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      var(--liquid-base) 0%,
+      transparent 100%
+    );
+  backdrop-filter: var(--liquid-blur-base);
+  -webkit-backdrop-filter: var(--liquid-blur-base);
+  border: 1px solid var(--liquid-edge);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   8. REFRACTION SIMULATION
+   Fake refraction with animated gradients.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-refraction {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: var(--geist-radius, 6px);
+  background:
+    linear-gradient(
+      115deg,
+      transparent 38%,
+      var(--liquid-rim) 45%,
+      transparent 50%,
+      var(--liquid-rim) 55%,
+      transparent 62%
+    ),
+    var(--liquid-base);
+  background-size: 250% 250%, 100% 100%;
+  backdrop-filter: var(--liquid-blur-base);
+  -webkit-backdrop-filter: var(--liquid-blur-base);
+  border: 1px solid var(--liquid-edge);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: liquid-shift 10s linear infinite;
+}
+
+@keyframes liquid-shift {
+  0% { background-position: 0% 0%, 0 0; }
+  100% { background-position: 100% 100%, 0 0; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   9. BUBBLE VARIANT
+   Rounded glass with internal highlight.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass-bubble {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: 999px;
+  background: var(--liquid-base);
+  backdrop-filter: var(--liquid-blur-base);
+  -webkit-backdrop-filter: var(--liquid-blur-base);
+  border: 1px solid var(--liquid-edge);
+  box-shadow:
+    inset 0 1px 0 var(--liquid-rim),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.liquid-glass-bubble::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 40%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--liquid-specular) 0%,
+    transparent 70%
+  );
+  opacity: 0.55;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   10. SVG REFRACTION FILTER
+   For true refraction, apply this SVG filter.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Add this SVG to your HTML:
+<svg width="0" height="0" aria-hidden="true">
+  <filter id="liquid-refraction">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="8" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="16" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+Then use: filter: url(#liquid-refraction);
+*/
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   11. ACCESSIBILITY & MOTION SAFETY
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-refraction,
+  .liquid-glass-glow-pulse::before {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass,
+  .liquid-glass-layer-1,
+  .liquid-glass-layer-2,
+  .liquid-glass-layer-3,
+  .liquid-glass-nav,
+  .liquid-glass-card,
+  .liquid-glass-btn,
+  .liquid-glass-btn-primary,
+  .liquid-glass-lit,
+  .liquid-glass-refraction,
+  .liquid-glass-bubble {
+    background: var(--ds-background-200, #111) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   12. MOBILE PERFORMANCE
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .liquid-glass,
+  .liquid-glass-layer-1,
+  .liquid-glass-layer-2,
+  .liquid-glass-layer-3,
+  .liquid-glass-card,
+  .liquid-glass-lit,
+  .liquid-glass-refraction,
+  .liquid-glass-bubble {
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+  }
+  
+  .liquid-glass-nav {
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+  }
+  
+  .liquid-glass-refraction,
+  .liquid-glass-bubble::before {
+    animation: none !important;
+  }
+}
+
+/* Limit stacked panels to 3 on mobile */
+@media (max-width: 768px) {
+  .liquid-glass:nth-child(n+4),
+  .liquid-glass-card:nth-child(n+4) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--ds-gray-alpha-200, rgba(255, 255, 255, 0.06)) !important;
+    border: 1px solid var(--liquid-edge) !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .liquid-glass:nth-child(n+3),
+  .liquid-glass-card:nth-child(n+3) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--ds-gray-alpha-200, rgba(255, 255, 255, 0.06)) !important;
+    border: 1px solid var(--liquid-edge) !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────────
+   13. GLASS-ON-GLASS SAFETY
+   Only outer pane is truly glass; inner panes use matte fallback.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.liquid-glass .liquid-glass,
+.liquid-glass-card .liquid-glass-card {
+  backdrop-filter: blur(4px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(120%) !important;
+  background: var(--liquid-base) !important;
+}

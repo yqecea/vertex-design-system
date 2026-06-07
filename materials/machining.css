@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════
+   MACHINING — Default Material
+   CNC, Lathe, Precision — Developer tools, AI/ML, infra
+   Mapped to real Geist tokens
+   ═══════════════════════════════════════════════════════ */
+
+[data-material="machining"] {
+  /* ── Surface Elevation ── */
+  --bg-000: var(--ds-background-100, #0a0a0a);
+  --bg-100: #171717;
+  --bg-200: var(--ds-gray-100, #1a1a1a);
+  --bg-300: var(--ds-gray-200, #1f1f1f);
+
+  /* ── Text Hierarchy ── */
+  --text-hi: var(--ds-gray-1000, #ededed);
+  --text-md: var(--ds-gray-900, #a1a1a1);
+  --text-lo: #6a6a6a;
+
+  /* ── Border System ── */
+  --line: rgba(255, 255, 255, 0.07);
+  --line-2: rgba(255, 255, 255, 0.13);
+
+  /* ── Accent ── */
+  --accent: var(--ds-blue-700, #0072f5);
+  --accent-hover: var(--ds-focus-color, #52a8ff);
+
+  /* ── Semantic ── */
+  --ok: var(--ds-green-700, #45a557);
+  --warn: var(--ds-amber-700, #ffb224);
+  --alarm: var(--ds-red-700, #e5484d);
+
+  /* ── Typography ── */
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ── Surface Texture ── */
+  --texture-primary:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 7px,
+      rgba(255, 255, 255, 0.03) 7px,
+      rgba(255, 255, 255, 0.03) 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 7px,
+      rgba(255, 255, 255, 0.03) 7px,
+      rgba(255, 255, 255, 0.03) 8px
+    );
+}

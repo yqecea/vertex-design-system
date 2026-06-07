@@ -1,0 +1,103 @@
+/* ═══════════════════════════════════════════════════════
+   LAYOUT: BOXED — Contained-instrument chassis
+   Default layout for Vertex Industrial
+   Vercel docs, Linear blog pattern
+   ═══════════════════════════════════════════════════════ */
+
+body {
+  background: var(--bg-000);
+  color: var(--text-md);
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-ui, system-ui, sans-serif);
+  line-height: 1.55;
+}
+
+.chassis {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-left: 1px solid var(--line-2);
+  border-right: 1px solid var(--line-2);
+  background: var(--bg-000);
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ── Edge-strip vertical brand label ── */
+.edge-strip {
+  position: absolute;
+  top: 64px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.edge-strip--left {
+  left: -32px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.edge-strip--right {
+  right: -32px;
+  writing-mode: vertical-rl;
+}
+
+/* ── Corner ticks on chassis ── */
+.chassis-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+.chassis-corner::before,
+.chassis-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--text-lo);
+}
+.chassis-corner::before { width: 12px; height: 1px; }
+.chassis-corner::after  { width: 1px; height: 12px; }
+.chassis-corner.tl { top: 8px; left: 8px; }
+.chassis-corner.tl::before { top: 0; left: 0; }
+.chassis-corner.tl::after  { top: 0; left: 0; }
+.chassis-corner.tr { top: 8px; right: 8px; }
+.chassis-corner.tr::before { top: 0; right: 0; }
+.chassis-corner.tr::after  { top: 0; right: 0; }
+.chassis-corner.bl { bottom: 8px; left: 8px; }
+.chassis-corner.bl::before { bottom: 0; left: 0; }
+.chassis-corner.bl::after  { bottom: 0; left: 0; }
+.chassis-corner.br { bottom: 8px; right: 8px; }
+.chassis-corner.br::before { bottom: 0; right: 0; }
+.chassis-corner.br::after  { bottom: 0; right: 0; }
+
+/* ── Section bands inside chassis ── */
+.chassis-section {
+  padding: 64px 32px;
+  border-bottom: 1px solid var(--line-2);
+}
+.chassis-section:last-child { border-bottom: none; }
+
+/* ── Internal grid ── */
+.chassis-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--geist-gap);
+  padding: var(--geist-space-12) var(--geist-space-8);
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .chassis {
+    border-left: none;
+    border-right: none;
+    max-width: 100%;
+  }
+  .edge-strip { display: none; }
+  .chassis-corner { display: none; }
+  .chassis-grid { padding: var(--geist-space-8) var(--geist-space-4); gap: var(--geist-gap-half); }
+  .chassis-section { padding: var(--geist-space-8) var(--geist-space-4); }
+}

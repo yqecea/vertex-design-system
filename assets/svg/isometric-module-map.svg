@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Isometric Module Map - Signature Move D1
+  Five labeled modules in 3D isometric, with data-flow connections.
+  EDIT THE LABELS before shipping. Defaults are placeholders.
+  Color hooks (override with style attribute or CSS):
+    iso-stroke  module edge stroke    (default: line-2, #333)
+    iso-fill    module face fill      (default: bg-100, #181818)
+    iso-top     module top face fill  (default: bg-200, #222222)
+    iso-accent  highlighted module    (default: accent, #4AA8FF)
+    iso-label   label text color      (default: text-md, #9DA6AB)
+    iso-line    connection line color (default: line-2, #333)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" width="100%" aria-labelledby="iso-title">
+  <title id="iso-title">Isometric module map</title>
+  <style>
+    .iso-stroke { stroke: var(--iso-stroke, var(--line-2, #333)); stroke-width: 1; fill: var(--iso-fill, var(--bg-100, #181818)); }
+    .iso-top    { stroke: var(--iso-stroke, var(--line-2, #333)); stroke-width: 1; fill: var(--iso-top, var(--bg-200, #222222)); }
+    .iso-side   { stroke: var(--iso-stroke, var(--line-2, #333)); stroke-width: 1; fill: var(--iso-fill, var(--bg-100, #181818)); opacity: 0.85; }
+    .iso-accent .iso-stroke,
+    .iso-accent .iso-top,
+    .iso-accent .iso-side { stroke: var(--iso-accent, var(--accent, #4AA8FF)); }
+    .iso-accent .iso-top  { fill: color-mix(in srgb, var(--iso-accent, var(--accent, #4AA8FF)) 18%, var(--iso-top, var(--bg-200, #222))); }
+    .iso-line   { stroke: var(--iso-line, var(--line-2, #333)); stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+    .iso-label  { font-family: var(--font-mono, ui-monospace, Menlo, monospace); font-size: 11px; letter-spacing: 0.06em; fill: var(--iso-label, var(--text-md, #9DA6AB)); text-transform: uppercase; }
+    .iso-label-conn { font-family: var(--font-mono, ui-monospace, monospace); font-size: 9px; letter-spacing: 0.06em; fill: var(--iso-label, var(--text-md, #9DA6AB)); text-transform: uppercase; }
+  </style>
+
+  <!-- Module A — top left -->
+  <g transform="translate(80, 100)">
+    <!-- top face (rhombus) -->
+    <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+    <!-- left face -->
+    <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+    <!-- right face -->
+    <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+    <text class="iso-label" x="120" y="65" text-anchor="start">INGEST</text>
+  </g>
+
+  <!-- Module B — top right -->
+  <g transform="translate(440, 100)">
+    <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+    <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+    <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+    <text class="iso-label" x="120" y="65" text-anchor="start">NORMALIZE</text>
+  </g>
+
+  <!-- Module C — center (ACCENT module) -->
+  <g transform="translate(280, 200)" class="iso-accent">
+    <polygon class="iso-top" points="50,0 120,35 70,70 0,35"/>
+    <polygon class="iso-side" points="0,35 70,70 70,130 0,95"/>
+    <polygon class="iso-stroke" points="120,35 120,95 70,130 70,70"/>
+    <text class="iso-label" x="60" y="160" text-anchor="middle" style="fill: var(--iso-accent, var(--accent, #4AA8FF));">INFERENCE</text>
+  </g>
+
+  <!-- Module D — bottom left -->
+  <g transform="translate(100, 320)">
+    <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+    <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+    <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+    <text class="iso-label" x="120" y="65" text-anchor="start">STORAGE</text>
+  </g>
+
+  <!-- Module E — bottom right -->
+  <g transform="translate(460, 320)">
+    <polygon class="iso-top" points="40,0 100,30 60,60 0,30"/>
+    <polygon class="iso-side" points="0,30 60,60 60,110 0,80"/>
+    <polygon class="iso-stroke" points="100,30 100,80 60,110 60,60"/>
+    <text class="iso-label" x="120" y="65" text-anchor="start">EDGE</text>
+  </g>
+
+  <!-- Connection lines (dashed) with labels -->
+  <!-- A → C -->
+  <path class="iso-line" d="M 180 160 Q 240 200 320 240"/>
+  <text class="iso-label-conn" x="240" y="195">grpc :9092</text>
+  <!-- B → C -->
+  <path class="iso-line" d="M 500 160 Q 460 200 400 240"/>
+  <text class="iso-label-conn" x="455" y="195">tcp :7000</text>
+  <!-- C → D -->
+  <path class="iso-line" d="M 320 320 Q 240 340 180 360"/>
+  <text class="iso-label-conn" x="220" y="355">wal stream</text>
+  <!-- C → E -->
+  <path class="iso-line" d="M 400 320 Q 460 340 520 360"/>
+  <text class="iso-label-conn" x="455" y="355">wss</text>
+</svg>

@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════════════
+   GEIST SPACING — 4px base scale
+   Real values from vercel.com/geist
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Base Scale ── */
+  --geist-space: 4px;
+  --geist-space-2: var(--geist-space-2x);
+  --geist-space-2x: 8px;
+  --geist-space-3x: 12px;
+  --geist-space-4x: 16px;
+  --geist-space-6x: 24px;
+  --geist-space-8x: 32px;
+  --geist-space-10x: 40px;
+  --geist-space-16x: 64px;
+  --geist-space-24x: 96px;
+  --geist-space-32x: 128px;
+  --geist-space-48x: 192px;
+  --geist-space-64x: 256px;
+
+  /* ── Gaps ── */
+  --geist-gap-quarter: 8px;
+  --geist-gap-half: 12px;
+  --geist-gap: 24px;
+  --geist-gap-double: 48px;
+
+  /* ── Negative Space ── */
+  --geist-space-negative: -4px;
+  --geist-space-2x-negative: -8px;
+  --geist-space-4x-negative: -16px;
+  --geist-space-8x-negative: -32px;
+
+  /* ── Form Heights ── */
+  --geist-form-small-height: 32px;
+  --geist-form-height: 40px;
+  --geist-form-large-height: 48px;
+
+  /* ── Shape ── */
+  --geist-radius: 6px;
+  --geist-marketing-radius: 12px;
+
+  /* ── Layout ── */
+  --ds-page-width: 1400px;
+  --geist-page-width: 1200px;
+  --geist-page-margin: 24px;
+  --geist-page-width-with-margin: calc(1200px + calc(2 * 24px));
+
+  /* ── Breakpoints ── */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 961px;
+  --breakpoint-xl: 1280px;
+}

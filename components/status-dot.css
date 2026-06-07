@@ -1,0 +1,26 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Status Dot
+   LED-style state indicators
+   ═══════════════════════════════════════════════════════ */
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-ok    { background: var(--ds-green-700); }
+.status-warn  { background: var(--ds-amber-700); }
+.status-alarm { background: var(--ds-red-700); }
+.status-live  { background: var(--ds-green-700); animation: status-pulse 2s ease-in-out infinite; }
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-live { animation: none; }
+}

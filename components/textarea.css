@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Textarea
+   Multi-line input with auto-resize support
+   ═══════════════════════════════════════════════════════ */
+
+.textarea {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--text-sm--line-height);
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  padding: var(--geist-space-3x) var(--geist-space-4x);
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              box-shadow var(--default-transition-duration) var(--ease-in-out);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.textarea::placeholder {
+  color: var(--ds-gray-600);
+}
+
+.textarea:focus {
+  border-color: var(--ds-focus-color);
+  box-shadow: var(--ds-focus-ring);
+}
+
+.textarea:hover:not(:focus):not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--ds-gray-alpha-500);
+}
+
+.textarea:disabled,
+.textarea[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-500);
+  border-color: var(--ds-gray-alpha-100);
+  cursor: not-allowed;
+  opacity: 0.6;
+  resize: none;
+}
+
+.textarea:disabled::placeholder,
+.textarea[aria-disabled="true"]::placeholder {
+  color: var(--ds-gray-400);
+}
+
+/* Error state */
+.textarea[data-error="true"],
+.textarea[aria-invalid="true"] {
+  border-color: var(--ds-red-700);
+}
+
+.textarea[data-error="true"]:focus,
+.textarea[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 2px var(--ds-background-100), 0 0 0 4px var(--ds-red-700);
+}
+
+/* Sizes */
+.textarea--sm {
+  padding: var(--geist-space-2x) var(--geist-space-3x);
+  font-size: var(--text-xs);
+  min-height: 60px;
+}
+
+.textarea--lg {
+  padding: var(--geist-space-4x) var(--geist-space-6x);
+  font-size: var(--text-base);
+  min-height: 120px;
+}
+
+/* Auto-resize variant (no visible resize handle) */
+.textarea--autoresize {
+  resize: none;
+  overflow: hidden;
+  field-sizing: content;
+  min-height: var(--geist-form-height);
+}
+
+/* Character counter */
+.textarea-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textarea-counter {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  margin-top: var(--geist-space);
+  font-variant-numeric: tabular-nums;
+}
+
+.textarea-counter--over {
+  color: var(--ds-red-700);
+}
+
+/* Dark mode */
+[data-theme="dark"] .textarea {
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .textarea::placeholder {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .textarea:hover:not(:focus):not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .textarea:disabled,
+[data-theme="dark"] .textarea[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-500);
+  border-color: var(--ds-gray-alpha-200);
+}
+
+[data-theme="dark"] .textarea-counter {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .textarea-counter--over {
+  color: var(--ds-red-500);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .textarea {
+    transition: none;
+  }
+}

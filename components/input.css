@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Input
+   Text input with focus ring, sizes, and states
+   ═══════════════════════════════════════════════════════ */
+
+.geist-input {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--text-sm--line-height);
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  padding: 0 var(--geist-space-3x);
+  height: var(--geist-form-height);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              box-shadow var(--default-transition-duration) var(--ease-in-out);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.geist-input::placeholder {
+  color: var(--ds-gray-600);
+}
+
+/* Focus state */
+.geist-input:focus {
+  border-color: var(--ds-focus-color);
+  box-shadow: var(--ds-focus-ring);
+}
+
+/* Hover state */
+.geist-input:hover:not(:focus):not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--ds-gray-alpha-500);
+}
+
+/* Disabled state */
+.geist-input:disabled,
+.geist-input[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-500);
+  border-color: var(--ds-gray-alpha-100);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.geist-input:disabled::placeholder,
+.geist-input[aria-disabled="true"]::placeholder {
+  color: var(--ds-gray-400);
+}
+
+/* Error state */
+.geist-input[data-error="true"],
+.geist-input[aria-invalid="true"] {
+  border-color: var(--ds-red-700);
+}
+
+.geist-input[data-error="true"]:focus,
+.geist-input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 2px var(--ds-background-100), 0 0 0 4px var(--ds-red-700);
+}
+
+/* Sizes */
+.geist-input--sm {
+  height: var(--geist-form-small-height);
+  font-size: var(--text-xs);
+  padding: 0 var(--geist-space-2x);
+}
+
+.geist-input--lg {
+  height: var(--geist-form-large-height);
+  font-size: var(--text-base);
+  padding: 0 var(--geist-space-4x);
+}
+
+/* With icon prefix */
+.geist-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.geist-input-wrapper .geist-input {
+  padding-left: var(--geist-space-8x);
+}
+
+.geist-input-wrapper .geist-input--sm {
+  padding-left: var(--geist-space-6x);
+}
+
+.geist-input-wrapper .geist-input--lg {
+  padding-left: var(--geist-space-10x);
+}
+
+.geist-input__icon {
+  position: absolute;
+  left: var(--geist-space-3x);
+  color: var(--ds-gray-600);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-input {
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-input::placeholder {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .geist-input:hover:not(:focus):not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .geist-input:disabled,
+[data-theme="dark"] .geist-input[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-500);
+  border-color: var(--ds-gray-alpha-200);
+}
+
+[data-theme="dark"] .geist-input__icon {
+  color: var(--ds-gray-600);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-input {
+    transition: none;
+  }
+}
+
+/* ARIA support */
+.geist-input[aria-describedby] {
+  /* associations handled by JS */
+}
+
+.geist-input[aria-required="true"] {
+  /* visual indicator handled by label */
+}

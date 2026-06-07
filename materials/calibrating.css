@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════════════════
+   CALIBRATING — Mission Control
+   Monitoring, trading terminals, real-time ops
+   Mapped to real Geist tokens
+   ═══════════════════════════════════════════════════════ */
+
+[data-material="calibrating"] {
+  /* ── Surface Elevation ── */
+  --bg-000: var(--ds-background-100, #0a0a0a);
+  --bg-100: #131b22;
+  --bg-200: #1a242d;
+  --bg-300: #222e38;
+
+  /* ── Text Hierarchy ── */
+  --text-hi: #d6dce0;
+  --text-md: #869099;
+  --text-lo: #5a6470;
+
+  /* ── Border System ── */
+  --line: rgba(255, 176, 0, 0.08);
+  --line-2: rgba(255, 176, 0, 0.15);
+
+  /* ── Accent ── */
+  --accent: var(--ds-amber-700, #ffb224);
+  --accent-hover: #f2a20d;
+
+  /* ── Segment Display ── */
+  --seg: var(--ds-green-700, #45a557);
+
+  /* ── Semantic ── */
+  --ok: var(--ds-green-700, #45a557);
+  --warn: var(--ds-amber-700, #ffb224);
+  --alarm: var(--ds-red-700, #e5484d);
+
+  /* ── Typography ── */
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ── Surface Texture ── */
+  --texture-primary:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 7px,
+      rgba(255, 176, 36, 0.03) 7px,
+      rgba(255, 176, 36, 0.03) 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 7px,
+      rgba(255, 176, 36, 0.03) 7px,
+      rgba(255, 176, 36, 0.03) 8px
+    );
+}

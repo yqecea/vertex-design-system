@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Registration Marks — Signature Move S2
+  Single corner registration mark for inline use:
+    <svg class="reg-mark"><use href="registration-marks.svg#mark"/></svg>
+  Position 4 of them at viewport corners (tl, tr, bl, br) via CSS.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+  <defs>
+    <g id="mark">
+      <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" stroke-width="1"/>
+      <line x1="8" y1="0" x2="8"  y2="16" stroke="currentColor" stroke-width="1"/>
+      <circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1"/>
+    </g>
+  </defs>
+  <use href="#mark"/>
+</svg>

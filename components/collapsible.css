@@ -1,0 +1,137 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Collapsible
+   Toggle content visibility with animated height
+   ═══════════════════════════════════════════════════════ */
+
+.collapsible {
+  width: 100%;
+}
+
+.collapsible-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--geist-space-3x) var(--geist-space-4x);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-1000);
+  background: transparent;
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out),
+              border-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.collapsible-trigger:hover {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+.collapsible-trigger:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.collapsible-trigger[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+
+.collapsible-trigger[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.collapsible-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--ds-gray-700);
+  transition: transform var(--default-transition-duration) var(--ease-in-out);
+  flex-shrink: 0;
+  margin-left: var(--geist-space-3x);
+}
+
+.collapsible-trigger[aria-expanded="true"] .collapsible-icon {
+  transform: rotate(180deg);
+}
+
+.collapsible-content {
+  overflow: hidden;
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-top: none;
+  border-bottom-left-radius: var(--geist-radius);
+  border-bottom-right-radius: var(--geist-radius);
+  background: var(--ds-background-100);
+  transition: height var(--ds-motion-overlay-duration) var(--ease-in-out),
+              opacity var(--ds-motion-overlay-duration) var(--ease-in-out);
+}
+
+.collapsible-content[hidden] {
+  display: none;
+}
+
+.collapsible-content-inner {
+  padding: var(--geist-space-4x);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  color: var(--ds-gray-900);
+}
+
+/* Ghost variant (no borders) */
+.collapsible--ghost .collapsible-trigger {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.collapsible--ghost .collapsible-content {
+  border: none;
+  background: transparent;
+}
+
+.collapsible--ghost .collapsible-content-inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] .collapsible-trigger {
+  color: var(--ds-gray-1000);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .collapsible-trigger:hover {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .collapsible-icon {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .collapsible-content {
+  border-color: var(--ds-gray-alpha-300);
+  background: var(--ds-background-100);
+}
+
+[data-theme="dark"] .collapsible-content-inner {
+  color: var(--ds-gray-900);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .collapsible-trigger,
+  .collapsible-icon,
+  .collapsible-content {
+    transition: none;
+  }
+}

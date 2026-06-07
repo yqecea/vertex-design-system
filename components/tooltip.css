@@ -1,0 +1,163 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Tooltip
+   Hover tooltip
+   ═══════════════════════════════════════════════════════ */
+
+.geist-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.geist-tooltip__content {
+  position: absolute;
+  z-index: 1000;
+  padding: var(--geist-space) var(--geist-space-2x);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-xs--line-height);
+  color: var(--ds-background-100);
+  background: var(--ds-gray-1000);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--default-transition-duration) var(--ease-out),
+              transform var(--default-transition-duration) var(--ds-motion-timing-swift),
+              visibility var(--default-transition-duration) var(--ease-out);
+}
+
+.geist-tooltip__content::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--ds-gray-1000);
+  transform: rotate(45deg);
+}
+
+/* Tooltip positions */
+.geist-tooltip__content--top {
+  bottom: calc(100% + var(--geist-space-2x));
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.geist-tooltip__content--top::before {
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.geist-tooltip__content--bottom {
+  top: calc(100% + var(--geist-space-2x));
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.geist-tooltip__content--bottom::before {
+  top: -3px;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.geist-tooltip__content--left {
+  right: calc(100% + var(--geist-space-2x));
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.geist-tooltip__content--left::before {
+  right: -3px;
+  top: 50%;
+  margin-top: -3px;
+}
+
+.geist-tooltip__content--right {
+  left: calc(100% + var(--geist-space-2x));
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.geist-tooltip__content--right::before {
+  left: -3px;
+  top: 50%;
+  margin-top: -3px;
+}
+
+/* Show tooltip on hover/focus */
+.geist-tooltip:hover .geist-tooltip__content,
+.geist-tooltip:focus-within .geist-tooltip__content,
+.geist-tooltip__trigger[aria-describedby]:focus ~ .geist-tooltip__content,
+.geist-tooltip[data-open="true"] .geist-tooltip__content {
+  opacity: 1;
+  visibility: visible;
+}
+
+.geist-tooltip:hover .geist-tooltip__content--top,
+.geist-tooltip:focus-within .geist-tooltip__content--top,
+.geist-tooltip[data-open="true"] .geist-tooltip__content--top {
+  transform: translateX(-50%) translateY(0);
+}
+
+.geist-tooltip:hover .geist-tooltip__content--bottom,
+.geist-tooltip:focus-within .geist-tooltip__content--bottom,
+.geist-tooltip[data-open="true"] .geist-tooltip__content--bottom {
+  transform: translateX(-50%) translateY(0);
+}
+
+.geist-tooltip:hover .geist-tooltip__content--left,
+.geist-tooltip:focus-within .geist-tooltip__content--left,
+.geist-tooltip[data-open="true"] .geist-tooltip__content--left {
+  transform: translateY(-50%) translateX(0);
+}
+
+.geist-tooltip:hover .geist-tooltip__content--right,
+.geist-tooltip:focus-within .geist-tooltip__content--right,
+.geist-tooltip[data-open="true"] .geist-tooltip__content--right {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Multiline tooltip */
+.geist-tooltip__content--multiline {
+  white-space: normal;
+  max-width: 240px;
+  line-height: var(--leading-normal);
+  padding: var(--geist-space-2x);
+}
+
+/* Tooltip trigger */
+.geist-tooltip__trigger {
+  cursor: help;
+  border-bottom: 1px dashed var(--ds-gray-alpha-500);
+  text-decoration: none;
+  color: inherit;
+}
+
+.geist-tooltip__trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-tooltip__content {
+  color: var(--ds-background-100);
+  background: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-tooltip__content::before {
+  background: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-tooltip__trigger {
+  border-bottom-color: var(--ds-gray-alpha-500);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-tooltip__content {
+    transition: none;
+  }
+}

@@ -1,0 +1,625 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Icon
+   Icon button, icon+text, icon group, icon badge, animated icons
+   ═══════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════
+   1. ICON BUTTON (icon-only action button)
+   ═══════════════════════════════════════════════════════ */
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--geist-form-height);
+  height: var(--geist-form-height);
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  background: transparent;
+  color: var(--text-hi);
+  cursor: pointer;
+  transition: all 150ms linear;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-200);
+}
+
+.icon-btn:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
+}
+
+.icon-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+.icon-btn:disabled,
+.icon-btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--line-2);
+  color: var(--text-lo);
+}
+
+.icon-btn:disabled:hover,
+.icon-btn[aria-disabled="true"]:hover {
+  background: transparent;
+  border-color: var(--line-2);
+  color: var(--text-lo);
+}
+
+/* Icon button with accent background */
+.icon-btn--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-000);
+}
+
+.icon-btn--accent:hover {
+  filter: brightness(1.15);
+  background: var(--accent);
+}
+
+.icon-btn--accent:active {
+  filter: brightness(0.9);
+}
+
+/* Icon button ghost (no border until hover) */
+.icon-btn--ghost {
+  border-color: transparent;
+}
+
+.icon-btn--ghost:hover {
+  border-color: var(--line-2);
+  background: var(--bg-100);
+}
+
+/* Icon button sizes */
+.icon-btn--xs {
+  width: 28px;
+  height: 28px;
+}
+
+.icon-btn--xs .icon-btn__icon,
+.icon-btn--xs svg {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+
+.icon-btn--sm {
+  width: var(--geist-form-small-height);
+  height: var(--geist-form-small-height);
+}
+
+.icon-btn--sm .icon-btn__icon,
+.icon-btn--sm svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.icon-btn--lg {
+  width: var(--geist-form-large-height);
+  height: var(--geist-form-large-height);
+}
+
+.icon-btn--lg .icon-btn__icon,
+.icon-btn--lg svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+.icon-btn--xl {
+  width: 56px;
+  height: 56px;
+}
+
+.icon-btn--xl .icon-btn__icon,
+.icon-btn--xl svg {
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+}
+
+/* Square variant (0px radius for industrial panels) */
+.icon-btn--square {
+  border-radius: var(--radius-none);
+}
+
+/* Pill variant */
+.icon-btn--pill {
+  border-radius: var(--radius-pill);
+}
+
+/* Icon inside button */
+.icon-btn__icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. ICON WITH TEXT (horizontal alignment)
+   ═══════════════════════════════════════════════════════ */
+
+.icon-text-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--geist-space-2);
+  color: var(--text-hi);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.icon-text-pair__icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+  color: var(--icon-color-muted);
+}
+
+.icon-text-pair__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Variants */
+.icon-text-pair--lg {
+  gap: var(--geist-space-3x);
+  font-size: 16px;
+}
+
+.icon-text-pair--lg .icon-text-pair__icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+.icon-text-pair--sm {
+  gap: var(--geist-space);
+  font-size: 13px;
+}
+
+.icon-text-pair--sm .icon-text-pair__icon {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+
+.icon-text-pair--mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+/* Icon position: right */
+.icon-text-pair--reverse {
+  flex-direction: row-reverse;
+}
+
+/* Vertical stack */
+.icon-text-pair--vertical {
+  flex-direction: column;
+  gap: var(--geist-space);
+  text-align: center;
+}
+
+.icon-text-pair--vertical .icon-text-pair__icon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+/* Status variants */
+.icon-text-pair--ok .icon-text-pair__icon {
+  color: var(--ds-ok);
+}
+
+.icon-text-pair--warn .icon-text-pair__icon {
+  color: var(--ds-warn);
+}
+
+.icon-text-pair--alarm .icon-text-pair__icon {
+  color: var(--ds-alarm);
+}
+
+.icon-text-pair--info .icon-text-pair__icon {
+  color: var(--ds-info);
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. ICON GROUP (toolbar / button group)
+   ═══════════════════════════════════════════════════════ */
+
+.icon-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  overflow: hidden;
+  background: var(--bg-100);
+}
+
+.icon-toolbar .icon-btn {
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid var(--line-2);
+}
+
+.icon-toolbar .icon-btn:last-child {
+  border-right: none;
+}
+
+.icon-toolbar .icon-btn:hover {
+  background: var(--bg-200);
+}
+
+/* Separator variant (with dividers) */
+.icon-toolbar--divided .icon-btn {
+  position: relative;
+}
+
+.icon-toolbar--divided .icon-btn:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background: var(--line-2);
+}
+
+.icon-toolbar--divided .icon-btn {
+  border-right: none;
+}
+
+/* Compact variant (no outer border) */
+.icon-toolbar--compact {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  gap: var(--geist-space);
+}
+
+.icon-toolbar--compact .icon-btn {
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. ICON BADGE (notification dot / count)
+   ═══════════════════════════════════════════════════════ */
+
+.icon-badge {
+  position: relative;
+  display: inline-flex;
+}
+
+.icon-badge__target {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--text-hi);
+}
+
+/* Notification dot */
+.icon-badge__dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--ds-alarm);
+  border: 2px solid var(--ds-background-100);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Numeric count */
+.icon-badge__count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--ds-alarm);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  border: 2px solid var(--ds-background-100);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge on larger icons */
+.icon-badge--lg .icon-badge__target {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+.icon-badge--lg .icon-badge__dot {
+  width: 10px;
+  height: 10px;
+  top: -3px;
+  right: -3px;
+}
+
+/* Status dot colors */
+.icon-badge--ok .icon-badge__dot,
+.icon-badge--ok .icon-badge__count {
+  background: var(--ds-ok);
+}
+
+.icon-badge--warn .icon-badge__dot,
+.icon-badge--warn .icon-badge__count {
+  background: var(--ds-warn);
+}
+
+.icon-badge--info .icon-badge__dot,
+.icon-badge--info .icon-badge__count {
+  background: var(--ds-info);
+}
+
+/* Pulse animation on dot */
+.icon-badge--pulse .icon-badge__dot {
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. ANIMATED ICON STATES
+   ═══════════════════════════════════════════════════════ */
+
+/* Spinning loader */
+.icon-loader {
+  animation: icon-spin 1s linear infinite;
+}
+
+.icon-loader--slow {
+  animation: icon-spin 2s linear infinite;
+}
+
+.icon-loader--fast {
+  animation: icon-spin 0.6s linear infinite;
+}
+
+/* Attention pulse */
+.icon-attention {
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+/* Bounce (subtle, for interactive hints) */
+.icon-hint {
+  animation: icon-bounce 2s ease-in-out infinite;
+}
+
+/* Data update flash */
+.icon-update {
+  animation: icon-update-flash 300ms ease-out;
+}
+
+/* Entry animation */
+.icon-enter {
+  animation: icon-enter 200ms var(--ease-out) forwards;
+}
+
+/* Exit animation */
+.icon-exit {
+  animation: icon-exit 150ms var(--ease-in) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. ICON IN SPECIFIC CONTEXTS
+   ═══════════════════════════════════════════════════════ */
+
+/* Icon inside panel header */
+.panel__icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--accent);
+  margin-right: var(--geist-space-2);
+  flex-shrink: 0;
+}
+
+/* Icon in metric card */
+.metric__icon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  color: var(--text-lo);
+  margin-bottom: var(--geist-space-2);
+}
+
+.metric__icon--ok {
+  color: var(--ds-ok);
+}
+
+.metric__icon--warn {
+  color: var(--ds-warn);
+}
+
+.metric__icon--alarm {
+  color: var(--ds-alarm);
+}
+
+/* Icon in alert / status row */
+.status-icon {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  flex-shrink: 0;
+}
+
+.status-icon--ok {
+  color: var(--ds-ok);
+}
+
+.status-icon--warn {
+  color: var(--ds-warn);
+}
+
+.status-icon--alarm {
+  color: var(--ds-alarm);
+}
+
+.status-icon--info {
+  color: var(--ds-info);
+}
+
+/* Icon in navigation */
+.nav-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--text-md);
+  transition: color 150ms linear;
+}
+
+.nav-icon:hover,
+.nav-icon--active {
+  color: var(--accent);
+}
+
+/* Icon in terminal / code context */
+.terminal-icon {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+  color: var(--text-lo);
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. UTILITY CLASSES
+   ═══════════════════════════════════════════════════════ */
+
+/* Color overrides */
+.icon-color-accent {
+  color: var(--accent) !important;
+}
+
+.icon-color-text {
+  color: var(--text-hi) !important;
+}
+
+.icon-color-muted {
+  color: var(--text-lo) !important;
+}
+
+/* Size overrides */
+.icon-size-inherit {
+  width: 1em;
+  height: 1em;
+}
+
+/* Block display (for standalone icon containers) */
+.icon-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--geist-form-height);
+  height: var(--geist-form-height);
+  background: var(--bg-100);
+  border: 1px solid var(--line-2);
+}
+
+/* ═══════════════════════════════════════════════════════
+   KEYFRAMES (component-specific)
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes icon-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes icon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes icon-update-flash {
+  0% { color: var(--accent); transform: scale(1.1); }
+  100% { color: inherit; transform: scale(1); }
+}
+
+@keyframes icon-enter {
+  from { opacity: 0; transform: scale(0.8) translateY(4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes icon-exit {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.8); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   DARK MODE
+   ═══════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .icon-btn {
+  border-color: var(--line-2);
+  color: var(--text-hi);
+}
+
+[data-theme="dark"] .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .icon-toolbar {
+  border-color: var(--line-2);
+  background: var(--bg-100);
+}
+
+[data-theme="dark"] .icon-toolbar .icon-btn {
+  border-right-color: var(--line-2);
+}
+
+[data-theme="dark"] .icon-toolbar .icon-btn:hover {
+  background: var(--bg-200);
+}
+
+[data-theme="dark"] .icon-badge__dot,
+[data-theme="dark"] .icon-badge__count {
+  border-color: var(--ds-background-100);
+}
+
+[data-theme="dark"] .icon-block {
+  background: var(--bg-100);
+  border-color: var(--line-2);
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-loader,
+  .icon-loader--slow,
+  .icon-loader--fast,
+  .icon-attention,
+  .icon-hint,
+  .icon-update,
+  .icon-enter,
+  .icon-exit {
+    animation: none;
+  }
+
+  .icon-update {
+    color: inherit;
+    transform: none;
+  }
+
+  .icon-enter,
+  .icon-exit {
+    opacity: 1;
+    transform: none;
+  }
+}

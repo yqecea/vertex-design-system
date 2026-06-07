@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════════════
+   GLASS / FROSTED GLASS — Overlay tokens
+   Optional enhancement layer, NOT base material
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Glass Background ── */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-hover: rgba(255, 255, 255, 0.06);
+  --glass-bg-active: rgba(255, 255, 255, 0.08);
+
+  /* ── Glass Border ── */
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* ── Glass Blur ── */
+  --glass-blur: blur(16px) saturate(180%);
+  --glass-blur-light: blur(8px) saturate(140%);
+  --glass-blur-heavy: blur(24px) saturate(200%);
+
+  /* ── Glass Shine ── */
+  --glass-shine: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glass-shine-strong: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  /* ── Glass Shine Overlays ── */
+  --glass-shine-top: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --glass-shine-diagonal: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* ── Glass Base Class ── */
+.glass {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+/* Specular shine overlay */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: var(--glass-shine-top);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hover state */
+.glass:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+}
+
+/* Light variant (for use over dark backgrounds) */
+.glass--light {
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-blur: blur(8px) saturate(140%);
+}
+
+/* Heavy variant (for navbars, modals) */
+.glass--heavy {
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-blur: blur(24px) saturate(200%);
+}
+
+/* Glass over grid (lighter blur so grid stays visible) */
+.glass--over-grid {
+  --glass-blur: blur(8px) saturate(140%);
+  --glass-bg: rgba(255, 255, 255, 0.02);
+}

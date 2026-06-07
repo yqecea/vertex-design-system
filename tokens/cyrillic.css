@@ -1,0 +1,137 @@
+/* ═══════════════════════════════════════════════════════
+   CYRILLIC FALLBACK STRATEGY
+   Geist has limited Cyrillic coverage.
+   This file provides a robust fallback chain.
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* 
+   * FALLBACK CHAIN for Cyrillic scripts:
+   * 
+   * 1. Geist Sans (Latin + limited Cyrillic)
+   * 2. Inter (full Cyrillic, close visual match to Geist)
+   * 3. system-ui (OS native, guaranteed Cyrillic)
+   * 4. generic sans-serif
+   * 
+   * For Mono:
+   * 1. Geist Mono (Latin + limited Cyrillic)
+   * 2. JetBrains Mono (full Cyrillic, similar character)
+   * 3. Roboto Mono (full Cyrillic, available everywhere)
+   * 4. system monospace
+   */
+
+  /* Structure Voice — with Cyrillic fallback */
+  --font-sans-cyrillic: 
+    "Geist",           /* Primary: real Geist Sans */
+    "Inter",           /* Fallback 1: full Cyrillic, similar geometry */
+    "Segoe UI",        /* Windows native */
+    -apple-system,     /* macOS/iOS native */
+    "Roboto",          /* Android native */
+    system-ui,         /* System font */
+    sans-serif;
+
+  /* Instrument Voice — with Cyrillic fallback */
+  --font-mono-cyrillic:
+    "Geist Mono",      /* Primary: real Geist Mono */
+    "JetBrains Mono",  /* Fallback 1: full Cyrillic, technical aesthetic */
+    "Roboto Mono",     /* Fallback 2: full Cyrillic, available everywhere */
+    "SFMono-Regular",  /* macOS native monospace */
+    "Liberation Mono", /* Linux native */
+    "Courier New",     /* Windows native */
+    monospace;
+
+  /* Pixel Display — no Cyrillic fallback needed (decorative only) */
+  --font-pixel-cyrillic:
+    "Geist Pixel Square",
+    "Geist Mono",      /* Falls back to mono for Cyrillic */
+    "JetBrains Mono",
+    monospace;
+}
+
+/* === ACTIVE FALLBACK === */
+/* 
+ * To enable Cyrillic fallback, set this attribute on <html>:
+ * <html data-cyrillic="true">
+ * 
+ * The design system will automatically switch to fallback fonts
+ * when Cyrillic characters are detected.
+ */
+
+[data-cyrillic="true"] {
+  --font-sans: var(--font-sans-cyrillic);
+  --font-mono: var(--font-mono-cyrillic);
+  --font-pixel: var(--font-pixel-cyrillic);
+}
+
+/* === AUTOMATIC DETECTION (optional) === */
+/* 
+ * If you want automatic Cyrillic detection without data attribute,
+ * use this JavaScript snippet:
+ * 
+ * const hasCyrillic = /[\u0400-\u04FF]/.test(document.body.textContent);
+ * if (hasCyrillic) document.documentElement.setAttribute('data-cyrillic', 'true');
+ */
+
+/* === VERIFYING COVERAGE === */
+/*
+ * Test these characters to verify Cyrillic support:
+ * 
+ * Russian:     Привет мир
+ * Ukrainian:   Привіт світ
+ * Bulgarian:   Здравей свят
+ * Serbian:     Здраво свете
+ * Kazakh:      Сәлем дүние
+ * 
+ * If Geist renders these correctly → primary font works
+ * If Inter renders them → fallback 1 active
+ * If system font renders them → fallback 2+ active
+ */
+
+/* === WEIGHT MAPPING === */
+/*
+ * Geist weight → Inter weight mapping:
+ * 
+ * Geist 100 (Thin)       → Inter 100
+ * Geist 200 (UltraLight) → Inter 200
+ * Geist 300 (Light)      → Inter 300
+ * Geist 400 (Regular)    → Inter 400
+ * Geist 500 (Medium)     → Inter 500
+ * Geist 600 (SemiBold)   → Inter 600
+ * Geist 700 (Bold)       → Inter 700
+ * Geist 800 (Black)      → Inter 800
+ * Geist 900 (UltraBlack) → Inter 900
+ * 
+ * Note: Geist Pixel has no variable weight — always 500
+ */
+
+/* === FONT LOADING STRATEGY === */
+/*
+ * Recommended loading order:
+ * 
+ * 1. Preload Geist (primary)
+ *    <link rel="preload" href="Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+ * 
+ * 2. Preload Inter (Cyrillic fallback)
+ *    <link rel="preload" href="Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+ * 
+ * 3. Load Geist first
+ *    @font-face { src: url('Geist-Variable.woff2'); font-family: 'Geist'; }
+ * 
+ * 4. Load Inter as fallback
+ *    @font-face { src: url('Inter-Variable.woff2'); font-family: 'Inter'; }
+ * 
+ * 5. System fonts load automatically
+ * 
+ * This ensures Geist loads first, but Cyrillic characters
+ * immediately fall back to Inter without flash.
+ */
+
+/* === PERFORMANCE NOTES === */
+/*
+ * - Inter adds ~150KB (variable) or ~30KB per weight (static)
+ * - JetBrains Mono adds ~120KB (variable) or ~25KB per weight
+ * - Use variable fonts for smaller payload
+ * - Subset to only needed weights if payload is critical
+ * - For critical path: preload only Regular (400) and Medium (500)
+ * - Load other weights asynchronously
+ */

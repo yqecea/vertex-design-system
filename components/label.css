@@ -1,0 +1,142 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Label
+   Form label
+   ═══════════════════════════════════════════════════════ */
+
+.geist-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--geist-space);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-sm--line-height);
+  color: var(--ds-gray-1000);
+  cursor: pointer;
+  margin-bottom: var(--geist-space);
+}
+
+.geist-label__required {
+  color: var(--ds-red-700);
+  font-weight: var(--font-weight-normal);
+}
+
+.geist-label__optional {
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  font-weight: var(--font-weight-normal);
+}
+
+.geist-label__hint {
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  font-weight: var(--font-weight-normal);
+  margin-left: auto;
+}
+
+/* Label sizes */
+.geist-label--sm {
+  font-size: var(--text-xs);
+  margin-bottom: var(--geist-space);
+}
+
+.geist-label--lg {
+  font-size: var(--text-base);
+  margin-bottom: var(--geist-space-2x);
+}
+
+/* Label states */
+.geist-label--disabled {
+  color: var(--ds-gray-500);
+  cursor: not-allowed;
+}
+
+.geist-label--error {
+  color: var(--ds-red-700);
+}
+
+.geist-label--error .geist-label__required {
+  color: var(--ds-red-800);
+}
+
+/* Label with input wrapper */
+.geist-label-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.geist-label-wrapper .geist-label {
+  margin-bottom: var(--geist-space);
+}
+
+/* Inline label */
+.geist-label--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--geist-space-2x);
+  margin-bottom: 0;
+}
+
+/* Checkbox / radio label variant */
+.geist-label--check {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-2x);
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.geist-label--check .geist-label__text {
+  font-weight: var(--font-weight-normal);
+}
+
+/* Description text below label */
+.geist-label__description {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-700);
+  line-height: var(--leading-normal);
+  margin-top: calc(-1 * var(--geist-space));
+  margin-bottom: var(--geist-space-2x);
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-label {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-label__required {
+  color: var(--ds-red-600);
+}
+
+[data-theme="dark"] .geist-label__optional {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .geist-label__hint {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .geist-label--disabled {
+  color: var(--ds-gray-500);
+}
+
+[data-theme="dark"] .geist-label--error {
+  color: var(--ds-red-600);
+}
+
+[data-theme="dark"] .geist-label--error .geist-label__required {
+  color: var(--ds-red-700);
+}
+
+[data-theme="dark"] .geist-label__description {
+  color: var(--ds-gray-700);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-label {
+    transition: none;
+  }
+}

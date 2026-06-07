@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════════════════════════
+   GEIST MOTION — Animation tokens
+   Real values from vercel.com/geist
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Durations ── */
+  --default-transition-duration: 0.15s;
+  --ds-motion-popover-duration: 0.2s;
+  --ds-motion-overlay-duration: 0.3s;
+
+  /* ── Timing Functions ── */
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+  --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+  --ds-motion-timing-swift: cubic-bezier(.175, .885, .32, 1.1);
+  --ds-motion-popover-timing: cubic-bezier(.175, .885, .32, 1.1);
+  --ds-motion-overlay-timing: cubic-bezier(.175, .885, .32, 1.1);
+
+  /* ── Scale ── */
+  --ds-motion-overlay-scale: 0.96;
+
+  /* ── Named Animations ── */
+  --animate-loading: loading 8s ease-in-out infinite;
+  --animate-loading-skeleton: loading-skeleton 1.5s ease-in-out infinite reverse;
+  --animate-blink: blink 1.4s infinite both;
+}
+
+/* ── Keyframes ── */
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes loading-skeleton {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes data-flash {
+  0% { color: var(--accent); }
+  100% { color: var(--text-hi); }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

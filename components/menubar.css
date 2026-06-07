@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Menubar
+   Horizontal menu bar with dropdown submenus
+   ═══════════════════════════════════════════════════════ */
+
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space);
+  padding: 0 var(--geist-space-2x);
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  height: 40px;
+  font-family: var(--font-sans);
+}
+
+.menubar-item {
+  position: relative;
+}
+
+.menubar-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space);
+  padding: var(--geist-space-2x) var(--geist-space-3x);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-1000);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.menubar-trigger:hover {
+  background: var(--ds-gray-100);
+}
+
+.menubar-trigger:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.menubar-trigger[aria-expanded="true"] {
+  background: var(--ds-gray-100);
+}
+
+.menubar-trigger[data-highlighted] {
+  background: var(--ds-gray-100);
+}
+
+/* Submenu */
+.menubar-submenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  box-shadow: var(--ds-shadow-xl);
+  padding: var(--geist-space) 0;
+  z-index: 1000;
+  animation: menubar-in var(--ds-motion-popover-duration) var(--ds-motion-popover-timing);
+}
+
+@keyframes menubar-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.menubar-submenu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-3x);
+  padding: var(--geist-space-2x) var(--geist-space-4x);
+  margin: 0 var(--geist-space);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ds-gray-1000);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.menubar-submenu-item:hover,
+.menubar-submenu-item[data-highlighted] {
+  background: var(--ds-gray-100);
+}
+
+.menubar-submenu-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--ds-focus-color);
+}
+
+.menubar-submenu-item[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.menubar-submenu-item__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--ds-gray-700);
+}
+
+.menubar-submenu-item__label {
+  flex: 1;
+}
+
+.menubar-submenu-item__shortcut {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+}
+
+.menubar-submenu-item__arrow {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  color: var(--ds-gray-600);
+  margin-left: auto;
+}
+
+.menubar-separator {
+  height: 1px;
+  background: var(--ds-gray-alpha-200);
+  margin: var(--geist-space) var(--geist-space-4x);
+}
+
+/* Dark mode */
+[data-theme="dark"] .menubar {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .menubar-trigger {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .menubar-trigger:hover {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .menubar-trigger[aria-expanded="true"] {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .menubar-submenu {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .menubar-submenu-item {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .menubar-submenu-item:hover,
+[data-theme="dark"] .menubar-submenu-item[data-highlighted] {
+  background: var(--ds-gray-100);
+}
+
+[data-theme="dark"] .menubar-submenu-item__icon {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .menubar-submenu-item__shortcut {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .menubar-separator {
+  background: var(--ds-gray-alpha-300);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .menubar-submenu {
+    animation: none;
+  }
+  .menubar-trigger,
+  .menubar-submenu-item {
+    transition: none;
+  }
+}

@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Radio
+   Single selection circle
+   ═══════════════════════════════════════════════════════ */
+
+.geist-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--geist-space-2x);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ds-gray-1000);
+  user-select: none;
+}
+
+.geist-radio__input {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--ds-gray-alpha-500);
+  border-radius: 50%;
+  background: var(--ds-background-100);
+  cursor: pointer;
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              background var(--default-transition-duration) var(--ease-in-out),
+              box-shadow var(--default-transition-duration) var(--ease-in-out);
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.geist-radio__input::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-background-100);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform var(--default-transition-duration) var(--ds-motion-timing-swift);
+}
+
+/* Checked state */
+.geist-radio__input:checked {
+  border-color: var(--ds-blue-700);
+  background: var(--ds-blue-700);
+}
+
+.geist-radio__input:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Focus state */
+.geist-radio__input:focus {
+  box-shadow: var(--ds-focus-ring);
+}
+
+/* Hover state */
+.geist-radio:hover .geist-radio__input:not(:checked):not(:disabled):not([aria-disabled="true"]):not([aria-invalid="true"]) {
+  border-color: var(--ds-gray-alpha-700);
+}
+
+.geist-radio:hover .geist-radio__input:checked:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--ds-blue-800);
+  border-color: var(--ds-blue-800);
+}
+
+/* Disabled state */
+.geist-radio__input:disabled,
+.geist-radio__input[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-200);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.geist-radio__input:disabled:checked,
+.geist-radio__input[aria-disabled="true"]:checked {
+  background: var(--ds-gray-400);
+  border-color: var(--ds-gray-400);
+}
+
+.geist-radio__input:disabled:checked::after,
+.geist-radio__input[aria-disabled="true"]:checked::after {
+  background: var(--ds-background-100);
+}
+
+.geist-radio:has(.geist-radio__input:disabled),
+.geist-radio:has(.geist-radio__input[aria-disabled="true"]) {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Error state */
+.geist-radio__input[aria-invalid="true"],
+.geist-radio__input[data-error="true"] {
+  border-color: var(--ds-red-700);
+}
+
+.geist-radio__input[aria-invalid="true"]:checked,
+.geist-radio__input[data-error="true"]:checked {
+  background: var(--ds-red-700);
+  border-color: var(--ds-red-700);
+}
+
+/* Sizes */
+.geist-radio--sm .geist-radio__input {
+  width: 14px;
+  height: 14px;
+}
+
+.geist-radio--sm .geist-radio__input::after {
+  width: 6px;
+  height: 6px;
+}
+
+.geist-radio--lg .geist-radio__input {
+  width: 20px;
+  height: 20px;
+}
+
+.geist-radio--lg .geist-radio__input::after {
+  width: 10px;
+  height: 10px;
+}
+
+.geist-radio--sm {
+  font-size: var(--text-xs);
+  gap: var(--geist-space);
+}
+
+.geist-radio--lg {
+  font-size: var(--text-base);
+  gap: var(--geist-space-3x);
+}
+
+/* Radio group */
+.geist-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space-2x);
+}
+
+.geist-radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--geist-space-4x);
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-radio {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .geist-radio__input {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .geist-radio__input:checked {
+  background: var(--ds-blue-600);
+  border-color: var(--ds-blue-600);
+}
+
+[data-theme="dark"] .geist-radio:hover .geist-radio__input:not(:checked):not(:disabled):not([aria-disabled="true"]):not([aria-invalid="true"]) {
+  border-color: var(--ds-gray-alpha-700);
+}
+
+[data-theme="dark"] .geist-radio:hover .geist-radio__input:checked:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--ds-blue-700);
+  border-color: var(--ds-blue-700);
+}
+
+[data-theme="dark"] .geist-radio__input:disabled,
+[data-theme="dark"] .geist-radio__input[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-radio__input:disabled:checked,
+[data-theme="dark"] .geist-radio__input[aria-disabled="true"]:checked {
+  background: var(--ds-gray-500);
+  border-color: var(--ds-gray-500);
+}
+
+[data-theme="dark"] .geist-radio__input:disabled:checked::after,
+[data-theme="dark"] .geist-radio__input[aria-disabled="true"]:checked::after {
+  background: var(--ds-background-100);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-radio__input,
+  .geist-radio__input::after {
+    transition: none;
+  }
+}

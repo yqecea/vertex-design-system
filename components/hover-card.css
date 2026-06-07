@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Hover Card
+   Rich tooltip that appears on hover with delay
+   ═══════════════════════════════════════════════════════ */
+
+.hover-card-trigger {
+  display: inline-flex;
+  cursor: pointer;
+  outline: none;
+  border-bottom: 1px dashed var(--ds-gray-alpha-500);
+  transition: border-color var(--default-transition-duration) var(--ease-in-out);
+}
+
+.hover-card-trigger:hover {
+  border-bottom-color: var(--ds-blue-700);
+}
+
+.hover-card-trigger:focus-visible {
+  border-bottom-style: solid;
+  border-bottom-color: var(--ds-focus-color);
+  box-shadow: var(--ds-focus-ring);
+}
+
+.hover-card {
+  position: absolute;
+  z-index: 1000;
+  width: 320px;
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  box-shadow: var(--ds-shadow-xl);
+  padding: var(--geist-space-4x);
+  font-family: var(--font-sans);
+  animation: hover-card-in var(--ds-motion-popover-duration) var(--ds-motion-popover-timing);
+  pointer-events: none;
+}
+
+.hover-card[data-state="open"] {
+  pointer-events: auto;
+}
+
+@keyframes hover-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hover-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-3x);
+  margin-bottom: var(--geist-space-3x);
+}
+
+.hover-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ds-gray-200);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.hover-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hover-card__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-1000);
+  margin: 0;
+}
+
+.hover-card__subtitle {
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  margin: 0;
+}
+
+.hover-card__body {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  color: var(--ds-gray-900);
+}
+
+.hover-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-3x);
+  margin-top: var(--geist-space-3x);
+  padding-top: var(--geist-space-3x);
+  border-top: 1px solid var(--ds-gray-alpha-200);
+}
+
+/* Arrow pointer */
+.hover-card__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  transform: rotate(45deg);
+}
+
+.hover-card__arrow--top {
+  top: -6px;
+  border-bottom: none;
+  border-right: none;
+}
+
+.hover-card__arrow--bottom {
+  bottom: -6px;
+  border-top: none;
+  border-left: none;
+}
+
+/* Dark mode */
+[data-theme="dark"] .hover-card-trigger {
+  border-bottom-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .hover-card-trigger:hover {
+  border-bottom-color: var(--ds-blue-500);
+}
+
+[data-theme="dark"] .hover-card {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .hover-card__title {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .hover-card__subtitle {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .hover-card__body {
+  color: var(--ds-gray-900);
+}
+
+[data-theme="dark"] .hover-card__footer {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .hover-card__avatar {
+  background: var(--ds-gray-200);
+}
+
+[data-theme="dark"] .hover-card__arrow {
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hover-card {
+    animation: none;
+  }
+  .hover-card-trigger {
+    transition: none;
+  }
+}

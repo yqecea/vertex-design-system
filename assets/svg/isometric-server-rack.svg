@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Isometric Server Rack — Signature Move D1 (variant)
+  Server rack with 4 labeled units and per-unit status dots.
+  EDIT unit labels and status colors.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 400" width="100%" aria-labelledby="rack-title">
+  <title id="rack-title">Isometric server rack</title>
+  <style>
+    .rk-frame  { fill: var(--bg-100, #181818); stroke: var(--line-2, #333); stroke-width: 1; }
+    .rk-frame-top { fill: var(--bg-200, #222); stroke: var(--line-2, #333); stroke-width: 1; }
+    .rk-frame-side { fill: var(--bg-100, #181818); stroke: var(--line-2, #333); stroke-width: 1; opacity: 0.85; }
+    .rk-unit   { fill: var(--bg-200, #222); stroke: var(--line-2, #333); stroke-width: 1; }
+    .rk-vent   { fill: var(--bg-000, #0B0D0F); }
+    .rk-dot-ok { fill: var(--ok, #46E37B); }
+    .rk-dot-wn { fill: var(--warn, #FFB000); }
+    .rk-label  { font-family: var(--font-mono, ui-monospace, monospace); font-size: 9px; letter-spacing: 0.04em; fill: var(--text-md, #9DA6AB); text-transform: uppercase; }
+    .rk-name   { font-family: var(--font-mono, ui-monospace, monospace); font-size: 10px; letter-spacing: 0.08em; fill: var(--text-md, #9DA6AB); text-transform: uppercase; }
+  </style>
+
+  <polygon class="rk-frame-top" points="60,40 220,40 280,80 120,80"/>
+  <polygon class="rk-frame-side" points="220,40 280,80 280,340 220,300"/>
+  <polygon class="rk-frame" points="60,40 220,40 220,300 60,300"/>
+
+  <g>
+    <rect class="rk-unit" x="70" y="50"  width="140" height="56"/>
+    <rect class="rk-vent" x="78" y="58"  width="50" height="6"/>
+    <rect class="rk-vent" x="78" y="68"  width="50" height="6"/>
+    <circle class="rk-dot-ok" cx="195" cy="64" r="3"/>
+    <text class="rk-name" x="140" y="98" text-anchor="middle">UNIT-01 · COMPUTE</text>
+
+    <rect class="rk-unit" x="70" y="110" width="140" height="56"/>
+    <rect class="rk-vent" x="78" y="118" width="50" height="6"/>
+    <rect class="rk-vent" x="78" y="128" width="50" height="6"/>
+    <circle class="rk-dot-ok" cx="195" cy="124" r="3"/>
+    <text class="rk-name" x="140" y="158" text-anchor="middle">UNIT-02 · STORAGE</text>
+
+    <rect class="rk-unit" x="70" y="170" width="140" height="56"/>
+    <rect class="rk-vent" x="78" y="178" width="50" height="6"/>
+    <rect class="rk-vent" x="78" y="188" width="50" height="6"/>
+    <circle class="rk-dot-wn" cx="195" cy="184" r="3"/>
+    <text class="rk-name" x="140" y="218" text-anchor="middle">UNIT-03 · NETWORK</text>
+
+    <rect class="rk-unit" x="70" y="230" width="140" height="56"/>
+    <rect class="rk-vent" x="78" y="238" width="50" height="6"/>
+    <rect class="rk-vent" x="78" y="248" width="50" height="6"/>
+    <circle class="rk-dot-ok" cx="195" cy="244" r="3"/>
+    <text class="rk-name" x="140" y="278" text-anchor="middle">UNIT-04 · EDGE</text>
+  </g>
+
+  <polygon class="rk-frame-top" points="60,300 220,300 280,340 120,340"/>
+
+  <text class="rk-label" x="20" y="170" transform="rotate(-90 20 170)">RACK A · ROW 03 · DATACENTER US-EAST-1</text>
+</svg>

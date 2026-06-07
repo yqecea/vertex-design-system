@@ -1,0 +1,47 @@
+/* ═══════════════════════════════════════════════════════
+   LAYOUT: SPLIT — Message column + live-evidence column
+   Left: language / Right: functional artifact
+   ═══════════════════════════════════════════════════════ */
+
+body {
+  background: var(--bg-000);
+  color: var(--text-md);
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-ui, system-ui, sans-serif);
+  line-height: 1.55;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1fr;
+  border-bottom: 1px solid var(--line-2);
+  min-height: 70vh;
+}
+
+.split-message {
+  padding: var(--geist-gap-double) var(--geist-gap-double);
+  border-right: 1px solid var(--line-2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--geist-space-8);
+}
+
+.split-evidence {
+  padding: var(--geist-gap-double);
+  background: var(--bg-100);
+  display: grid;
+  place-items: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .split-section {
+    grid-template-columns: 1fr;
+  }
+  .split-message {
+    border-right: none;
+    border-bottom: 1px solid var(--line-2);
+  }
+}

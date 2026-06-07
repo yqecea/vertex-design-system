@@ -1,0 +1,26 @@
+/* ═══════════════════════════════════════════════════════
+   GEIST SHAPE — Radius tokens
+   Real values from vercel.com/geist
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Radius Scale ── */
+  --geist-radius: 6px;
+  --geist-marketing-radius: 8px;
+  --radius-3xl: 1.5rem;
+
+  /* ── Industrial Adaptation ── */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+}
+
+/* ── Radius Rules ──
+   Structural elements (grid, sections): 0px
+   Interactive elements (buttons, inputs): 6px
+   Pills/badges: 999px
+   Cards/panels: 0px (sharp corners for industrial feel)
+   Modals/overlays: 8px
+*/

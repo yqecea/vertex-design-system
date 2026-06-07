@@ -1,0 +1,233 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Avatar
+   User representation
+   ═══════════════════════════════════════════════════════ */
+
+.geist-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-700);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  vertical-align: middle;
+}
+
+.geist-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.geist-avatar__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
+  line-height: 1;
+}
+
+/* Avatar sizes */
+.geist-avatar--xs {
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+}
+
+.geist-avatar--sm {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+
+.geist-avatar--md {
+  width: 32px;
+  height: 32px;
+  font-size: var(--text-xs);
+}
+
+.geist-avatar--lg {
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-sm);
+}
+
+.geist-avatar--xl {
+  width: 56px;
+  height: 56px;
+  font-size: var(--text-lg);
+}
+
+.geist-avatar--2xl {
+  width: 80px;
+  height: 80px;
+  font-size: var(--text-xl);
+}
+
+/* Avatar with border */
+.geist-avatar--border {
+  border: 2px solid var(--ds-background-100);
+  box-shadow: 0 0 0 1px var(--ds-gray-alpha-200);
+}
+
+/* Avatar group */
+.geist-avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.geist-avatar-group .geist-avatar {
+  margin-left: -8px;
+  border: 2px solid var(--ds-background-100);
+  transition: transform var(--default-transition-duration) var(--ds-motion-timing-swift),
+              margin var(--default-transition-duration) var(--ds-motion-timing-swift);
+}
+
+.geist-avatar-group .geist-avatar:first-child {
+  margin-left: 0;
+}
+
+.geist-avatar-group:hover .geist-avatar {
+  margin-left: 2px;
+}
+
+.geist-avatar-group:hover .geist-avatar:first-child {
+  margin-left: 0;
+}
+
+.geist-avatar-group .geist-avatar:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+/* Avatar group limit */
+.geist-avatar-group__more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -8px;
+  border: 2px solid var(--ds-background-100);
+  background: var(--ds-gray-200);
+  color: var(--ds-gray-800);
+  border-radius: 50%;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.geist-avatar-group__more--sm {
+  width: 24px;
+  height: 24px;
+  font-size: 9px;
+}
+
+.geist-avatar-group__more--md {
+  width: 32px;
+  height: 32px;
+  font-size: 10px;
+}
+
+.geist-avatar-group__more--lg {
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-xs);
+}
+
+/* Status indicator */
+.geist-avatar__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--ds-background-100);
+  background: var(--ds-gray-500);
+}
+
+.geist-avatar__status--online {
+  background: var(--ds-green-700);
+}
+
+.geist-avatar__status--away {
+  background: var(--ds-amber-700);
+}
+
+.geist-avatar__status--busy {
+  background: var(--ds-red-700);
+}
+
+.geist-avatar__status--offline {
+  background: var(--ds-gray-500);
+}
+
+/* Placeholder / skeleton avatar */
+.geist-avatar--placeholder {
+  background: var(--ds-gray-100);
+  animation: loading-skeleton 1.5s ease-in-out infinite reverse;
+}
+
+/* Dark mode */
+[data-theme="dark"] .geist-avatar {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .geist-avatar--border {
+  border-color: var(--ds-background-100);
+  box-shadow: 0 0 0 1px var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .geist-avatar-group .geist-avatar {
+  border-color: var(--ds-background-100);
+}
+
+[data-theme="dark"] .geist-avatar-group__more {
+  border-color: var(--ds-background-100);
+  background: var(--ds-gray-200);
+  color: var(--ds-gray-700);
+}
+
+[data-theme="dark"] .geist-avatar__status {
+  border-color: var(--ds-background-100);
+}
+
+[data-theme="dark"] .geist-avatar__status--online {
+  background: var(--ds-green-600);
+}
+
+[data-theme="dark"] .geist-avatar__status--away {
+  background: var(--ds-amber-600);
+}
+
+[data-theme="dark"] .geist-avatar__status--busy {
+  background: var(--ds-red-600);
+}
+
+[data-theme="dark"] .geist-avatar__status--offline {
+  background: var(--ds-gray-500);
+}
+
+[data-theme="dark"] .geist-avatar--placeholder {
+  background: var(--ds-gray-100);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .geist-avatar-group .geist-avatar {
+    transition: none;
+  }
+  
+  .geist-avatar--placeholder {
+    animation: none;
+  }
+}

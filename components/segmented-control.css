@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Segmented Control
+   iOS-style tab toggle with sliding indicator
+   ═══════════════════════════════════════════════════════ */
+
+.segmented-control {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 3px;
+  background: var(--ds-gray-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  font-family: var(--font-sans);
+}
+
+.segmented-control-item {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--geist-space-2x);
+  padding: var(--geist-space-2x) var(--geist-space-4x);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-800);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--geist-radius) - 2px);
+  cursor: pointer;
+  outline: none;
+  transition: color var(--default-transition-duration) var(--ease-in-out);
+  white-space: nowrap;
+}
+
+.segmented-control-item:hover {
+  color: var(--ds-gray-1000);
+}
+
+.segmented-control-item:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.segmented-control-item[aria-pressed="true"],
+.segmented-control-item[data-state="active"] {
+  color: var(--ds-gray-1000);
+}
+
+.segmented-control-item:disabled,
+.segmented-control-item[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.segmented-control-indicator {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  background: var(--ds-background-100);
+  border-radius: calc(var(--geist-radius) - 2px);
+  box-shadow: var(--ds-shadow-xs);
+  transition: left var(--default-transition-duration) var(--ease-in-out),
+              width var(--default-transition-duration) var(--ease-in-out);
+  z-index: 0;
+}
+
+.segmented-control-item__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Sizes */
+.segmented-control--sm {
+  padding: 2px;
+}
+
+.segmented-control--sm .segmented-control-item {
+  padding: var(--geist-space) var(--geist-space-3x);
+  font-size: var(--text-xs);
+}
+
+.segmented-control--sm .segmented-control-indicator {
+  top: 2px;
+  bottom: 2px;
+  border-radius: calc(var(--geist-radius) - 1px);
+}
+
+.segmented-control--lg {
+  padding: 4px;
+}
+
+.segmented-control--lg .segmented-control-item {
+  padding: var(--geist-space-3x) var(--geist-space-6x);
+  font-size: var(--text-base);
+}
+
+.segmented-control--lg .segmented-control-indicator {
+  top: 4px;
+  bottom: 4px;
+}
+
+/* Pill shape */
+.segmented-control--pill {
+  border-radius: var(--radius-pill);
+}
+
+.segmented-control--pill .segmented-control-item {
+  border-radius: var(--radius-pill);
+}
+
+.segmented-control--pill .segmented-control-indicator {
+  border-radius: var(--radius-pill);
+}
+
+/* Full width */
+.segmented-control--full {
+  display: flex;
+  width: 100%;
+}
+
+.segmented-control--full .segmented-control-item {
+  flex: 1;
+}
+
+/* Dark mode */
+[data-theme="dark"] .segmented-control {
+  background: var(--ds-gray-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .segmented-control-item {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .segmented-control-item:hover {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .segmented-control-item[aria-pressed="true"],
+[data-theme="dark"] .segmented-control-item[data-state="active"] {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .segmented-control-indicator {
+  background: var(--ds-background-100);
+  box-shadow: var(--ds-shadow-xs);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .segmented-control-item,
+  .segmented-control-indicator {
+    transition: none;
+  }
+}

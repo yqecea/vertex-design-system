@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Waveform Sparkline — Signature Move companion to Dt2
+  Small sparkline chart with peak labels and a 1-line summary.
+  EDIT the data path d="..." and peak label text.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" width="100%" aria-labelledby="spark-title">
+  <title id="spark-title">Request throughput sparkline</title>
+  <style>
+    .sp-grid  { stroke: var(--line, rgba(255,255,255,0.06)); stroke-width: 1; }
+    .sp-line  { stroke: var(--accent, #4AA8FF); stroke-width: 1.5; fill: none; }
+    .sp-area  { fill: var(--accent, #4AA8FF); opacity: 0.10; }
+    .sp-peak  { fill: var(--accent, #4AA8FF); }
+    .sp-label { font-family: var(--font-mono, ui-monospace, monospace); font-size: 10px; letter-spacing: 0.06em; fill: var(--text-md, #9DA6AB); text-transform: uppercase; }
+    .sp-value { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; fill: var(--text-hi, #E4E7E9); font-variant-numeric: tabular-nums; }
+  </style>
+
+  <text class="sp-label" x="8" y="14">REQ / SEC</text>
+  <text class="sp-value" x="312" y="14" text-anchor="end">4.2k peak</text>
+
+  <line class="sp-grid" x1="0" y1="40" x2="320" y2="40"/>
+  <line class="sp-grid" x1="0" y1="64" x2="320" y2="64"/>
+
+  <path class="sp-area" d="M 0 70 L 16 60 L 32 64 L 48 50 L 64 55 L 80 42 L 96 48 L 112 35 L 128 38 L 144 28 L 160 32 L 176 20 L 192 24 L 208 30 L 224 22 L 240 35 L 256 28 L 272 40 L 288 32 L 304 45 L 320 38 L 320 84 L 0 84 Z"/>
+  <path class="sp-line" d="M 0 70 L 16 60 L 32 64 L 48 50 L 64 55 L 80 42 L 96 48 L 112 35 L 128 38 L 144 28 L 160 32 L 176 20 L 192 24 L 208 30 L 224 22 L 240 35 L 256 28 L 272 40 L 288 32 L 304 45 L 320 38"/>
+
+  <circle class="sp-peak" cx="176" cy="20" r="2.5"/>
+
+  <text class="sp-label" x="8" y="93">-24h</text>
+  <text class="sp-label" x="160" y="93" text-anchor="middle">-12h</text>
+  <text class="sp-label" x="312" y="93" text-anchor="end">now</text>
+</svg>

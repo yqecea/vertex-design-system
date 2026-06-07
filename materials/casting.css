@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════
+   CASTING — Foundry / Forge
+   Hardware, manufacturing, energy, robotics
+   Mapped to real Geist tokens
+   ═══════════════════════════════════════════════════════ */
+
+[data-material="casting"] {
+  /* ── Surface Elevation ── */
+  --bg-000: var(--ds-background-100, #0a0a0a);
+  --bg-100: #202225;
+  --bg-200: #2a2c30;
+  --bg-300: #35373c;
+
+  /* ── Text Hierarchy ── */
+  --text-hi: #e6e4df;
+  --text-md: #8c8a85;
+  --text-lo: #5c5a55;
+
+  /* ── Border System ── */
+  --line: rgba(255, 255, 255, 0.08);
+  --line-2: rgba(255, 255, 255, 0.15);
+
+  /* ── Accent ── */
+  --accent: var(--ds-red-700, #e5484d);
+  --accent-hover: #ff6166;
+
+  /* ── Semantic ── */
+  --ok: var(--ds-green-700, #45a557);
+  --warn: var(--ds-amber-700, #ffb224);
+  --alarm: var(--ds-red-700, #e5484d);
+
+  /* ── Typography ── */
+  --font-display: var(--font-pixel-square, var(--font-sans));
+  --font-ui: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ── Surface Texture ── */
+  --texture-primary:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 11px,
+      rgba(229, 72, 77, 0.03) 11px,
+      rgba(229, 72, 77, 0.03) 12px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 11px,
+      rgba(229, 72, 77, 0.03) 11px,
+      rgba(229, 72, 77, 0.03) 12px
+    );
+}

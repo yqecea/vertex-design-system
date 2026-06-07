@@ -1,0 +1,128 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: OTP Input
+   One-time password segmented input
+   ═══════════════════════════════════════════════════════ */
+
+.otp-input {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-2x);
+  font-family: var(--font-mono);
+}
+
+.otp-input__field {
+  width: 48px;
+  height: 56px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  outline: none;
+  caret-color: var(--ds-blue-700);
+  transition: border-color var(--default-transition-duration) var(--ease-in-out),
+              box-shadow var(--default-transition-duration) var(--ease-in-out);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.otp-input__field::placeholder {
+  color: var(--ds-gray-400);
+}
+
+.otp-input__field:focus {
+  border-color: var(--ds-focus-color);
+  box-shadow: var(--ds-focus-ring);
+}
+
+.otp-input__field:hover:not(:focus):not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--ds-gray-alpha-500);
+}
+
+.otp-input__field:disabled,
+.otp-input__field[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-500);
+  border-color: var(--ds-gray-alpha-100);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.otp-input__field[aria-invalid="true"] {
+  border-color: var(--ds-red-700);
+  animation: otp-shake 0.3s ease-in-out;
+}
+
+.otp-input__field[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 2px var(--ds-background-100), 0 0 0 4px var(--ds-red-700);
+}
+
+@keyframes otp-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Separator */
+.otp-input__separator {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  color: var(--ds-gray-600);
+  user-select: none;
+}
+
+/* Sizes */
+.otp-input--sm .otp-input__field {
+  width: 36px;
+  height: 44px;
+  font-size: var(--text-lg);
+}
+
+.otp-input--lg .otp-input__field {
+  width: 56px;
+  height: 64px;
+  font-size: var(--text-xl);
+}
+
+/* Masked variant */
+.otp-input--masked .otp-input__field {
+  -webkit-text-security: disc;
+  text-security: disc;
+}
+
+/* Dark mode */
+[data-theme="dark"] .otp-input__field {
+  color: var(--ds-gray-1000);
+  background: var(--ds-background-100);
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .otp-input__field::placeholder {
+  color: var(--ds-gray-400);
+}
+
+[data-theme="dark"] .otp-input__field:hover:not(:focus):not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--ds-gray-alpha-500);
+}
+
+[data-theme="dark"] .otp-input__field:disabled,
+[data-theme="dark"] .otp-input__field[aria-disabled="true"] {
+  background: var(--ds-gray-100);
+  color: var(--ds-gray-500);
+  border-color: var(--ds-gray-alpha-200);
+}
+
+[data-theme="dark"] .otp-input__separator {
+  color: var(--ds-gray-600);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .otp-input__field {
+    transition: none;
+    animation: none !important;
+  }
+}

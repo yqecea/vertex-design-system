@@ -1,0 +1,142 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Form
+   Form layout with field grouping, labels, and validation
+   ═══════════════════════════════════════════════════════ */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space-6x);
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--geist-space-2x);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--geist-space-6x);
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-1000);
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space);
+}
+
+.form-label__required {
+  color: var(--ds-red-700);
+}
+
+.form-hint {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--ds-gray-600);
+  line-height: var(--text-xs--line-height);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--ds-red-700);
+  line-height: var(--text-xs--line-height);
+}
+
+.form-error__icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+/* Fieldset */
+.form-fieldset {
+  border: 1px solid var(--ds-gray-alpha-200);
+  border-radius: var(--geist-radius);
+  padding: var(--geist-space-6x);
+  margin: 0;
+}
+
+.form-fieldset__legend {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--ds-gray-1000);
+  padding: 0 var(--geist-space-2x);
+}
+
+.form-fieldset:disabled,
+.form-fieldset[aria-disabled="true"] {
+  opacity: 0.6;
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-3x);
+  padding-top: var(--geist-space-4x);
+  border-top: 1px solid var(--ds-gray-alpha-200);
+}
+
+.form-actions--right {
+  justify-content: flex-end;
+}
+
+.form-actions--center {
+  justify-content: center;
+}
+
+/* Input states within form */
+.form-group:has(.form-error) .geist-input,
+.form-group:has([aria-invalid="true"]) .geist-input {
+  border-color: var(--ds-red-700);
+}
+
+.form-group:has(.form-error) .geist-input:focus,
+.form-group:has([aria-invalid="true"]) .geist-input:focus {
+  box-shadow: 0 0 0 2px var(--ds-background-100), 0 0 0 4px var(--ds-red-700);
+}
+
+/* Dark mode */
+[data-theme="dark"] .form-label {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .form-hint {
+  color: var(--ds-gray-600);
+}
+
+[data-theme="dark"] .form-error {
+  color: var(--ds-red-500);
+}
+
+[data-theme="dark"] .form-fieldset {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+[data-theme="dark"] .form-fieldset__legend {
+  color: var(--ds-gray-1000);
+}
+
+[data-theme="dark"] .form-actions {
+  border-color: var(--ds-gray-alpha-300);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .form-group:has(.form-error) .geist-input,
+  .form-group:has([aria-invalid="true"]) .geist-input {
+    transition: none;
+  }
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Terminal Window Frame — Signature Move (frame for Dt3 / C1)
+  A clean terminal window chrome with sample content.
+  EDIT the title bar text and command/output text to match the real product.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="100%" aria-labelledby="term-title">
+  <title id="term-title">Terminal window frame</title>
+  <style>
+    .tm-frame  { fill: var(--bg-100, #121619); stroke: var(--line-2, rgba(255,255,255,0.13)); stroke-width: 1; }
+    .tm-titleb { fill: var(--bg-200, #1A2024); stroke: var(--line-2, rgba(255,255,255,0.13)); stroke-width: 1; }
+    .tm-dot    { fill: var(--text-lo, #6B7378); }
+    .tm-title  { font-family: var(--font-mono, ui-monospace, monospace); font-size: 11px; letter-spacing: 0.06em; fill: var(--text-md, #9DA6AB); }
+    .tm-prompt { font-family: var(--font-mono, ui-monospace, monospace); font-size: 13px; fill: var(--text-md, #9DA6AB); }
+    .tm-cmd    { font-family: var(--font-mono, ui-monospace, monospace); font-size: 13px; fill: var(--accent, #4AA8FF); }
+    .tm-out    { font-family: var(--font-mono, ui-monospace, monospace); font-size: 13px; fill: var(--text-hi, #E4E7E9); }
+    .tm-dim    { font-family: var(--font-mono, ui-monospace, monospace); font-size: 13px; fill: var(--text-lo, #6B7378); }
+    .tm-ok     { font-family: var(--font-mono, ui-monospace, monospace); font-size: 13px; fill: var(--ok, #3DF07A); }
+  </style>
+
+  <rect class="tm-frame" x="0.5" y="0.5" width="639" height="359"/>
+  <rect class="tm-titleb" x="0.5" y="0.5" width="639" height="32"/>
+  <circle class="tm-dot" cx="18" cy="16" r="4"/>
+  <circle class="tm-dot" cx="34" cy="16" r="4"/>
+  <circle class="tm-dot" cx="50" cy="16" r="4"/>
+  <text class="tm-title" x="320" y="20" text-anchor="middle">forge@console:~/ops</text>
+
+  <text x="16" y="60">
+    <tspan class="tm-prompt">$</tspan>
+    <tspan class="tm-cmd" dx="6">forge deploy --env=prod --region=us-east-1</tspan>
+  </text>
+  <text class="tm-dim" x="16" y="84">→ build  v4.1.2-rc1   ok   2.1s</text>
+  <text class="tm-dim" x="16" y="104">→ test   324 pass    ok   8.4s</text>
+  <text class="tm-dim" x="16" y="124">→ push   3 images    ok   12.7s</text>
+  <text x="16" y="148">
+    <tspan class="tm-dim">→ rollout</tspan>
+    <tspan class="tm-out" dx="2">us-east-1 ✓ us-west-2 ✓ eu-west-1 ✓</tspan>
+  </text>
+  <text class="tm-ok"  x="16" y="172">✓ deployed in 47.3s   (latency p99: 12ms)</text>
+
+  <text x="16" y="208">
+    <tspan class="tm-prompt">$</tspan>
+    <tspan class="tm-cmd" dx="6">forge status</tspan>
+  </text>
+  <text class="tm-out" x="16" y="232">all systems nominal</text>
+  <text class="tm-dim" x="16" y="252">build   v4.1.2-rc1</text>
+  <text class="tm-dim" x="16" y="272">uptime  847d 14h 22m</text>
+  <text class="tm-dim" x="16" y="292">region  us-east-1</text>
+</svg>

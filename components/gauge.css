@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════════════
+   COMPONENT: Gauge
+   Circular and linear progress indicators
+   ═══════════════════════════════════════════════════════ */
+
+.gauge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--geist-space-2);
+}
+
+.gauge__svg {
+  transform: rotate(-90deg);
+}
+
+.gauge__track {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 4;
+}
+
+.gauge__fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 300ms ease-out;
+}
+
+.gauge__value {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-hi);
+  font-variant-numeric: tabular-nums;
+}
+
+.gauge__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+}
+
+/* Linear variant */
+.gauge--linear {
+  width: 100%;
+}
+
+.gauge--linear .gauge__track,
+.gauge--linear .gauge__fill {
+  stroke-width: 2;
+}
+
+/* Size variants */
+.gauge--sm { --gauge-size: 48px; }
+.gauge--md { --gauge-size: 64px; }
+.gauge--lg { --gauge-size: 96px; }
+
+.gauge--sm .gauge__svg { width: 48px; height: 48px; }
+.gauge--md .gauge__svg { width: 64px; height: 64px; }
+.gauge--lg .gauge__svg { width: 96px; height: 96px; }
+
+/* Color variants */
+.gauge--ok    .gauge__fill { stroke: var(--ds-green-700); }
+.gauge--warn  .gauge__fill { stroke: var(--ds-amber-700); }
+.gauge--alarm .gauge__fill { stroke: var(--ds-red-700); }
+
+[data-theme="dark"] .gauge--ok    .gauge__fill { stroke: var(--ds-green-700); }
+[data-theme="dark"] .gauge--warn  .gauge__fill { stroke: var(--ds-amber-700); }
+[data-theme="dark"] .gauge--alarm .gauge__fill { stroke: var(--ds-red-700); }
