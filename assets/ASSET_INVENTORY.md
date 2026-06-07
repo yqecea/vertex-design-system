@@ -1,11 +1,20 @@
-# PPLX Wallpapers I — Asset Inventory
+# Vertex Industrial — Asset Inventory
 
 ## Overview
-- **Collection:** PPLX Wallpapers I (Midjourney-style AI-generated wallpapers)
+- **Total Collections:** 3
+- **Total Files:** 509
+- **Total Size:** ~526 MB
+- **Last Updated:** 2026-06-07
+
+---
+
+## Collection 1: PPLX Wallpapers I
+
 - **Source:** /home/yqecea/Pictures/pplx-assets/
 - **Desktop:** 33 wallpapers (16:9)
 - **Mobile:** 39 wallpapers (9:16)
 - **Total:** 72 wallpapers
+- **Formats:** PNG, JPEG, WebP
 
 ---
 
@@ -176,4 +185,81 @@
 
 ---
 
-*Inventory compiled from /home/yqecea/Pictures/pplx-assets/PPLX%20Wallpapers%20I/*
+## Collection 2: Brand Design Assets
+
+- **Source:** /home/yqecea/Pictures/brand_design/
+- **Total Folders:** 40
+- **Total Files:** 359 (200 originals + 159 WebP)
+- **Total Size:** ~197 MB
+- **Formats:** PNG, JPEG, WebP
+
+### Brand Folders
+
+| Brand | Files | Description |
+|---|---|---|
+| active | 11 | Active brand visuals |
+| aerial-lab | 8 | Aerial laboratory designs |
+| atlas | 3 | Atlas brand system |
+| aura | 1 | Aura visual identity |
+| black-perfect | 17 | Black Perfect brand |
+| blockiva | 5 | Blockiva crypto/fintech |
+| brass hands | 19 | Brass Hands industrial |
+| brs | 9 | BRS brand system |
+| cadrian | 5 | Cadrian design |
+| cathedral | 6 | Cathedral architecture |
+| cavix | 2 | Cavix technology |
+| colonial | 6 | Colonial heritage |
+| def-IN | 15 | Def-in industrial |
+| droid | 15 | Droid robotics |
+| echo | 9 | Echo brand |
+| forra | 6 | Forra design |
+| fugitive | 2 | Fugitive brand |
+| huds | 14 | HUDs interfaces |
+| isc | 2 | ISC industrial |
+| klub | 5 | Klub brand |
+| mizan | 19 | Mizan full system |
+| museum | 2 | Museum collection |
+| N | 9 | N brand identity |
+| noamix | 8 | Noamix design |
+| op-1 | 13 | OP-1 synth brand |
+| optimal | 22 | Optimal systems |
+| overgrid | 2 | Overgrid technology |
+| produx | 8 | Producx brand |
+| quadwave | 2 | Quadwave audio |
+| R | 8 | R brand system |
+| radian | 1 | Radian energy |
+| record | 9 | Record label |
+| robotics | 6 | Robotics industrial |
+| starstory | 7 | Starstory space |
+| synthetic | 8 | Synthetic AI |
+| synthetic-v2 | 8 | Synthetic v2 |
+| t-100 | 10 | T-100 industrial |
+| technica | 5 | Technica engineering |
+| text | 12 | Text brand |
+| trasnformative | 7 | Transformative design |
+| UDC | 8 | UDC urban |
+| vent | 6 | Vent industrial |
+
+### File Types
+- **PNGs:** Interface mockups, logos, UI components
+- **JPEGs:** Photography, product shots, brand imagery
+- **WebP:** Optimized versions for production
+
+### Usage
+- Hero backgrounds for industrial/tech landing pages
+- Component examples in showcase
+- Brand identity references
+- Texture sources for materials
+
+---
+
+## Collection 3: SVG Assets
+
+- **Location:** `assets/svg/`
+- **Total Files:** 16
+- **Types:** Industrial design elements, wireframes, patterns
+- **Examples:** Gauge arcs, PCB traces, isometric racks, halftone dither, waveform sparklines
+
+---
+
+*Inventory compiled from /home/yqecea/Pictures/pplx-assets/PPLX%20Wallpapers%20I/ and /home/yqecea/Pictures/brand_design/*
