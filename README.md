@@ -8,6 +8,7 @@ vertex-industrial-geist/
 ├── DESIGN_SYSTEM.md             # Comprehensive design system reference
 ├── SKILL.md                     # Integration skill for agents
 ├── preview.html                 # Live preview of all components
+├── showcase.html                # Interactive design system showcase
 ├── tokens/
 │   ├── colors.css              # Geist color tokens (light + dark)
 │   ├── typography.css          # Geist Sans/Mono/Pixel stacks
