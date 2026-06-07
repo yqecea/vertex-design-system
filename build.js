@@ -14,40 +14,40 @@ const isMinify = process.argv.includes('--minify');
 // Build order: tokens → materials → layouts → components
 const files = [
   // Tokens
-  'tokens/reset.css',
-  'tokens/colors.css',
-  'tokens/typography.css',
-  'tokens/spacing.css',
-  'tokens/motion.css',
-  'tokens/shape.css',
-  'tokens/glass.css',
-  'tokens/glass-advanced.css',
-  'tokens/liquid-glass.css',
-  'tokens/glass-performance.css',
-  'tokens/icons.css',
-  'tokens/cyrillic.css',
-  'tokens/z-index.css',
+  'src/tokens/reset.css',
+  'src/tokens/colors.css',
+  'src/tokens/typography.css',
+  'src/tokens/spacing.css',
+  'src/tokens/motion.css',
+  'src/tokens/shape.css',
+  'src/tokens/glass.css',
+  'src/tokens/glass-advanced.css',
+  'src/tokens/liquid-glass.css',
+  'src/tokens/glass-performance.css',
+  'src/tokens/icons.css',
+  'src/tokens/cyrillic.css',
+  'src/tokens/z-index.css',
   // Materials
-  'materials/machining.css',
-  'materials/plating.css',
-  'materials/welding.css',
-  'materials/casting.css',
-  'materials/calibrating.css',
-  'materials/printing.css',
+  'src/materials/machining.css',
+  'src/materials/plating.css',
+  'src/materials/welding.css',
+  'src/materials/casting.css',
+  'src/materials/calibrating.css',
+  'src/materials/printing.css',
   // Layouts
-  'layouts/boxed.css',
-  'layouts/full-bleed.css',
-  'layouts/split.css',
-  'layouts/document.css',
+  'src/layouts/boxed.css',
+  'src/layouts/full-bleed.css',
+  'src/layouts/split.css',
+  'src/layouts/document.css',
 ];
 
-// Components — read all .css files from components/ directory
-const componentsDir = path.join(BASE, 'components');
+// Components — read all .css files from src/components/ directory
+const componentsDir = path.join(BASE, 'src/components');
 const componentFiles = fs.readdirSync(componentsDir)
   .filter(f => f.endsWith('.css'))
   .sort();
 
-const allFiles = [...files, ...componentFiles.map(f => `components/${f}`)];
+const allFiles = [...files, ...componentFiles.map(f => `src/components/${f}`)];
 
 // Build
 let output = '/* Vertex Industrial Design System v1.0.0 | Built CSS */\n';

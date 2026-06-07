@@ -1,7 +1,7 @@
 /* Vertex Industrial Design System v1.0.0 | Built CSS */
 /* Files: 92 */
 
-/* === tokens/reset.css === */
+/* === src/tokens/reset.css === */
 /* ═══════════════════════════════════════════════════════
    RESET — Minimal, design-system-aware reset
    Preserves Geist typography and spacing
@@ -64,7 +64,7 @@ body {
 }
 
 
-/* === tokens/colors.css === */
+/* === src/tokens/colors.css === */
 /* ═══════════════════════════════════════════════════════
    GEIST COLOR TOKENS — Real values from vercel.com/geist
    Light + Dark themes, 10 color scales each
@@ -252,7 +252,7 @@ body {
   --ds-overlay-backdrop-color: rgba(0,0,0,0.8);
 }
 
-/* === tokens/typography.css === */
+/* === src/tokens/typography.css === */
 /* ═══════════════════════════════════════════════════════
    GEIST TYPOGRAPHY — Geist Sans / Mono / Pixel
    Real values from vercel.com/geist/font
@@ -330,7 +330,7 @@ body {
   line-height: var(--leading-normal);
 }
 
-/* === tokens/spacing.css === */
+/* === src/tokens/spacing.css === */
 /* ═══════════════════════════════════════════════════════
    GEIST SPACING — 4px base scale
    Real values from vercel.com/geist
@@ -391,7 +391,7 @@ body {
   --breakpoint-xl: 1280px;
 }
 
-/* === tokens/motion.css === */
+/* === src/tokens/motion.css === */
 /* ═══════════════════════════════════════════════════════
    GEIST MOTION — Animation tokens
    Real values from vercel.com/geist
@@ -456,7 +456,7 @@ body {
   }
 }
 
-/* === tokens/shape.css === */
+/* === src/tokens/shape.css === */
 /* ═══════════════════════════════════════════════════════
    GEIST SHAPE — Radius tokens
    Real values from vercel.com/geist
@@ -484,7 +484,7 @@ body {
    Modals/overlays: 8px
 */
 
-/* === tokens/glass.css === */
+/* === src/tokens/glass.css === */
 /* ═══════════════════════════════════════════════════════
    GLASS / FROSTED GLASS — Overlay tokens
    Optional enhancement layer, NOT base material
@@ -559,7 +559,7 @@ body {
   --glass-bg: rgba(255, 255, 255, 0.02);
 }
 
-/* === tokens/glass-advanced.css === */
+/* === src/tokens/glass-advanced.css === */
 /* ═══════════════════════════════════════════════════════════════════════════════
    GLASS ADVANCED — Layered glass + glow system
    Industrial Geist extension for vertex-industrial-geist
@@ -1174,7 +1174,7 @@ body {
 }
 
 
-/* === tokens/liquid-glass.css === */
+/* === src/tokens/liquid-glass.css === */
 /* ═══════════════════════════════════════════════════════════════════════════════
    LIQUID GLASS — Apple-inspired depth system
    Based on research: base diffusion + tint/fill + edge definition + 
@@ -1697,7 +1697,7 @@ Then use: filter: url(#liquid-refraction);
 }
 
 
-/* === tokens/glass-performance.css === */
+/* === src/tokens/glass-performance.css === */
 /* ═══════════════════════════════════════════════════════════════════════════════
    GLASS PERFORMANCE — Mobile Optimization & Performance Budget Enforcement
    ═══════════════════════════════════════════════════════════════════════════════ */
@@ -2370,7 +2370,7 @@ Then use: filter: url(#liquid-refraction);
  */
 
 
-/* === tokens/icons.css === */
+/* === src/tokens/icons.css === */
 /* ═══════════════════════════════════════════════════════
    GEIST ICON TOKENS — Size, stroke, and animation utilities
    Industrial precision for SVG iconography
@@ -2787,7 +2787,7 @@ Then use: filter: url(#liquid-refraction);
 }
 
 
-/* === tokens/cyrillic.css === */
+/* === src/tokens/cyrillic.css === */
 /* ═══════════════════════════════════════════════════════
    CYRILLIC FALLBACK STRATEGY
    Geist has limited Cyrillic coverage.
@@ -2926,7 +2926,7 @@ Then use: filter: url(#liquid-refraction);
  * - Load other weights asynchronously
  */
 
-/* === tokens/z-index.css === */
+/* === src/tokens/z-index.css === */
 /* ═══════════════════════════════════════════════════════
    Z-INDEX SCALE — Unified layering system
    Prevents z-index chaos across components
@@ -2945,7 +2945,7 @@ Then use: filter: url(#liquid-refraction);
 }
 
 
-/* === materials/machining.css === */
+/* === src/materials/machining.css === */
 /* ═══════════════════════════════════════════════════════
    MACHINING — Default Material
    CNC, Lathe, Precision — Developer tools, AI/ML, infra
@@ -3000,7 +3000,7 @@ Then use: filter: url(#liquid-refraction);
     );
 }
 
-/* === materials/plating.css === */
+/* === src/materials/plating.css === */
 /* ═══════════════════════════════════════════════════════
    PLATING — PCB Routing Material
    Data platforms, API infrastructure, integration tools
@@ -3056,7 +3056,7 @@ Then use: filter: url(#liquid-refraction);
     );
 }
 
-/* === materials/welding.css === */
+/* === src/materials/welding.css === */
 /* ═══════════════════════════════════════════════════════
    WELDING — Steel Frame Assembly
    Open-source tools, platforms, frameworks
@@ -3111,7 +3111,7 @@ Then use: filter: url(#liquid-refraction);
     );
 }
 
-/* === materials/casting.css === */
+/* === src/materials/casting.css === */
 /* ═══════════════════════════════════════════════════════
    CASTING — Foundry / Forge
    Hardware, manufacturing, energy, robotics
@@ -3166,7 +3166,7 @@ Then use: filter: url(#liquid-refraction);
     );
 }
 
-/* === materials/calibrating.css === */
+/* === src/materials/calibrating.css === */
 /* ═══════════════════════════════════════════════════════
    CALIBRATING — Mission Control
    Monitoring, trading terminals, real-time ops
@@ -3224,7 +3224,7 @@ Then use: filter: url(#liquid-refraction);
     );
 }
 
-/* === materials/printing.css === */
+/* === src/materials/printing.css === */
 /* ═══════════════════════════════════════════════════════
    PRINTING — Documentation / Research (Light Mode)
    Research, B2B premium, legal, finance, docs
@@ -3279,7 +3279,7 @@ Then use: filter: url(#liquid-refraction);
     );
 }
 
-/* === layouts/boxed.css === */
+/* === src/layouts/boxed.css === */
 /* ═══════════════════════════════════════════════════════
    LAYOUT: BOXED — Contained-instrument chassis
    Default layout for Vertex Industrial
@@ -3384,7 +3384,7 @@ body {
   .chassis-section { padding: var(--geist-space-8) var(--geist-space-4); }
 }
 
-/* === layouts/full-bleed.css === */
+/* === src/layouts/full-bleed.css === */
 /* ═══════════════════════════════════════════════════════
    LAYOUT: FULL-BLEED — Edge-to-edge infrastructure
    Content reaches every edge of viewport
@@ -3420,7 +3420,7 @@ body {
   padding: 0 var(--geist-gap);
 }
 
-/* === layouts/split.css === */
+/* === src/layouts/split.css === */
 /* ═══════════════════════════════════════════════════════
    LAYOUT: SPLIT — Message column + live-evidence column
    Left: language / Right: functional artifact
@@ -3469,7 +3469,7 @@ body {
   }
 }
 
-/* === layouts/document.css === */
+/* === src/layouts/document.css === */
 /* ═══════════════════════════════════════════════════════
    LAYOUT: DOCUMENT — Print-grid composition
    Light mode, wide margins, registration marks
@@ -3552,7 +3552,7 @@ body::after {
   margin-top: var(--geist-space-4);
 }
 
-/* === components/accordion.css === */
+/* === src/components/accordion.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Accordion
    Expandable sections with trigger and content panels
@@ -3702,7 +3702,7 @@ body::after {
 }
 
 
-/* === components/alert.css === */
+/* === src/components/alert.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Alert
    Warning/error/info/success messages with icon + dismiss
@@ -3836,7 +3836,7 @@ body::after {
 }
 
 
-/* === components/autocomplete.css === */
+/* === src/components/autocomplete.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Autocomplete
    Search input with dropdown suggestions
@@ -4018,7 +4018,7 @@ body::after {
 }
 
 
-/* === components/avatar.css === */
+/* === src/components/avatar.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Avatar
    User representation
@@ -4254,7 +4254,7 @@ body::after {
 }
 
 
-/* === components/badge.css === */
+/* === src/components/badge.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Badge
    Status indicator with variants
@@ -4535,7 +4535,7 @@ body::after {
 }
 
 
-/* === components/banner.css === */
+/* === src/components/banner.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Banner
    Top/bottom notification strip
@@ -4606,7 +4606,7 @@ body::after {
 [data-theme="dark"] .banner--ok    { background: rgba(69, 165, 87, 0.12); }
 
 
-/* === components/bento.css === */
+/* === src/components/bento.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Bento Grid
    Feature sections with 1px seams
@@ -4641,7 +4641,7 @@ body::after {
   }
 }
 
-/* === components/breadcrumbs.css === */
+/* === src/components/breadcrumbs.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Breadcrumbs
    Path navigation
@@ -4794,7 +4794,7 @@ body::after {
 }
 
 
-/* === components/button.css === */
+/* === src/components/button.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Button
    Primary and ghost variants
@@ -4855,7 +4855,7 @@ body::after {
   border-radius: 999px;
 }
 
-/* === components/calendar.css === */
+/* === src/components/calendar.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Calendar
    Date picker grid with month navigation
@@ -5067,7 +5067,7 @@ body::after {
 }
 
 
-/* === components/card.css === */
+/* === src/components/card.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Card
    Content container
@@ -5279,7 +5279,7 @@ body::after {
 }
 
 
-/* === components/carousel.css === */
+/* === src/components/carousel.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Carousel
    Image/content slider with navigation
@@ -5449,7 +5449,7 @@ body::after {
 }
 
 
-/* === components/checkbox.css === */
+/* === src/components/checkbox.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Checkbox
    Boolean toggle with checkmark
@@ -5652,7 +5652,7 @@ body::after {
 }
 
 
-/* === components/collapsible.css === */
+/* === src/components/collapsible.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Collapsible
    Toggle content visibility with animated height
@@ -5792,7 +5792,7 @@ body::after {
 }
 
 
-/* === components/color-picker.css === */
+/* === src/components/color-picker.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Color Picker
    Hex/RGB color input with preview swatch
@@ -6084,7 +6084,7 @@ body::after {
 }
 
 
-/* === components/command-palette.css === */
+/* === src/components/command-palette.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Command Palette
    Searchable command overlay (Ctrl+K style)
@@ -6297,7 +6297,7 @@ body::after {
 }
 
 
-/* === components/context-menu.css === */
+/* === src/components/context-menu.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Context Menu
    Right-click menu with nested submenus
@@ -6471,7 +6471,7 @@ body::after {
 }
 
 
-/* === components/date-picker.css === */
+/* === src/components/date-picker.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Date Picker
    Full date picker with input + calendar dropdown
@@ -6798,7 +6798,7 @@ body::after {
 }
 
 
-/* === components/dialog.css === */
+/* === src/components/dialog.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Dialog
    Modal overlay for confirm/prompt/actions
@@ -6961,7 +6961,7 @@ body::after {
 }
 
 
-/* === components/drawer.css === */
+/* === src/components/drawer.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Drawer
    Side panel overlay
@@ -7232,7 +7232,7 @@ body::after {
 }
 
 
-/* === components/dropdown-menu.css === */
+/* === src/components/dropdown-menu.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Dropdown Menu
    Click-activated nested menu with submenus
@@ -7448,7 +7448,7 @@ body::after {
 }
 
 
-/* === components/empty-state.css === */
+/* === src/components/empty-state.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Empty State
    Placeholder for empty data views
@@ -7510,7 +7510,7 @@ body::after {
 }
 
 
-/* === components/error.css === */
+/* === src/components/error.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Error State
    Error boundary / fault display
@@ -7605,7 +7605,7 @@ body::after {
 }
 
 
-/* === components/file-upload.css === */
+/* === src/components/file-upload.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: File Upload
    Drag & drop file input with preview
@@ -7881,7 +7881,7 @@ body::after {
 }
 
 
-/* === components/form.css === */
+/* === src/components/form.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Form
    Form layout with field grouping, labels, and validation
@@ -8026,7 +8026,7 @@ body::after {
 }
 
 
-/* === components/gauge.css === */
+/* === src/components/gauge.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Gauge
    Circular and linear progress indicators
@@ -8102,7 +8102,7 @@ body::after {
 [data-theme="dark"] .gauge--alarm .gauge__fill { stroke: var(--ds-red-700); }
 
 
-/* === components/hover-card.css === */
+/* === src/components/hover-card.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Hover Card
    Rich tooltip that appears on hover with delay
@@ -8277,7 +8277,7 @@ body::after {
 }
 
 
-/* === components/icon.css === */
+/* === src/components/icon.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Icon
    Icon button, icon+text, icon group, icon badge, animated icons
@@ -8905,7 +8905,7 @@ body::after {
 }
 
 
-/* === components/input.css === */
+/* === src/components/input.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Input
    Text input with focus ring, sizes, and states
@@ -9058,7 +9058,7 @@ body::after {
 }
 
 
-/* === components/label.css === */
+/* === src/components/label.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Label
    Form label
@@ -9203,7 +9203,7 @@ body::after {
 }
 
 
-/* === components/menubar.css === */
+/* === src/components/menubar.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Menubar
    Horizontal menu bar with dropdown submenus
@@ -9400,7 +9400,7 @@ body::after {
 }
 
 
-/* === components/metric.css === */
+/* === src/components/metric.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Metric Card
    Key performance numbers
@@ -9448,7 +9448,7 @@ body::after {
 .trend-up   { color: var(--ok); }
 .trend-down { color: var(--alarm); }
 
-/* === components/modal.css === */
+/* === src/components/modal.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Modal
    Dialog overlay with backdrop
@@ -9651,7 +9651,7 @@ body::after {
 }
 
 
-/* === components/nav.css === */
+/* === src/components/nav.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Navigation
    Utility-style header with glass option
@@ -9749,7 +9749,7 @@ body::after {
   .nav-actions { display: none; }
 }
 
-/* === components/navigation-menu.css === */
+/* === src/components/navigation-menu.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Navigation Menu
    Mega menu / site navigation with nested links
@@ -9950,7 +9950,7 @@ body::after {
 }
 
 
-/* === components/note.css === */
+/* === src/components/note.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Note
    Inline callout / contextual message
@@ -10032,7 +10032,7 @@ body::after {
 }
 
 
-/* === components/otp-input.css === */
+/* === src/components/otp-input.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: OTP Input
    One-time password segmented input
@@ -10163,7 +10163,7 @@ body::after {
 }
 
 
-/* === components/pagination.css === */
+/* === src/components/pagination.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Pagination
    Page navigation
@@ -10356,7 +10356,7 @@ body::after {
 }
 
 
-/* === components/panel.css === */
+/* === src/components/panel.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Panel
    Base container for all modules
@@ -10433,7 +10433,7 @@ body::after {
   border-color: var(--glass-border-hover);
 }
 
-/* === components/password-input.css === */
+/* === src/components/password-input.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Password Input
    Text input with show/hide toggle
@@ -10629,7 +10629,7 @@ body::after {
 }
 
 
-/* === components/popover.css === */
+/* === src/components/popover.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Popover
    Floating panel anchored to a trigger element
@@ -10805,7 +10805,7 @@ body::after {
 }
 
 
-/* === components/progress.css === */
+/* === src/components/progress.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Progress
    Linear progress bar with determinate/indeterminate modes
@@ -10976,7 +10976,7 @@ body::after {
 }
 
 
-/* === components/radio-group.css === */
+/* === src/components/radio-group.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Radio Group
    Grouped radio buttons with label association
@@ -11139,7 +11139,7 @@ body::after {
 }
 
 
-/* === components/radio.css === */
+/* === src/components/radio.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Radio
    Single selection circle
@@ -11343,7 +11343,7 @@ body::after {
 }
 
 
-/* === components/rating.css === */
+/* === src/components/rating.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Rating
    Star rating with half-star and read-only support
@@ -11509,7 +11509,7 @@ body::after {
 }
 
 
-/* === components/resizable.css === */
+/* === src/components/resizable.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Resizable
    Split pane layout with draggable handles
@@ -11674,7 +11674,7 @@ body::after {
 }
 
 
-/* === components/scroll-area.css === */
+/* === src/components/scroll-area.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Scroll Area
    Custom scrollable container with styled scrollbar
@@ -11825,7 +11825,7 @@ body::after {
 }
 
 
-/* === components/search-input.css === */
+/* === src/components/search-input.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Search Input
    Input with search icon, clear button, and loading state
@@ -12029,7 +12029,7 @@ body::after {
 }
 
 
-/* === components/segmented-control.css === */
+/* === src/components/segmented-control.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Segmented Control
    iOS-style tab toggle with sliding indicator
@@ -12190,7 +12190,7 @@ body::after {
 }
 
 
-/* === components/select.css === */
+/* === src/components/select.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Select
    Dropdown select with single/multiple selection
@@ -12467,7 +12467,7 @@ body::after {
 }
 
 
-/* === components/separator.css === */
+/* === src/components/separator.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Separator
    Visual divider
@@ -12614,7 +12614,7 @@ body::after {
 }
 
 
-/* === components/skeleton.css === */
+/* === src/components/skeleton.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Skeleton
    Loading placeholder
@@ -12804,7 +12804,7 @@ body::after {
 }
 
 
-/* === components/slider.css === */
+/* === src/components/slider.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Slider
    Range slider with track, thumb, and value label
@@ -13010,7 +13010,7 @@ body::after {
 }
 
 
-/* === components/spinner.css === */
+/* === src/components/spinner.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Spinner
    Loading spinner
@@ -13216,7 +13216,7 @@ body::after {
 }
 
 
-/* === components/status-dot.css === */
+/* === src/components/status-dot.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Status Dot
    LED-style state indicators
@@ -13245,7 +13245,7 @@ body::after {
 }
 
 
-/* === components/stepper.css === */
+/* === src/components/stepper.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Stepper
    Wizard steps with progress indicator
@@ -13456,7 +13456,7 @@ body::after {
 }
 
 
-/* === components/switch.css === */
+/* === src/components/switch.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Switch
    Toggle switch
@@ -13635,7 +13635,7 @@ body::after {
 }
 
 
-/* === components/table.css === */
+/* === src/components/table.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Table
    Data grid with sorting, selection, and pagination
@@ -13911,7 +13911,7 @@ body::after {
 }
 
 
-/* === components/tabs.css === */
+/* === src/components/tabs.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Tabs
    Tab navigation
@@ -14143,7 +14143,7 @@ body::after {
 }
 
 
-/* === components/tag-input.css === */
+/* === src/components/tag-input.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Tag Input
    Multi-tag input with add/remove functionality
@@ -14371,7 +14371,7 @@ body::after {
 }
 
 
-/* === components/terminal.css === */
+/* === src/components/terminal.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Terminal Window
    CLI interaction evidence slot
@@ -14433,7 +14433,7 @@ body::after {
 .terminal-line.error { color: var(--alarm); }
 .terminal-line.success { color: var(--ok); }
 
-/* === components/textarea.css === */
+/* === src/components/textarea.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Textarea
    Multi-line input with auto-resize support
@@ -14577,7 +14577,7 @@ body::after {
 }
 
 
-/* === components/time-picker.css === */
+/* === src/components/time-picker.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Time Picker
    Time selector with hours, minutes, and optional seconds
@@ -14926,7 +14926,7 @@ body::after {
 }
 
 
-/* === components/toast.css === */
+/* === src/components/toast.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Toast
    Notification with variants
@@ -15213,7 +15213,7 @@ body::after {
 }
 
 
-/* === components/toggle-group.css === */
+/* === src/components/toggle-group.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Toggle Group
    Grouped two-state buttons (single or multi select)
@@ -15359,7 +15359,7 @@ body::after {
 }
 
 
-/* === components/toggle.css === */
+/* === src/components/toggle.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Toggle
    Two-state button (pressed/unpressed)
@@ -15486,7 +15486,7 @@ body::after {
 }
 
 
-/* === components/toolbar.css === */
+/* === src/components/toolbar.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Toolbar
    Horizontal button/action group with separators
@@ -15647,7 +15647,7 @@ body::after {
 }
 
 
-/* === components/tooltip.css === */
+/* === src/components/tooltip.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Tooltip
    Hover tooltip
@@ -15813,7 +15813,7 @@ body::after {
 }
 
 
-/* === components/tree.css === */
+/* === src/components/tree.css === */
 /* ═══════════════════════════════════════════════════════
    COMPONENT: Tree
    Hierarchical expandable list with nested items

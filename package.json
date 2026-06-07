@@ -10,18 +10,13 @@
   },
   "files": [
     "dist/",
-    "tokens/",
-    "materials/",
-    "components/",
-    "layouts/",
+    "src/",
+    "docs/",
     "examples/",
     "assets/",
-    "preview.html",
+    "build.js",
     "README.md",
-    "SKILL.md",
-    "DESIGN_SYSTEM.md",
-    "GEIST_COMPONENT_CATALOG.md",
-    "TESTING.md"
+    "package.json"
   ],
   "keywords": [
     "design-system",
