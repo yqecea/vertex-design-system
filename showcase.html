@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en" data-material="machining" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex Industrial Design System — Showcase</title>
+<link rel="stylesheet" href="dist/vertex-industrial.css">
+<link rel="stylesheet" href="preview.css">
+<style>
+/* Showcase-specific layout helpers */
+.showcase-section {
+  border-top: 1px solid var(--line);
+  padding: var(--geist-space-16x) var(--geist-gap);
+  position: relative;
+}
+.showcase-section:first-child { border-top: none; }
+.showcase-title {
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 600;
+  color: var(--text-hi);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--geist-space-8x);
+}
+.showcase-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  display: block;
+  margin-bottom: var(--geist-space-4x);
+}
+.showcase-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--geist-gap);
+}
+.showcase-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--geist-gap);
+}
+.showcase-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--geist-gap);
+}
+@media (max-width: 900px) {
+  .showcase-grid-2, .showcase-grid-3, .showcase-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .showcase-grid-2, .showcase-grid-3, .showcase-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Theme switcher bar */
+.theme-bar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--bg-000);
+  border-bottom: 1px solid var(--line-2);
+  padding: var(--geist-space-4x) var(--geist-gap);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--geist-gap);
+  flex-wrap: wrap;
+}
+.theme-bar__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  white-space: nowrap;
+}
+.theme-bar__buttons {
+  display: flex;
+  gap: var(--geist-space-2x);
+  flex-wrap: wrap;
+}
+.theme-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  background: var(--bg-100);
+  color: var(--text-md);
+  cursor: pointer;
+  transition: all 150ms linear;
+}
+.theme-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.theme-btn.active {
+  background: var(--accent);
+  color: var(--bg-000);
+  border-color: var(--accent);
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-2);
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(var(--accent-rgb), 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(var(--accent-rgb), 0.04) 0%, transparent 50%),
+    var(--bg-000);
+  z-index: 0;
+}
+.hero__glass {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  padding: var(--geist-space-16x) var(--geist-gap);
+}
+.hero__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  margin-bottom: var(--geist-space-6);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 600;
+  color: var(--text-hi);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--geist-space-6);
+}
+.hero__subtitle {
+  font-size: 18px;
+  color: var(--text-md);
+  max-width: 520px;
+  margin: 0 auto var(--geist-space-8x);
+  line-height: 1.6;
+}
+
+/* Color swatches */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: var(--geist-space-4x);
+}
+.swatch {
+  aspect-ratio: 1;
+  border-radius: var(--geist-radius);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--geist-space-2x);
+  border: 1px solid var(--line);
+}
+.swatch-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Typography specimen */
+.type-specimen {
+  margin-bottom: var(--geist-space-8x);
+}
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--geist-gap);
+  padding: var(--geist-space-4x) 0;
+  border-bottom: 1px solid var(--line);
+}
+.type-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-lo);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: 140px;
+  flex-shrink: 0;
+}
+.type-sample { flex: 1; }
+
+/* Spacing blocks */
+.spacing-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--geist-gap);
+  align-items: flex-end;
+}
+.spacing-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--geist-space-2x);
+}
+.spacing-block {
+  background: var(--accent);
+  border-radius: var(--geist-radius);
+}
+.spacing-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Component demo area */
+.demo-area {
+  padding: var(--geist-gap);
+  border: 1px solid var(--line-2);
+  background: var(--bg-000);
+  margin-bottom: var(--geist-gap);
+}
+.demo-area__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--geist-space-4x);
+}
+
+/* Glass showcase */
+.glass-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--geist-gap);
+}
+.glass-showcase__item {
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-md);
+}
+
+/* Layout demos */
+.layout-demo {
+  border: 1px solid var(--line-2);
+  padding: var(--geist-gap);
+  margin-bottom: var(--geist-gap);
+}
+.layout-demo__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--geist-space-4x);
+}
+
+/* Material explanation cards */
+.material-card {
+  border: 1px solid var(--line-2);
+  padding: var(--geist-gap);
+  transition: border-color 150ms linear;
+}
+.material-card:hover {
+  border-color: var(--accent);
+}
+.material-card__name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  margin-bottom: var(--geist-space-2x);
+}
+.material-card__accent {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: var(--geist-space-4x);
+}
+.material-card__desc {
+  font-size: 14px;
+  color: var(--text-md);
+  line-height: 1.5;
+}
+
+/* Texture preview */
+.texture-preview {
+  width: 100%;
+  height: 120px;
+  border: 1px solid var(--line-2);
+  margin-top: var(--geist-space-4x);
+}
+
+/* Gauge inline */
+.gauge-inline {
+  display: flex;
+  gap: var(--geist-gap);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Terminal demo */
+.terminal-demo {
+  background: var(--bg-000);
+  border: 1px solid var(--line-2);
+  border-radius: var(--geist-radius);
+  padding: var(--geist-space-4x);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-md);
+}
+.terminal-demo__prompt {
+  color: var(--accent);
+}
+.terminal-demo__cmd {
+  color: var(--text-hi);
+}
+
+/* Status row */
+.status-row {
+  display: flex;
+  gap: var(--geist-space-4x);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--geist-space-2x);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-md);
+}
+
+/* Chassis override for showcase */
+.chassis--showcase {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-left: 1px solid var(--line-2);
+  border-right: 1px solid var(--line-2);
+  background: var(--bg-000);
+  position: relative;
+  min-height: 100vh;
+}
+@media (max-width: 800px) {
+  .chassis--showcase {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* Grain on body */
+body.grain {
+  position: relative;
+}
+body.grain::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(6) infinite;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -2%); }
+  20% { transform: translate(2%, 2%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-2%, 2%); }
+}
+</style>
+</head>
+<body class="grain">
+
+<!-- THEME SWITCHER -->
+<div class="theme-bar">
+  <div class="theme-bar__label">Material Theme</div>
+  <div class="theme-bar__buttons">
+    <button class="theme-btn active" data-theme="machining" onclick="setMaterial('machining')">Machining</button>
+    <button class="theme-btn" data-theme="plating" onclick="setMaterial('plating')">Plating</button>
+    <button class="theme-btn" data-theme="welding" onclick="setMaterial('welding')">Welding</button>
+    <button class="theme-btn" data-theme="casting" onclick="setMaterial('casting')">Casting</button>
+    <button class="theme-btn" data-theme="calibrating" onclick="setMaterial('calibrating')">Calibrating</button>
+    <button class="theme-btn" data-theme="printing" onclick="setMaterial('printing')">Printing</button>
+  </div>
+</div>
+
+<div class="chassis--showcase">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--bl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--br" aria-hidden="true"></span>
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__glass">
+      <div class="hero__label">// Vertex Industrial Design System v1.0</div>
+      <h1 class="hero__title">Precision-engineered<br>interface architecture.</h1>
+      <p class="hero__subtitle">Real Geist tokens meet industrial frontend. Every pixel serves a purpose. Every animation confirms state change. Every component proves something.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-primary">Initialize</button>
+        <button class="btn btn-ghost">Read Spec</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT ARE MATERIAL THEMES? -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Concept</span>
+    <h2 class="showcase-title">What are Material Themes?</h2>
+    <p style="font-size: 16px; color: var(--text-md); line-height: 1.6; max-width: 720px; margin-bottom: var(--geist-space-8x);">
+      Material themes are complete surface treatments that derive every color, texture, and accent from a single industrial process. Each theme defines surface elevation, text hierarchy, border systems, accent colors, and a unique background texture. Choose one material per page and derive everything from it.
+    </p>
+    <div class="showcase-grid-3">
+      <div class="material-card">
+        <div class="material-card__name">Machining</div>
+        <div class="material-card__accent" style="background: #0072f5;"></div>
+        <div class="material-card__desc">Default material. CNC precision. Blue accent. 8px plotting grid texture. Best for dev tools, AI/ML, and infrastructure platforms.</div>
+        <div class="texture-preview" style="background: var(--texture-primary);" aria-hidden="true"></div>
+      </div>
+      <div class="material-card">
+        <div class="material-card__name">Plating</div>
+        <div class="material-card__accent" style="background: #12a594;"></div>
+        <div class="material-card__desc">PCB routing aesthetic. Teal accent. Trace-line texture. Best for data platforms, APIs, and integration tools.</div>
+        <div class="texture-preview" style="background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(18,165,148,0.04) 3px, rgba(18,165,148,0.04) 4px), repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(18,165,148,0.04) 3px, rgba(18,165,148,0.04) 4px);" aria-hidden="true"></div>
+      </div>
+      <div class="material-card">
+        <div class="material-card__name">Welding</div>
+        <div class="material-card__accent" style="background: #ffb224;"></div>
+        <div class="material-card__desc">Steel frame assembly. Amber accent. Structural grid texture. Best for open-source tools, platforms, and frameworks.</div>
+        <div class="texture-preview" style="background: repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(255,176,36,0.04) 15px, rgba(255,176,36,0.04) 16px), repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,176,36,0.04) 15px, rgba(255,176,36,0.04) 16px);" aria-hidden="true"></div>
+      </div>
+      <div class="material-card">
+        <div class="material-card__name">Casting</div>
+        <div class="material-card__accent" style="background: #e5484d;"></div>
+        <div class="material-card__desc">Foundry / forge. Red accent. Hazard hatching texture. Best for hardware, robotics, manufacturing, and energy.</div>
+        <div class="texture-preview" style="background: repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(229,72,77,0.03) 11px, rgba(229,72,77,0.03) 12px), repeating-linear-gradient(90deg, transparent, transparent 11px, rgba(229,72,77,0.03) 11px, rgba(229,72,77,0.03) 12px);" aria-hidden="true"></div>
+      </div>
+      <div class="material-card">
+        <div class="material-card__name">Calibrating</div>
+        <div class="material-card__accent" style="background: #ffb224;"></div>
+        <div class="material-card__desc">Mission control. Amber accent. Instrument grid texture. Best for monitoring, trading terminals, and real-time ops.</div>
+        <div class="texture-preview" style="background: repeating-linear-gradient(0deg, transparent, transparent 7px, rgba(255,176,36,0.03) 7px, rgba(255,176,36,0.03) 8px), repeating-linear-gradient(90deg, transparent, transparent 7px, rgba(255,176,36,0.03) 7px, rgba(255,176,36,0.03) 8px);" aria-hidden="true"></div>
+      </div>
+      <div class="material-card">
+        <div class="material-card__name">Printing</div>
+        <div class="material-card__accent" style="background: #0072f5;"></div>
+        <div class="material-card__desc">Light mode docs. Blue accent. Hairline rules texture. Best for documentation, research, legal, and finance.</div>
+        <div class="texture-preview" style="background: repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(0,0,0,0.03) 15px, rgba(0,0,0,0.03) 16px), repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(0,0,0,0.03) 15px, rgba(0,0,0,0.03) 16px);" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Tokens</span>
+    <h2 class="showcase-title">Color System</h2>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Gray Scale</div>
+    <div class="swatch-grid" style="margin-bottom: var(--geist-space-8x);">
+      <div class="swatch" style="background: var(--ds-gray-100);"><span class="swatch-label">100</span></div>
+      <div class="swatch" style="background: var(--ds-gray-200);"><span class="swatch-label">200</span></div>
+      <div class="swatch" style="background: var(--ds-gray-300);"><span class="swatch-label">300</span></div>
+      <div class="swatch" style="background: var(--ds-gray-400);"><span class="swatch-label">400</span></div>
+      <div class="swatch" style="background: var(--ds-gray-500);"><span class="swatch-label">500</span></div>
+      <div class="swatch" style="background: var(--ds-gray-600);"><span class="swatch-label">600</span></div>
+      <div class="swatch" style="background: var(--ds-gray-700);"><span class="swatch-label">700</span></div>
+      <div class="swatch" style="background: var(--ds-gray-800);"><span class="swatch-label">800</span></div>
+      <div class="swatch" style="background: var(--ds-gray-900);"><span class="swatch-label">900</span></div>
+      <div class="swatch" style="background: var(--ds-gray-1000);"><span class="swatch-label">1000</span></div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Blue Scale</div>
+    <div class="swatch-grid" style="margin-bottom: var(--geist-space-8x);">
+      <div class="swatch" style="background: var(--ds-blue-100);"><span class="swatch-label">100</span></div>
+      <div class="swatch" style="background: var(--ds-blue-200);"><span class="swatch-label">200</span></div>
+      <div class="swatch" style="background: var(--ds-blue-300);"><span class="swatch-label">300</span></div>
+      <div class="swatch" style="background: var(--ds-blue-400);"><span class="swatch-label">400</span></div>
+      <div class="swatch" style="background: var(--ds-blue-500);"><span class="swatch-label">500</span></div>
+      <div class="swatch" style="background: var(--ds-blue-600);"><span class="swatch-label">600</span></div>
+      <div class="swatch" style="background: var(--ds-blue-700);"><span class="swatch-label">700</span></div>
+      <div class="swatch" style="background: var(--ds-blue-800);"><span class="swatch-label">800</span></div>
+      <div class="swatch" style="background: var(--ds-blue-900);"><span class="swatch-label">900</span></div>
+      <div class="swatch" style="background: var(--ds-blue-1000);"><span class="swatch-label">1000</span></div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Red Scale</div>
+    <div class="swatch-grid" style="margin-bottom: var(--geist-space-8x);">
+      <div class="swatch" style="background: var(--ds-red-100);"><span class="swatch-label">100</span></div>
+      <div class="swatch" style="background: var(--ds-red-200);"><span class="swatch-label">200</span></div>
+      <div class="swatch" style="background: var(--ds-red-300);"><span class="swatch-label">300</span></div>
+      <div class="swatch" style="background: var(--ds-red-400);"><span class="swatch-label">400</span></div>
+      <div class="swatch" style="background: var(--ds-red-500);"><span class="swatch-label">500</span></div>
+      <div class="swatch" style="background: var(--ds-red-600);"><span class="swatch-label">600</span></div>
+      <div class="swatch" style="background: var(--ds-red-700);"><span class="swatch-label">700</span></div>
+      <div class="swatch" style="background: var(--ds-red-800);"><span class="swatch-label">800</span></div>
+      <div class="swatch" style="background: var(--ds-red-900);"><span class="swatch-label">900</span></div>
+      <div class="swatch" style="background: var(--ds-red-1000);"><span class="swatch-label">1000</span></div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Amber Scale</div>
+    <div class="swatch-grid" style="margin-bottom: var(--geist-space-8x);">
+      <div class="swatch" style="background: var(--ds-amber-100);"><span class="swatch-label">100</span></div>
+      <div class="swatch" style="background: var(--ds-amber-200);"><span class="swatch-label">200</span></div>
+      <div class="swatch" style="background: var(--ds-amber-300);"><span class="swatch-label">300</span></div>
+      <div class="swatch" style="background: var(--ds-amber-400);"><span class="swatch-label">400</span></div>
+      <div class="swatch" style="background: var(--ds-amber-500);"><span class="swatch-label">500</span></div>
+      <div class="swatch" style="background: var(--ds-amber-600);"><span class="swatch-label">600</span></div>
+      <div class="swatch" style="background: var(--ds-amber-700);"><span class="swatch-label">700</span></div>
+      <div class="swatch" style="background: var(--ds-amber-800);"><span class="swatch-label">800</span></div>
+      <div class="swatch" style="background: var(--ds-amber-900);"><span class="swatch-label">900</span></div>
+      <div class="swatch" style="background: var(--ds-amber-1000);"><span class="swatch-label">1000</span></div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Green Scale</div>
+    <div class="swatch-grid" style="margin-bottom: var(--geist-space-8x);">
+      <div class="swatch" style="background: var(--ds-green-100);"><span class="swatch-label">100</span></div>
+      <div class="swatch" style="background: var(--ds-green-200);"><span class="swatch-label">200</span></div>
+      <div class="swatch" style="background: var(--ds-green-300);"><span class="swatch-label">300</span></div>
+      <div class="swatch" style="background: var(--ds-green-400);"><span class="swatch-label">400</span></div>
+      <div class="swatch" style="background: var(--ds-green-500);"><span class="swatch-label">500</span></div>
+      <div class="swatch" style="background: var(--ds-green-600);"><span class="swatch-label">600</span></div>
+      <div class="swatch" style="background: var(--ds-green-700);"><span class="swatch-label">700</span></div>
+      <div class="swatch" style="background: var(--ds-green-800);"><span class="swatch-label">800</span></div>
+      <div class="swatch" style="background: var(--ds-green-900);"><span class="swatch-label">900</span></div>
+      <div class="swatch" style="background: var(--ds-green-1000);"><span class="swatch-label">1000</span></div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Semantic Colors</div>
+    <div class="swatch-grid">
+      <div class="swatch" style="background: var(--ds-ok);"><span class="swatch-label">OK</span></div>
+      <div class="swatch" style="background: var(--ds-warn);"><span class="swatch-label">Warn</span></div>
+      <div class="swatch" style="background: var(--ds-alarm);"><span class="swatch-label">Alarm</span></div>
+      <div class="swatch" style="background: var(--ds-info);"><span class="swatch-label">Info</span></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Tokens</span>
+    <h2 class="showcase-title">Typography</h2>
+
+    <div class="type-specimen">
+      <div class="type-row">
+        <div class="type-name">Display</div>
+        <div class="type-sample" style="font-size: var(--display-88); font-weight: 500; line-height: 1.05; letter-spacing: -0.04em; color: var(--text-hi);">Deploy at machine speed.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">Headline</div>
+        <div class="type-sample" style="font-size: var(--display-56); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--text-hi);">Engineered for operators.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">H1 / 32px</div>
+        <div class="type-sample" style="font-size: var(--display-32); font-weight: 600; line-height: 1.2; color: var(--text-hi);">Section Headline</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">H2 / 24px</div>
+        <div class="type-sample" style="font-size: 24px; font-weight: 600; line-height: 1.3; color: var(--text-hi);">Subsection Title</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">H3 / 20px</div>
+        <div class="type-sample" style="font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--text-hi);">Card Headline</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">Body / 16px</div>
+        <div class="type-sample" style="font-size: 16px; line-height: 1.55; color: var(--text-md);">Zero-downtime orchestration for distributed systems. Sub-100ms inference. 99.99% uptime. Built on real Geist tokens.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">Small / 14px</div>
+        <div class="type-sample" style="font-size: 14px; line-height: 1.5; color: var(--text-md);">Secondary information, captions, and metadata. Used for supporting context beneath primary content.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-name">Label / 11px</div>
+        <div class="type-sample" style="font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-lo);">Uppercase label with tracking</div>
+      </div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Font Families</div>
+    <div class="showcase-grid-2">
+      <div class="demo-area">
+        <div class="demo-area__label">Geist Sans — Structure Voice</div>
+        <p style="font-family: var(--font-sans); font-size: 18px; color: var(--text-hi); line-height: 1.5;">The quick brown fox jumps over the lazy dog. 0123456789</p>
+        <p style="font-family: var(--font-sans); font-size: 14px; color: var(--text-md); margin-top: var(--geist-space-2x);">Weights: 100, 200, 300, 400, 500, 600, 700, 800, 900</p>
+      </div>
+      <div class="demo-area">
+        <div class="demo-area__label">Geist Mono — Instrument Voice</div>
+        <p style="font-family: var(--font-mono); font-size: 18px; color: var(--text-hi); line-height: 1.5;">The quick brown fox jumps over the lazy dog. 0123456789</p>
+        <p style="font-family: var(--font-mono); font-size: 14px; color: var(--text-md); margin-top: var(--geist-space-2x);">Tabular figures on all numbers. Labels uppercase with tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Tokens</span>
+    <h2 class="showcase-title">4px Spacing Scale</h2>
+    <p style="font-size: 16px; color: var(--text-md); line-height: 1.6; max-width: 600px; margin-bottom: var(--geist-space-8x);">
+      Every spacing value is a multiple of 4px. This creates a mathematically consistent rhythm across the entire interface. No arbitrary values. No guesswork.
+    </p>
+    <div class="spacing-grid">
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 4px; height: 4px;"></div>
+        <div class="spacing-label">4px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 8px; height: 8px;"></div>
+        <div class="spacing-label">8px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 12px; height: 12px;"></div>
+        <div class="spacing-label">12px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 16px; height: 16px;"></div>
+        <div class="spacing-label">16px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 24px; height: 24px;"></div>
+        <div class="spacing-label">24px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 32px; height: 32px;"></div>
+        <div class="spacing-label">32px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 40px; height: 40px;"></div>
+        <div class="spacing-label">40px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 48px; height: 48px;"></div>
+        <div class="spacing-label">48px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 64px; height: 64px;"></div>
+        <div class="spacing-label">64px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 96px; height: 96px;"></div>
+        <div class="spacing-label">96px</div>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-block" style="width: 128px; height: 128px;"></div>
+        <div class="spacing-label">128px</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Components</span>
+    <h2 class="showcase-title">Component Library</h2>
+
+    <!-- Buttons -->
+    <div class="demo-area">
+      <div class="demo-area__label">Buttons</div>
+      <div style="display: flex; gap: var(--geist-space-4x); flex-wrap: wrap; align-items: center;">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-ghost btn-sm">Small Ghost</button>
+        <button class="btn btn-primary btn-pill">Pill</button>
+        <button class="btn btn-ghost btn-pill">Pill Ghost</button>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="demo-area">
+      <div class="demo-area__label">Badges</div>
+      <div style="display: flex; gap: var(--geist-space-2x); flex-wrap: wrap; align-items: center;">
+        <span class="geist-badge geist-badge--default">Default</span>
+        <span class="geist-badge geist-badge--success">Success</span>
+        <span class="geist-badge geist-badge--warning">Warning</span>
+        <span class="geist-badge geist-badge--error">Error</span>
+        <span class="geist-badge geist-badge--info">Info</span>
+        <span class="geist-badge geist-badge--blue">Blue</span>
+        <span class="geist-badge geist-badge--purple">Purple</span>
+        <span class="geist-badge geist-badge--teal">Teal</span>
+        <span class="geist-badge geist-badge--pink">Pink</span>
+        <span class="geist-badge geist-badge--success geist-badge--pulse"><span class="geist-badge__dot"></span> Live</span>
+      </div>
+    </div>
+
+    <!-- Inputs -->
+    <div class="demo-area">
+      <div class="demo-area__label">Inputs</div>
+      <div style="display: flex; flex-direction: column; gap: var(--geist-space-4x); max-width: 400px;">
+        <input type="text" class="geist-input" placeholder="Standard input...">
+        <input type="text" class="geist-input geist-input--sm" placeholder="Small input...">
+        <input type="text" class="geist-input geist-input--lg" placeholder="Large input...">
+        <input type="text" class="geist-input" value="Invalid value" aria-invalid="true" data-error="true">
+      </div>
+    </div>
+
+    <!-- Panels -->
+    <div class="demo-area">
+      <div class="demo-area__label">Panels</div>
+      <div class="showcase-grid-2">
+        <div class="panel">
+          <span class="panel-label">Standard Panel</span>
+          <div class="panel-headline">Base Container</div>
+          <div class="panel-body">Every module lives in a panel. Hover to see the border accent transition.</div>
+          <div class="panel-footer">
+            <span class="panel-status">STATUS: OPERATIONAL</span>
+          </div>
+        </div>
+        <div class="panel panel-accent">
+          <span class="panel-label">Accent Panel</span>
+          <div class="panel-headline">With Top Stripe</div>
+          <div class="panel-body">This panel has an accent stripe at the top for visual hierarchy.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Cards -->
+    <div class="demo-area">
+      <div class="demo-area__label">Glass Cards</div>
+      <div class="showcase-grid-2">
+        <div class="glass-card glass-card-hover" style="padding: var(--geist-gap);">
+          <div class="panel-label">Glass Card</div>
+          <div class="panel-headline">Frosted Depth</div>
+          <div class="panel-body">Backdrop-filter blur with specular shine overlays. Hover to intensify.</div>
+        </div>
+        <div class="panel-glass" style="padding: var(--geist-gap);">
+          <div class="panel-label">Panel Glass</div>
+          <div class="panel-headline">Overlay Variant</div>
+          <div class="panel-body">Glass applied as an overlay to a standard panel structure.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="demo-area">
+      <div class="demo-area__label">Metrics</div>
+      <div class="showcase-grid-4">
+        <div class="metric">
+          <span class="metric-label">Uptime</span>
+          <div><span class="metric-number">99.99</span><span class="metric-unit">%</span></div>
+          <div class="metric-trend trend-up">+0.02%</div>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Latency</span>
+          <div><span class="metric-number">&lt;50</span><span class="metric-unit">ms</span></div>
+          <div class="metric-trend trend-down">+2ms</div>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Regions</span>
+          <div><span class="metric-number">32</span></div>
+          <div class="metric-trend trend-up">+3</div>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Throughput</span>
+          <div><span class="metric-number">2.4</span><span class="metric-unit">B/day</span></div>
+          <div class="metric-trend trend-up">+12%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="demo-area">
+      <div class="demo-area__label">Terminal</div>
+      <div class="terminal-demo">
+        <div><span class="terminal-demo__prompt">$ </span><span class="terminal-demo__cmd">vertex deploy --region us-east-1 --cluster prod</span></div>
+        <div style="color: var(--text-lo); margin-top: var(--geist-space-2x);">Deploying to cluster <span style="color: var(--accent);">prod-7a</span>...</div>
+        <div style="color: var(--ok); margin-top: var(--geist-space);">OK</div>
+        <div style="color: var(--text-lo); margin-top: var(--geist-space);">Build v3.2.1 complete in 4.2s</div>
+        <div><span class="terminal-demo__prompt">$ </span><span class="blink" style="color: var(--text-hi);">_</span></div>
+      </div>
+    </div>
+
+    <!-- Status Dots -->
+    <div class="demo-area">
+      <div class="demo-area__label">Status Dots</div>
+      <div class="status-row">
+        <div class="status-item"><span class="status-dot status-ok"></span> OK</div>
+        <div class="status-item"><span class="status-dot status-warn"></span> Warn</div>
+        <div class="status-item"><span class="status-dot status-alarm"></span> Alarm</div>
+        <div class="status-item"><span class="status-dot status-live"></span> Live</div>
+      </div>
+    </div>
+
+    <!-- Gauges -->
+    <div class="demo-area">
+      <div class="demo-area__label">Gauges</div>
+      <div class="gauge-inline">
+        <div class="gauge gauge--md">
+          <svg class="gauge__svg" viewBox="0 0 64 64" width="64" height="64">
+            <circle class="gauge__track" cx="32" cy="32" r="28"></circle>
+            <circle class="gauge__fill" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="26.4" style="transition: stroke-dashoffset 300ms ease-out;"></circle>
+          </svg>
+          <div class="gauge__value">85%</div>
+          <div class="gauge__label">CPU</div>
+        </div>
+        <div class="gauge gauge--md gauge--ok">
+          <svg class="gauge__svg" viewBox="0 0 64 64" width="64" height="64">
+            <circle class="gauge__track" cx="32" cy="32" r="28"></circle>
+            <circle class="gauge__fill" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="123.1" style="transition: stroke-dashoffset 300ms ease-out;"></circle>
+          </svg>
+          <div class="gauge__value">30%</div>
+          <div class="gauge__label">Mem</div>
+        </div>
+        <div class="gauge gauge--md gauge--warn">
+          <svg class="gauge__svg" viewBox="0 0 64 64" width="64" height="64">
+            <circle class="gauge__track" cx="32" cy="32" r="28"></circle>
+            <circle class="gauge__fill" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="52.8" style="transition: stroke-dashoffset 300ms ease-out;"></circle>
+          </svg>
+          <div class="gauge__value">70%</div>
+          <div class="gauge__label">Disk</div>
+        </div>
+        <div class="gauge gauge--md gauge--alarm">
+          <svg class="gauge__svg" viewBox="0 0 64 64" width="64" height="64">
+            <circle class="gauge__track" cx="32" cy="32" r="28"></circle>
+            <circle class="gauge__fill" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="8.8" style="transition: stroke-dashoffset 300ms ease-out;"></circle>
+          </svg>
+          <div class="gauge__value">95%</div>
+          <div class="gauge__label">Net</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="demo-area">
+      <div class="demo-area__label">Notes</div>
+      <div style="display: flex; flex-direction: column; gap: var(--geist-space-4x);">
+        <div class="note">
+          <div class="note__title">Default Note</div>
+          <div class="note__body">This is a standard note with neutral styling. Use for general callouts and contextual information.</div>
+        </div>
+        <div class="note note--info">
+          <div class="note__title">Info</div>
+          <div class="note__body">This note uses the info variant. Helpful for documentation and reference material.</div>
+        </div>
+        <div class="note note--ok">
+          <div class="note__title">Success</div>
+          <div class="note__body">All systems are operational. Deployment completed successfully with zero errors.</div>
+        </div>
+        <div class="note note--warn">
+          <div class="note__title">Warning</div>
+          <div class="note__body">High memory usage detected on node-7a. Consider scaling horizontally.</div>
+        </div>
+        <div class="note note--alarm">
+          <div class="note__title">Critical</div>
+          <div class="note__body">Connection lost to database cluster. Automatic failover initiated.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banners -->
+    <div class="demo-area">
+      <div class="demo-area__label">Banners</div>
+      <div style="display: flex; flex-direction: column; gap: var(--geist-space-4x);">
+        <div class="banner banner--info">
+          <div class="banner__content"><strong>Info:</strong> Scheduled maintenance window begins at 02:00 UTC.</div>
+        </div>
+        <div class="banner banner--ok">
+          <div class="banner__content"><strong>Success:</strong> All systems nominal. Build v3.2.1 is live.</div>
+        </div>
+        <div class="banner banner--warn">
+          <div class="banner__content"><strong>Warning:</strong> Elevated error rate in us-west-2 region.</div>
+        </div>
+        <div class="banner banner--alarm">
+          <div class="banner__content"><strong>Critical:</strong> Service degradation detected. Investigating.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="demo-area">
+      <div class="demo-area__label">Empty State</div>
+      <div class="empty-state empty-state--compact">
+        <svg class="empty-state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <div class="empty-state__title">No deployments found</div>
+        <div class="empty-state__description">Initialize your first deployment to see it here. The process takes under 60 seconds.</div>
+        <div class="empty-state__action">
+          <button class="btn btn-primary">Initialize</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div class="demo-area">
+      <div class="demo-area__label">Error State</div>
+      <div class="error error--compact">
+        <div class="error__code">503</div>
+        <div class="error__title">Service Unavailable</div>
+        <div class="error__message">The server is temporarily unable to handle the request. Retry in a few moments or check the status page.</div>
+        <div class="error__action">
+          <button class="btn btn-primary">Retry</button>
+          <button class="btn btn-ghost">Status Page</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="demo-area">
+      <div class="demo-area__label">Bento Grid</div>
+      <div class="bento">
+        <div class="bento-featured">
+          <div class="panel-label">01 // Featured</div>
+          <div class="panel-headline">Exposed Grid</div>
+          <div class="panel-body">The grid IS the design, not scaffolding. 1px seams between every cell.</div>
+        </div>
+        <div>
+          <div class="panel-label">02</div>
+          <div class="panel-headline">Glass Surface</div>
+          <div class="panel-body">Frosted depth with specular shine.</div>
+        </div>
+        <div>
+          <div class="panel-label">03</div>
+          <div class="panel-headline">Zero Shadows</div>
+          <div class="panel-body">Tonal hierarchy through luminance.</div>
+        </div>
+        <div>
+          <div class="panel-label">04</div>
+          <div class="panel-headline">Corner Caps</div>
+          <div class="panel-body">5px accent drafting pins.</div>
+        </div>
+        <div>
+          <div class="panel-label">05</div>
+          <div class="panel-headline">Tabular Figures</div>
+          <div class="panel-body">All numbers use tabular-nums.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLASS EFFECTS -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Effects</span>
+    <h2 class="showcase-title">Glass & Frosted Glass</h2>
+    <p style="font-size: 16px; color: var(--text-md); line-height: 1.6; max-width: 600px; margin-bottom: var(--geist-space-8x);">
+      Glass is an optional overlay layer, not a base material. It adds depth without obscuring the grid beneath. Think of it as a lens over the industrial substrate.
+    </p>
+
+    <div class="glass-showcase" style="margin-bottom: var(--geist-space-8x);">
+      <div class="glass glass-showcase__item">
+        <span>.glass</span>
+      </div>
+      <div class="glass-xs glass-showcase__item">
+        <span>.glass-xs</span>
+      </div>
+      <div class="glass-sm glass-showcase__item">
+        <span>.glass-sm</span>
+      </div>
+      <div class="glass-md glass-showcase__item">
+        <span>.glass-md</span>
+      </div>
+      <div class="glass-lg glass-showcase__item">
+        <span>.glass-lg</span>
+      </div>
+      <div class="glass-xl glass-showcase__item">
+        <span>.glass-xl</span>
+      </div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Advanced Glass Variants</div>
+    <div class="glass-showcase" style="margin-bottom: var(--geist-space-8x);">
+      <div class="glass-layer-1 glass-showcase__item">
+        <span>Layer 1</span>
+      </div>
+      <div class="glass-layer-2 glass-showcase__item">
+        <span>Layer 2</span>
+      </div>
+      <div class="glass-layer-3 glass-showcase__item">
+        <span>Layer 3</span>
+      </div>
+      <div class="glass-lit glass-showcase__item">
+        <span>Lit</span>
+      </div>
+      <div class="glass-glow glass-showcase__item">
+        <span>Glow</span>
+      </div>
+      <div class="glass-glow-accent glass-showcase__item">
+        <span>Accent Glow</span>
+      </div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Liquid Glass</div>
+    <div class="glass-showcase" style="margin-bottom: var(--geist-space-8x);">
+      <div class="liquid-glass glass-showcase__item">
+        <span>Liquid</span>
+      </div>
+      <div class="liquid-glass-layer-1 glass-showcase__item">
+        <span>Shallow</span>
+      </div>
+      <div class="liquid-glass-layer-2 glass-showcase__item">
+        <span>Medium</span>
+      </div>
+      <div class="liquid-glass-layer-3 glass-showcase__item">
+        <span>Deep</span>
+      </div>
+      <div class="liquid-glass-card glass-showcase__item">
+        <span>Card</span>
+      </div>
+      <div class="liquid-glass-bubble glass-showcase__item" style="aspect-ratio: 1; max-width: 120px; margin: 0 auto;">
+        <span>Bubble</span>
+      </div>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Glass Buttons</div>
+    <div style="display: flex; gap: var(--geist-space-4x); flex-wrap: wrap; align-items: center;">
+      <button class="glass-btn">Glass Button</button>
+      <button class="glass-btn-primary">Glass Primary</button>
+      <button class="liquid-glass-btn">Liquid Button</button>
+      <button class="liquid-glass-btn liquid-glass-btn-primary">Liquid Primary</button>
+    </div>
+  </section>
+
+  <!-- INDUSTRIAL ELEMENTS -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Surface</span>
+    <h2 class="showcase-title">Industrial Elements</h2>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x);">Grain Overlay</div>
+    <div class="demo-area" style="position: relative; min-height: 120px; display: flex; align-items: center; justify-content: center;">
+      <div class="demo-area__label">body.grain applies a fixed noise texture overlay</div>
+      <p style="color: var(--text-md); text-align: center;">The grain overlay adds subtle surface texture across the entire viewport. It is fixed, pointer-events: none, and animates subtly.</p>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x); margin-top: var(--geist-space-8x);">Corner Caps</div>
+    <div class="demo-area" style="position: relative;">
+      <div class="demo-area__label">5px accent squares at every intersection</div>
+      <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+      <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+      <span class="corner-cap corner-cap--bl" aria-hidden="true"></span>
+      <span class="corner-cap corner-cap--br" aria-hidden="true"></span>
+      <p style="color: var(--text-md); text-align: center; padding: var(--geist-space-8x);">Every bordered section can have corner caps. They are positioned absolutely and use the accent color.</p>
+    </div>
+
+    <div class="showcase-label" style="margin-bottom: var(--geist-space-4x); margin-top: var(--geist-space-8x);">Surface Texture</div>
+    <div class="demo-area">
+      <div class="demo-area__label">Each material defines a unique --texture-primary</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--geist-gap);">
+        <div>
+          <div class="panel-label">Machining</div>
+          <div style="height: 100px; border: 1px solid var(--line-2); background: var(--texture-primary);"></div>
+        </div>
+        <div>
+          <div class="panel-label">Current Material</div>
+          <div style="height: 100px; border: 1px solid var(--line-2); background: var(--texture-primary);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYOUTS -->
+  <section class="showcase-section">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <span class="showcase-label">// Structure</span>
+    <h2 class="showcase-title">Layout Modes</h2>
+    <p style="font-size: 16px; color: var(--text-md); line-height: 1.6; max-width: 720px; margin-bottom: var(--geist-space-8x);">
+      Four layout modes for different content types. Each mode defines how content relates to the viewport edge and how the grid behaves.
+    </p>
+
+    <div class="layout-demo">
+      <div class="layout-demo__label">BOXED (Default) — .chassis</div>
+      <p style="color: var(--text-md); margin-bottom: var(--geist-space-4x);">Centered max-width chassis with visible page-ground gutters. Best for most pages, dashboards, and docs.</p>
+      <div style="border: 1px dashed var(--line-2); padding: var(--geist-space-4x); text-align: center; color: var(--text-lo); font-family: var(--font-mono); font-size: 12px;">
+        max-width: 1280px; margin: 0 auto; border-left: 1px solid var(--line-2); border-right: 1px solid var(--line-2);
+      </div>
+    </div>
+
+    <div class="layout-demo">
+      <div class="layout-demo__label">FULL-BLEED — .full-bleed-section</div>
+      <p style="color: var(--text-md); margin-bottom: var(--geist-space-4x);">Content reaches every edge of the viewport. Best for infrastructure platforms and full dashboards.</p>
+      <div style="border: 1px dashed var(--line-2); padding: var(--geist-space-4x); text-align: center; color: var(--text-lo); font-family: var(--font-mono); font-size: 12px;">
+        width: 100%; padding: var(--geist-gap-double) clamp(24px, 5vw, 96px);
+      </div>
+    </div>
+
+    <div class="layout-demo">
+      <div class="layout-demo__label">SPLIT — .split-section</div>
+      <p style="color: var(--text-md); margin-bottom: var(--geist-space-4x);">Message column + live-evidence column. Best for API products, SDKs, and AI demos.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line-2);">
+        <div style="background: var(--bg-100); padding: var(--geist-space-4x); text-align: center; color: var(--text-md); font-family: var(--font-mono); font-size: 12px;">Message</div>
+        <div style="background: var(--bg-100); padding: var(--geist-space-4x); text-align: center; color: var(--text-md); font-family: var(--font-mono); font-size: 12px;">Evidence</div>
+      </div>
+    </div>
+
+    <div class="layout-demo">
+      <div class="layout-demo__label">DOCUMENT — body.document</div>
+      <p style="color: var(--text-md); margin-bottom: var(--geist-space-4x);">Print-grid composition with wide margins. Best for research, documentation, and B2B premium.</p>
+      <div style="border: 1px dashed var(--line-2); padding: var(--geist-space-4x); text-align: center; color: var(--text-lo); font-family: var(--font-mono); font-size: 12px;">
+        padding: var(--geist-gap-double) clamp(48px, 8vw, 144px);
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="showcase-section" style="text-align: center; border-top: 1px solid var(--line);">
+    <span class="corner-cap corner-cap--tl" aria-hidden="true"></span>
+    <span class="corner-cap corner-cap--tr" aria-hidden="true"></span>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--geist-space-4x);">
+      Vertex Industrial Design System v1.0.0
+    </p>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); letter-spacing: 0.04em; text-transform: uppercase;">
+      Built on real Geist tokens &middot; Industrial architecture &middot; Frosted glass overlay
+    </p>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-lo); letter-spacing: 0.04em; text-transform: uppercase; margin-top: var(--geist-space-4x);">
+      ALL SYSTEMS NOMINAL
+    </p>
+  </section>
+
+</div>
+
+<script>
+function setMaterial(material) {
+  document.documentElement.setAttribute('data-material', material);
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-theme') === material);
+  });
+}
+</script>
+
+</body>
+</html>
